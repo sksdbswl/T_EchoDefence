@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerMoveInput : MonoBehaviour
 {
     private static readonly int RUN = Animator.StringToHash("RUN");
     private PlayerInputActions playerInputActions;
     private Animator animator;
-    private VirtualJoystick joystick; 
+    [SerializeField] private VirtualJoystick joystick; 
     
     [SerializeField] private float speed = 5f;
     
@@ -18,9 +18,7 @@ public class PlayerInput : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
-        joystick = GetComponent<VirtualJoystick>();
         animator = GetComponent<Animator>();
-        
         animator.SetTrigger(RUN);
     }
 
