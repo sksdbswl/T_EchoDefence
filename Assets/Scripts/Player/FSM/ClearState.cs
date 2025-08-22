@@ -11,18 +11,7 @@ public class ClearState : PlayerBaseState
 
     public override void HandleInput() { }
 
-    public override void Update()
-    {
-        // 클리어 또는 게임 종료
-        if (true)
-        {
-            stateMachine.ChangeState(new NextState(stateMachine));  
-        }
-        else
-        {
-            //TODO 게임 종료 로직 추가
-        }
-    }
+    public override void Update() {}
 
     public override void Exit()
     {

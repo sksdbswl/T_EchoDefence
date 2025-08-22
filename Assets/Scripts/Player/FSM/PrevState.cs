@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PrevState : PlayerBaseState
@@ -6,8 +7,16 @@ public class PrevState : PlayerBaseState
 
     public override void Enter()
     {
-        // 초기 셋업
         Debug.Log("Prev State Enter");
+        stateMachine.Player.StartCoroutine(DelayToSpawn());
+    }
+
+    private IEnumerator DelayToSpawn()
+    {
+        // TODO :: 타이머 연출 추가
+        Debug.Log("Corutin Start :: Prev State Delay To Spawn");
+        yield return new WaitForSeconds(5f);
+        stateMachine.ChangeState(stateMachine.FightState);
     }
 
     public override void HandleInput() { }
@@ -15,9 +24,6 @@ public class PrevState : PlayerBaseState
     public override void Update()
     {
         Debug.Log("Prev State Update");
-        
-        // 초기 설정 및 타이머가 종료되면
-        stateMachine.ChangeState(new SpawnState(stateMachine));
     }
 
     public override void Exit()

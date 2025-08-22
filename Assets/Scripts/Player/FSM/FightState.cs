@@ -3,30 +3,37 @@ using UnityEngine;
 public class FightState : PlayerBaseState
 {
     public FightState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-
+    
     public override void Enter()
     {
-        Debug.Log("Fight Enter");
+        Debug.Log("Fight Enter :: 전투 시작");
+        Update();
     }
 
     public override void HandleInput() { }
 
     public override void Update()
     {
-        // 게임이 클리어 되었을경우 or 죽었을 경우
+        // 전투 중 조건 체크
+        if (stateMachine.Player.IsBattleClear)
+        {
+            stateMachine.ChangeState(stateMachine.ClearState);  
+        }
+        else if (stateMachine.Player.IsPlayerDead)
+        {
+            // TODO: 패배 로직 (GameOverState 등으로 전환)
+        }
         
-        if (true)
-        {
-            stateMachine.ChangeState(new ClearState(stateMachine));  
-        }
-        else
-        {
-            // TODO 게임 종료 로직 추가
-        }
+        UpdateBattle();
     }
 
     public override void Exit()
     {
         Debug.Log("Fight Exit");
+    }
+
+    public void UpdateBattle()
+    {
+        Debug.Log("Fight :: 전투 진행 중");
     }
 }
