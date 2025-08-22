@@ -1,28 +1,23 @@
 using UnityEngine;
 
-public class NextState : MonoBehaviour, IState
+public class NextState : PlayerBaseState
 {
-    private StateMachine stateMachine;
+    public NextState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
-    public NextState(StateMachine stateMachine)
-    {
-        this.stateMachine = stateMachine;
-    }
-
-    public void Enter()
+    public override void Enter()
     {
         Debug.Log("Next State Enter");
     }
 
-    public void HandleInput() { }
+    public override void HandleInput() { }
 
-    public void Update()
+    public override void Update()
     {
         // 다음 스테이지 전환
         stateMachine.ChangeState(new PrevState(stateMachine)); 
     }
 
-    public void Exit()
+    public override void Exit()
     {
         Debug.Log("Next State Exit");
     }

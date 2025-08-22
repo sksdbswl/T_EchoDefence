@@ -1,22 +1,17 @@
 using UnityEngine;
 
-public class ClearState : MonoBehaviour, IState
+public class ClearState : PlayerBaseState
 {
-    private StateMachine stateMachine;
+    public ClearState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
-    public ClearState(StateMachine stateMachine)
-    {
-        this.stateMachine = stateMachine;
-    }
-
-    public void Enter()
+    public override void Enter()
     {
         Debug.Log("Clear State Enter");
     }
 
-    public void HandleInput() { }
+    public override void HandleInput() { }
 
-    public void Update()
+    public override void Update()
     {
         // 클리어 또는 게임 종료
         if (true)
@@ -29,7 +24,7 @@ public class ClearState : MonoBehaviour, IState
         }
     }
 
-    public void Exit()
+    public override void Exit()
     {
         Debug.Log("Clear State Exit");
     }

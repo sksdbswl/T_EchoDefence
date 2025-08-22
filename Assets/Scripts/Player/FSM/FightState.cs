@@ -1,22 +1,17 @@
 using UnityEngine;
 
-public class FightState : MonoBehaviour, IState
+public class FightState : PlayerBaseState
 {
-    private StateMachine stateMachine;
+    public FightState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
-    public FightState(StateMachine stateMachine)
-    {
-        this.stateMachine = stateMachine;
-    }
-
-    public void Enter()
+    public override void Enter()
     {
         Debug.Log("Fight Enter");
     }
 
-    public void HandleInput() { }
+    public override void HandleInput() { }
 
-    public void Update()
+    public override void Update()
     {
         // 게임이 클리어 되었을경우 or 죽었을 경우
         
@@ -30,7 +25,7 @@ public class FightState : MonoBehaviour, IState
         }
     }
 
-    public void Exit()
+    public override void Exit()
     {
         Debug.Log("Fight Exit");
     }

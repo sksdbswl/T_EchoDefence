@@ -1,29 +1,24 @@
 using UnityEngine;
 
-public class SpawnState : MonoBehaviour, IState
+public class SpawnState : PlayerBaseState
 {
-    private StateMachine stateMachine;
+    public SpawnState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
-    public SpawnState(StateMachine stateMachine)
-    {
-        this.stateMachine = stateMachine;
-    }
-
-    public void Enter()
+    public override void Enter()
     {
         // 몬스터 소환 처리
         Debug.Log("Spawn State Enter");
     }
 
-    public void HandleInput() { }
+    public override void HandleInput() { }
 
-    public void Update()
+    public override void Update()
     {
         // 소환이 끝났으면
         stateMachine.ChangeState(new FightState(stateMachine));
     }
 
-    public void Exit()
+    public override void Exit()
     {
         Debug.Log("Spawn State Exit");
     }

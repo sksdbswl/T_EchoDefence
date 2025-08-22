@@ -1,29 +1,26 @@
 using UnityEngine;
 
-public class PrevState : MonoBehaviour, IState
+public class PrevState : PlayerBaseState
 {
-    private StateMachine stateMachine;
+    public PrevState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
-    public PrevState(StateMachine stateMachine)
-    {
-        this.stateMachine = stateMachine;
-    }
-
-    public void Enter()
+    public override void Enter()
     {
         // 초기 셋업
         Debug.Log("Prev State Enter");
     }
 
-    public void HandleInput() { }
+    public override void HandleInput() { }
 
-    public void Update()
+    public override void Update()
     {
+        Debug.Log("Prev State Update");
+        
         // 초기 설정 및 타이머가 종료되면
         stateMachine.ChangeState(new SpawnState(stateMachine));
     }
 
-    public void Exit()
+    public override void Exit()
     {
         Debug.Log("Prev State Exit");
     }
