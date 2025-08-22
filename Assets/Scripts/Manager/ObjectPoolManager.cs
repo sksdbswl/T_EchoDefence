@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class ObjectPoolManager : MonoBehaviour
 {
-    public static ObjectPoolManager Instance;
+    public static ObjectPoolManager instance;
+    public static ObjectPoolManager Instance { get { return instance; } }
     private Dictionary<GameObject, Queue<GameObject>> pools = new Dictionary<GameObject, Queue<GameObject>>();
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        instance = this;
     }
 
     /// <summary>

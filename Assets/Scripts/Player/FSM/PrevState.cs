@@ -14,7 +14,6 @@ public class PrevState : PlayerBaseState
     private IEnumerator DelayToSpawn()
     {
         // TODO :: 타이머 연출 추가
-        Debug.Log("Corutin Start :: Prev State Delay To Spawn");
         yield return new WaitForSeconds(5f);
         stateMachine.ChangeState(stateMachine.FightState);
     }

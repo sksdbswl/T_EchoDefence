@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class FightState : PlayerBaseState
@@ -8,6 +9,7 @@ public class FightState : PlayerBaseState
     {
         Debug.Log("Fight Enter :: 전투 시작");
         Update();
+        UpdateBattle();
     }
 
     public override void HandleInput() { }
@@ -23,17 +25,30 @@ public class FightState : PlayerBaseState
         {
             // TODO: 패배 로직 (GameOverState 등으로 전환)
         }
-        
-        UpdateBattle();
     }
 
     public override void Exit()
     {
         Debug.Log("Fight Exit");
+        stateMachine.Player.StopCoroutine(AutoShoot());
     }
-
+    
     public void UpdateBattle()
     {
-        Debug.Log("Fight :: 전투 진행 중");
+        //Debug.Log("Fight :: 전투 진행 중");
+        stateMachine.Player.StartCoroutine(AutoShoot());
+    }
+    
+    private IEnumerator AutoShoot()
+    {
+        while (true)
+        {
+            Vector3 pos = stateMachine.Player.Weapon.MuzzlePoint.position;
+            Quaternion rot = stateMachine.Player.Weapon.MuzzlePoint.rotation;
+            GameManager.Instance.BulletController.Shoot(pos, rot, stateMachine.Player);
+
+            // TODO :: 플레이어 속도 아이템에 따라 조절
+            yield return new WaitForSeconds(5f); 
+        }
     }
 }
