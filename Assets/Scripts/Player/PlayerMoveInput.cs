@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMoveInput : MonoBehaviour
 {
-    private static readonly int RUN = Animator.StringToHash("RUN");
     private PlayerInputActions playerInputActions;
-    private Animator animator;
-    [SerializeField] private VirtualJoystick joystick; 
+    private VirtualJoystick joystick; 
     
     [SerializeField] private float speed = 5f;
     
@@ -18,8 +17,11 @@ public class PlayerMoveInput : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
-        animator = GetComponent<Animator>();
-        animator.SetTrigger(RUN);
+    }
+
+    private void Start()
+    {
+        joystick = GameManager.Instance.VirtualJoystick;
     }
 
     private void OnEnable()

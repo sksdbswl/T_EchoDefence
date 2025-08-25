@@ -4,7 +4,6 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     [SerializeField] private GameObject[] BulletPrefabs; // 레벨별 총알 프리팹
-    [SerializeField] private Vector3 BulletPos;
     
     void Start()
     {
@@ -15,11 +14,11 @@ public class BulletController : MonoBehaviour
     
     public void Shoot(Vector3 pos, Quaternion rot, Player player)
     {
-        var bulletPrefab = BulletPrefabs[player.Level - 1];
-
+        var bulletPrefab = BulletPrefabs[player.playerStat.Level - 1];
+    
         // 풀에서 꺼내오기
         var bulletObj = ObjectPoolManager.Instance.GetFromPool(bulletPrefab, pos, rot);
-
+    
         // 꺼낸 오브젝트의 Bullet 초기화
         bulletObj.GetComponent<Bullet>().Init(bulletPrefab, player);
     }

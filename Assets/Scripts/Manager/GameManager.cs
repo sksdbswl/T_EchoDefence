@@ -4,20 +4,22 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
-    static GameManager instance;
-    public static GameManager Instance { get { return instance; } }
+    public static GameManager Instance { get; private set; }
     public BulletController BulletController;
-    
+    public VirtualJoystick VirtualJoystick;
+    public UnitManager Units;
+    public BuffManager Buffs;
+    public SkillManager Skills;
+
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         BulletController = GetComponent<BulletController>();
+        Units = GetComponent<UnitManager>();
+        Buffs = GetComponent<BuffManager>();
+        Skills = GetComponent<SkillManager>();
     }
-
-    private void Start()
-    {
-    }
-
+    
     public void ExitGame()
     {
         Debug.Log("ExitGame");

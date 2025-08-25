@@ -319,7 +319,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 217560421}
-  - component: {fileID: 217560420}
   m_Layer: 0
   m_Name: StaticLightingSky
   m_TagString: Untagged
@@ -327,18 +326,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &217560420
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 217560419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441482e8936e35048a1dffac814e3ef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &217560421
 Transform:
   m_ObjectHideFlags: 1
@@ -439,7 +426,6 @@ GameObject:
   - component: {fileID: 448461177}
   - component: {fileID: 448461176}
   - component: {fileID: 448461175}
-  - component: {fileID: 448461178}
   - component: {fileID: 448461179}
   m_Layer: 0
   m_Name: Main Camera
@@ -522,18 +508,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 208102288}
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
---- !u!114 &448461178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448461174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23c1ce4fb46143f46bc5cb5224c934f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &448461179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1386,7 +1360,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1812349217}
   - component: {fileID: 1812349216}
-  - component: {fileID: 1812349218}
   - component: {fileID: 1812349219}
   m_Layer: 0
   m_Name: Directional Light
@@ -1475,18 +1448,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 208102288}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &1812349218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812349215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1812349219
 MonoBehaviour:
   m_ObjectHideFlags: 0

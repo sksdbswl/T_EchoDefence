@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * (Player.Speed * Time.deltaTime));
+        transform.Translate(Vector3.forward * (Player.playerStat.Speed * Time.deltaTime));
         
         StartCoroutine(ReturnToPool());
     }
@@ -37,16 +37,17 @@ public class Bullet : MonoBehaviour
             Debug.Log("Monster 감지 ============================================");
             var monster = other.gameObject.GetComponent<Monster>();
             
-            monster.TakeDamage(Player.Damage);
+            monster.TakeDamage(Player.playerStat.Damage);
 
             StopCoroutine(ReturnToPool());
             ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject);
         }
+        
+        UnitDef unitDef = other.GetComponent<UnitDef>();
+        if (unitDef)
+        {
+            unitDef.unitValue++;
+        }
     }
-    
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject);
-    // }
 }
 
