@@ -48,7 +48,7 @@ public class FightState : PlayerBaseState
             GameManager.Instance.BulletController.Shoot(pos, rot, stateMachine.Player);
 
             // TODO :: 플레이어 속도 아이템에 따라 조절
-            yield return new WaitForSeconds(5f); 
+            yield return new WaitForSeconds(1.5f); 
         }
     }
 }

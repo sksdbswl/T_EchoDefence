@@ -16,8 +16,12 @@ public class BulletController : MonoBehaviour
     public void Shoot(Vector3 pos, Quaternion rot, Player player)
     {
         var bulletPrefab = BulletPrefabs[player.Level - 1];
-        bulletPrefab.GetComponent<Bullet>().Init(bulletPrefab, player);
-        ObjectPoolManager.Instance.GetFromPool(bulletPrefab, pos, rot);
+
+        // 풀에서 꺼내오기
+        var bulletObj = ObjectPoolManager.Instance.GetFromPool(bulletPrefab, pos, rot);
+
+        // 꺼낸 오브젝트의 Bullet 초기화
+        bulletObj.GetComponent<Bullet>().Init(bulletPrefab, player);
     }
     
     public void LevelUp() {}

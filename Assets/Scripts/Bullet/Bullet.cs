@@ -24,6 +24,9 @@ public class Bullet : MonoBehaviour
     private IEnumerator ReturnToPool()
     {
         yield return new WaitForSeconds(3.0f);
+        
+        Debug.Log($"Bullet ReturnToPool::{prefab.name}");
+        
         ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject);
     }
 
