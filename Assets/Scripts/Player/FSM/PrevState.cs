@@ -7,7 +7,7 @@ public class PrevState : PlayerBaseState
 
     public override void Enter()
     {
-        Debug.Log("Prev State Enter");
+        //Debug.Log("Prev State Enter");
         stateMachine.Player.StartCoroutine(DelayToSpawn());
     }
 
@@ -22,7 +22,7 @@ public class PrevState : PlayerBaseState
 
     public override void Update()
     {
-        Debug.Log("Prev State Update");
+        //Debug.Log("Prev State Update");
     }
 
     public override void Exit()

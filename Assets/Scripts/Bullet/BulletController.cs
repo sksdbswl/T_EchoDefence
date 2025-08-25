@@ -23,6 +23,9 @@ public class BulletController : MonoBehaviour
         // 꺼낸 오브젝트의 Bullet 초기화
         bulletObj.GetComponent<Bullet>().Init(bulletPrefab, player);
     }
-    
-    public void LevelUp() {}
+
+    public void LevelUp()
+    {
+        // TODO : 렙업 별 프리팹 초기화
+    }
 }

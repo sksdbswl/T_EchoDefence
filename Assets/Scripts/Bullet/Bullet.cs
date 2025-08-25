@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 0f;
     private GameObject prefab;
-
+    private Player Player;
+    
     public void Init(GameObject prefabRef, Player player)
     {
+        Player = player;
         prefab = prefabRef;
-        speed = player.Speed;
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * (speed * Time.deltaTime));
-
+        transform.Translate(Vector3.forward * (Player.Speed * Time.deltaTime));
+        
         StartCoroutine(ReturnToPool());
     }
 
@@ -25,11 +25,25 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         
-        Debug.Log($"Bullet ReturnToPool::{prefab.name}");
-        
         ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Monster target = other.GetComponent<Monster>();
+        
+        if (target)
+        {
+            Debug.Log("Monster 감지 ============================================");
+            var monster = other.gameObject.GetComponent<Monster>();
+            
+            monster.TakeDamage(Player.Damage);
+
+            StopCoroutine(ReturnToPool());
+            ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject);
+        }
+    }
+    
     // private void OnCollisionEnter(Collision collision)
     // {
     //     ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject);

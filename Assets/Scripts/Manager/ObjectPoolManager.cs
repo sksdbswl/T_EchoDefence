@@ -66,8 +66,6 @@ public class ObjectPoolManager : MonoBehaviour
     /// </summary>
     public void ReturnToPool(GameObject prefab, GameObject obj)
     {
-        Debug.Log($"prefab:: {prefab}");
-        
         obj.SetActive(false);
         obj.transform.SetParent(transform);
 

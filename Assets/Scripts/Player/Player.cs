@@ -11,13 +11,14 @@ public class Player : MonoBehaviour
     [Header("InGameSettings")]
     public int Level = 1;
     public float Speed = 3f;
+    public int Damage = 10;
     
     private void Awake()
     {
         // 기본 무기 설정
-        Weapon = GetComponentInChildren<Weapon>(); 
-        
+        Weapon = GetComponentInChildren<Weapon>();
         Debug.Log($"Weapon ==========================================================:: {Weapon}" );
+       
         // 초기 플레이어 생성 및 FSM 시작 선언
         PlayerStateMachine = new PlayerStateMachine(this); 
         PlayerStateMachine.ChangeState(PlayerStateMachine.PrevState);
