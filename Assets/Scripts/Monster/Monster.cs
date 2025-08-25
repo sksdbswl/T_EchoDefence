@@ -13,6 +13,7 @@ public class Monster : MonoBehaviour
     
     private void Awake()
     {
+        monsterPrefab = this.gameObject;
         currentHp = maxHp;
     }
 
