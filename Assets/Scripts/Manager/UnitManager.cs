@@ -123,7 +123,6 @@ public class UnitManager : MonoBehaviour
 
     private IEnumerator FireTick()
     {
-        
         while (true)
         {
             // 플레이어 스냅샷
