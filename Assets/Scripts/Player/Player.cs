@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour,IMuzzleProvider
+public class Player : MonoBehaviour,IMuzzleProvider, IProvider
 {
     public PlayerStateMachine PlayerStateMachine { get; private set; }
     public Weapon Weapon { get; private set; }
-    public Transform Muzzle => Weapon.MuzzlePoint;       
+    public Transform Muzzle => Weapon.MuzzlePoint;    
+    public Player PlayerProvider => this;
+    
     public bool IsBattleClear = false;
     public bool IsPlayerDead = false;
     public Animator animator;

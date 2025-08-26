@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class UnitAgent : MonoBehaviour, IMuzzleProvider
+public class UnitAgent : MonoBehaviour, IMuzzleProvider, IProvider
 {
     private Player _owner;
     private PlayerStat _stats;
     private Animator _anim;
-
+    public Player PlayerProvider => _owner; 
     [SerializeField] private Transform muzzle;  // 유닛 모델의 총구 위치
     public Transform Muzzle => muzzle;       
 

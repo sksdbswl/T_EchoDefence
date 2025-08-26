@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class WeaponUpgrade : MonoBehaviour
 {
+    private bool _triggered;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent<Player>(out var player)) return;
-        player.playerStat.Level++;
+        var provider = other.GetComponentInParent<IProvider>();
+        if (provider == null || provider.PlayerProvider == null) return;
         
+        _triggered = true;
+
+        provider.PlayerProvider.playerStat.Level++;
         Destroy(gameObject);
+        
+        _triggered = false;
     }
 }
