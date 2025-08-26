@@ -31,7 +31,7 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     private void Start()
     {
         GameManager.Instance.Units.Init(this);
-        GameManager.Instance.Skills.Init(this);
+        GameManager.Instance.Grenade.Init(this);
         GameManager.Instance.Units.RegisterPlayer(this);
     }
 

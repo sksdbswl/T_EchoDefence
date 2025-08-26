@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
@@ -8,14 +9,14 @@ public class GameManager : MonoBehaviour
     public BulletController BulletController;
     public VirtualJoystick VirtualJoystick;
     public UnitManager Units;
-    public SkillManager Skills;
+    public GrenadeManager Grenade;
     
     private void Awake()
     {
         Instance = this;
         BulletController = GetComponent<BulletController>();
         Units = GetComponent<UnitManager>();
-        Skills = GetComponent<SkillManager>();
+        Grenade = GetComponent<GrenadeManager>();
     }
     
     public void ExitGame()
