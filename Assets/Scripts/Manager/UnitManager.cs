@@ -16,8 +16,9 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private float jitter = 0.15f;        // 약간의 랜덤 흔들림(겹침 방지)
 
     private Player _owner;
+    private IMuzzleProvider _playerProvider; 
     private readonly List<UnitAgent> _activeUnits = new();
-
+    
     private Coroutine _fireLoop;
     [SerializeField] private float fireInterval = 1.5f;
 
@@ -33,7 +34,7 @@ public class UnitManager : MonoBehaviour
 
     public void RegisterPlayer(IMuzzleProvider playerProvider)
     {
-        // 이전 답변의 발사 루프 구조를 쓰고 있다면 여기에 저장/활용
+        _playerProvider = playerProvider;        
     }
 
     public void ApplyDelta(int delta)
@@ -122,9 +123,19 @@ public class UnitManager : MonoBehaviour
 
     private IEnumerator FireTick()
     {
+        
         while (true)
         {
-            // 현재 유닛 스냅샷
+            // 플레이어 스냅샷
+            if (_playerProvider != null)
+            {
+                var pos = _playerProvider.Muzzle.transform.position;
+                var rot = _playerProvider.Muzzle.rotation;
+                
+                GameManager.Instance.BulletController.Shoot(pos, rot, _owner);
+            }
+            
+            // 유닛 스냅샷
             var list = _activeUnits.ToArray();
             foreach (var agent in list)
             {
