@@ -14,7 +14,6 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private int   firstRingCapacity = 6; // 첫 링 수용 개수
     [SerializeField] private int   ringCapacityStep  = 6; // 링 올라갈 때마다 추가 수용량
     [SerializeField] private float jitter = 0.15f;        // 약간의 랜덤 흔들림(겹침 방지)
-    //[SerializeField] private bool  faceOutward = true;    // true면 바깥쪽, false면 플레이어 쪽을 바라보게
 
     private Player _owner;
     private readonly List<UnitAgent> _activeUnits = new();

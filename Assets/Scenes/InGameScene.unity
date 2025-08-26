@@ -1345,8 +1345,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
   unitPrefab: {fileID: 6647617584678554108, guid: 52d8661c18a0cb143a718da71cd6cd42, type: 3}
   prewarmCount: 20
-  baseRadius: 1
-  ringGap: 1
+  baseRadius: 0.5
+  ringGap: 0.5
   firstRingCapacity: 6
   ringCapacityStep: 6
   jitter: 0.15
@@ -1401,14 +1401,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4265095451359857653, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6436978732423342385, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
-      propertyPath: joystick
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7082865003355903656, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
-      propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
