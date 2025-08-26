@@ -1,4 +1,5 @@
 using System;
+using System.Xml;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,10 +7,19 @@ using Random = UnityEngine.Random;
 public class UnitDef : MonoBehaviour
 {
     public int unitValue;
+
+    [SerializeField]private GameObject Increment;
+    [SerializeField]private GameObject Decrement;
     
     private void Awake()
     {
         unitValue = Random.Range(-15, 3);
+        UnitDefChanged();
+    }
+
+    private void Update()
+    {
+        UnitDefChanged();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -17,5 +27,19 @@ public class UnitDef : MonoBehaviour
         if (!other.TryGetComponent<Player>(out var player)) return;
         GameManager.Instance.Units.ApplyDelta(unitValue); 
         Destroy(gameObject);
+    }
+
+    private void UnitDefChanged()
+    {
+        if (unitValue < 0)
+        {
+            Increment.SetActive(false);
+            Decrement.SetActive(true);
+        }
+        else
+        {
+            Increment.SetActive(true);
+            Decrement.SetActive(false);
+        }
     }
 }
