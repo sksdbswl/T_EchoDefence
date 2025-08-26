@@ -52,6 +52,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("유닛 부족 새로 생성=================");
             obj = Instantiate(prefab, transform); // 부족하면 새로 생성
         }
 

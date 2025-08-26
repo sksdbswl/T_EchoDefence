@@ -11,8 +11,8 @@ public class UnitManager : MonoBehaviour
     private Player _owner;
 
     // 발사 소스들
-    private IMuzzleProvider _playerProvider;     // ★ 플레이어
-    private readonly List<UnitAgent> _units = new(); // ★ 유닛들
+    private IMuzzleProvider _playerProvider;  // 플레이어
+    private readonly List<UnitAgent> _units = new(); // 유닛
 
     private Coroutine _fireLoop;
     [SerializeField] private float fireInterval = 1.5f;

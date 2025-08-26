@@ -18,21 +18,4 @@ public class UnitDef : MonoBehaviour
         GameManager.Instance.Units.ApplyDelta(unitValue); 
         Destroy(gameObject);
     }
-    
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     var player = other.GetComponent<Player>();
-    //
-    //     if (player)
-    //     {
-    //         int incrementUnit = player.playerStat.UnitCnt + unitValue;
-    //         
-    //         for (int i = 0; i < incrementUnit; i++)
-    //         { 
-    //             Instantiate(player, transform.position, Quaternion.identity);
-    //         }
-    //         
-    //         Destroy(gameObject);
-    //     }
-    // }
 }
