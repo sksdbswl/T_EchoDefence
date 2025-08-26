@@ -1505,6 +1505,7 @@ MonoBehaviour:
     speed: 1
     unitCnt: 1
     damage: 100
+    grenade: 1
 --- !u!54 &7082865003355903656
 Rigidbody:
   m_ObjectHideFlags: 0

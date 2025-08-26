@@ -11,7 +11,8 @@ public class PlayerStat
     [SerializeField] private float speed       = 1f;
     [SerializeField] private int   unitCnt     = 1;   // 0 이상 권장
     [SerializeField] private int   damage      = 100;
-
+    [SerializeField] private int   grenade     = 1;
+    
     // ---- 변경 알림 ----
     public event Action OnChanged;
     private bool _suppressNotify = false;
@@ -84,28 +85,40 @@ public class PlayerStat
             RaiseChanged();
         }
     }
+    
+    public int Grenade
+    {
+        get => grenade;
+        set
+        {
+            int v = Mathf.Max(0, value);
+            if (grenade == v) return;
+            grenade = v;
+            RaiseChanged();
+        }
+    }
 
     // ---- 유틸 메서드(클램프/증감) ----
-    public void AddUnits(int delta, int min = 0, int max = 999)
-        => UnitCnt = Mathf.Clamp(UnitCnt + delta, min, max);
+    // public void AddUnits(int delta, int min = 0, int max = 999)
+    //     => UnitCnt = Mathf.Clamp(UnitCnt + delta, min, max);
+    //
+    // public void AddWeaponLevels(int delta, int min = 1, int max = 10)
+    //     => WeaponLevel = Mathf.Clamp(WeaponLevel + delta, min, max);
+    //
+    // public void SetWeaponLevelClamped(int lv, int min = 1, int max = 10)
+    //     => WeaponLevel = Mathf.Clamp(lv, min, max);
+    //
+    // public void AddDamage(int delta)
+    //     => Damage = Mathf.Max(0, Damage + delta);
+    //
+    // public void SetSpeedClamped(float v, float min = 0.1f, float max = 50f)
+    //     => Speed = Mathf.Clamp(v, min, max);
+    //
+    // // ---- Damage 오버로드(기존 float 호출 대응) ----
+    // public void SetDamage(int v)   => Damage = v;
+    // public void SetDamage(float v) => Damage = Mathf.Max(0, Mathf.RoundToInt(v));
 
-    public void AddWeaponLevels(int delta, int min = 1, int max = 10)
-        => WeaponLevel = Mathf.Clamp(WeaponLevel + delta, min, max);
-
-    public void SetWeaponLevelClamped(int lv, int min = 1, int max = 10)
-        => WeaponLevel = Mathf.Clamp(lv, min, max);
-
-    public void AddDamage(int delta)
-        => Damage = Mathf.Max(0, Damage + delta);
-
-    public void SetSpeedClamped(float v, float min = 0.1f, float max = 50f)
-        => Speed = Mathf.Clamp(v, min, max);
-
-    // ---- Damage 오버로드(기존 float 호출 대응) ----
-    public void SetDamage(int v)   => Damage = v;
-    public void SetDamage(float v) => Damage = Mathf.Max(0, Mathf.RoundToInt(v));
-
-    // ✅ 주의: Unity 직렬화 특성상 생성자(initializer)보다
+    // 주의: Unity 직렬화 특성상 생성자(initializer)보다
     // 인스펙터 값이 우선됩니다. Awake에서 new PlayerStat()로 덮지 마세요.
     // (Inspector 값을 쓰려면 Player.Awake에서 new 호출 제거)
 }

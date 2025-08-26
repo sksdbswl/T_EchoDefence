@@ -1,16 +1,30 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Player _owner;
+    
+    [Header("Grenade Settings")]
+    [SerializeField] private GameObject GrenadePrefab;
+    [SerializeField] private GameObject GrenadeBtn;
+    [SerializeField] private TMP_Text GrenadeCount;
+    
+    public void Init(Player owner)
     {
-        
+        _owner = owner;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        GrenadeCount.text = _owner.playerStat.Grenade.ToString();
+    }
+
+    public void UseGrenade()
+    {
+        if (_owner.playerStat.Grenade < 0) return;
         
+        Debug.Log("Use Grenade");
     }
 }

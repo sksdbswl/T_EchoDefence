@@ -8,15 +8,13 @@ public class GameManager : MonoBehaviour
     public BulletController BulletController;
     public VirtualJoystick VirtualJoystick;
     public UnitManager Units;
-    public BuffManager Buffs;
     public SkillManager Skills;
-
+    
     private void Awake()
     {
         Instance = this;
         BulletController = GetComponent<BulletController>();
         Units = GetComponent<UnitManager>();
-        Buffs = GetComponent<BuffManager>();
         Skills = GetComponent<SkillManager>();
     }
     
