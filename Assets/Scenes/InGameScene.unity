@@ -1307,7 +1307,6 @@ MonoBehaviour:
   BulletPrefabs:
   - {fileID: 6308931787622046970, guid: 98e1b553ad7758847ab890a49a650524, type: 3}
   - {fileID: 3307465512734650322, guid: 5e182eb435925ae40a20b5baeee9cfd2, type: 3}
-  BulletPos: {x: 0, y: 0, z: 0}
 --- !u!114 &2117605346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1345,6 +1344,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
   unitPrefab: {fileID: 6647617584678554108, guid: 52d8661c18a0cb143a718da71cd6cd42, type: 3}
+  prewarmCount: 20
+  baseRadius: 1
+  ringGap: 1
+  firstRingCapacity: 6
+  ringCapacityStep: 6
+  jitter: 0.15
+  fireInterval: 1.5
 --- !u!1001 &2136681064
 PrefabInstance:
   m_ObjectHideFlags: 0

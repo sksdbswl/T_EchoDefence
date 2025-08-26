@@ -39,8 +39,8 @@ public class ObjectPoolManager : MonoBehaviour
     {
         if (!pools.ContainsKey(prefab))
         {
-            Debug.LogWarning($"풀에 {prefab.name} 이(가) 등록되지 않아 새로 생성합니다.");
-            CreatePool(prefab, 1); // 없으면 즉시 풀 생성
+            // 없으면 즉시 풀 생성
+            CreatePool(prefab, 1); 
         }
 
         Queue<GameObject> pool = pools[prefab];
@@ -52,8 +52,8 @@ public class ObjectPoolManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("유닛 부족 새로 생성=================");
-            obj = Instantiate(prefab, transform); // 부족하면 새로 생성
+            // 부족하면 새로 생성
+            obj = Instantiate(prefab, transform); 
         }
 
         obj.SetActive(true);

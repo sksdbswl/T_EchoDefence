@@ -8,11 +8,16 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private GameObject unitPrefab;
     [SerializeField] private int prewarmCount = 20;
 
-    private Player _owner;
+    [Header("Spawn Ring Settings")]
+    [SerializeField] private float baseRadius = 1.0f;     // 첫 링 반지름
+    [SerializeField] private float ringGap    = 1.0f;     // 링 간격
+    [SerializeField] private int   firstRingCapacity = 6; // 첫 링 수용 개수
+    [SerializeField] private int   ringCapacityStep  = 6; // 링 올라갈 때마다 추가 수용량
+    [SerializeField] private float jitter = 0.15f;        // 약간의 랜덤 흔들림(겹침 방지)
+    //[SerializeField] private bool  faceOutward = true;    // true면 바깥쪽, false면 플레이어 쪽을 바라보게
 
-    // 발사 소스들
-    private IMuzzleProvider _playerProvider;  // 플레이어
-    private readonly List<UnitAgent> _units = new(); // 유닛
+    private Player _owner;
+    private readonly List<UnitAgent> _activeUnits = new();
 
     private Coroutine _fireLoop;
     [SerializeField] private float fireInterval = 1.5f;
@@ -22,15 +27,16 @@ public class UnitManager : MonoBehaviour
         ObjectPoolManager.Instance.CreatePool(unitPrefab, prewarmCount);
     }
 
-    public void Init(Player owner) { _owner = owner; }
-
-    // 플레이어 등록
-    public void RegisterPlayer(IMuzzleProvider playerProvider)
+    public void Init(Player owner)
     {
-        _playerProvider = playerProvider;
+        _owner = owner;
     }
 
-    // 유닛 수 증감
+    public void RegisterPlayer(IMuzzleProvider playerProvider)
+    {
+        // 이전 답변의 발사 루프 구조를 쓰고 있다면 여기에 저장/활용
+    }
+
     public void ApplyDelta(int delta)
     {
         if (delta > 0) AddUnits(delta);
@@ -39,29 +45,69 @@ public class UnitManager : MonoBehaviour
 
     private void AddUnits(int count)
     {
+        // 현재 활성 유닛 수를 기준으로 “연속 인덱스”를 부여
+        int baseIndex = _activeUnits.Count;
+
         for (int i = 0; i < count; i++)
         {
-            var go = ObjectPoolManager.Instance.GetFromPool(unitPrefab, _owner.transform.position, Quaternion.identity);
+            Vector3 center = _owner.transform.position;
+
+            int globalIndex = baseIndex + i; // 전체에서의 인덱스
+            Vector3 pos = GetSpawnPosAroundPlayer(globalIndex, center);
+
+            Quaternion rot = Quaternion.identity;
+
+            var go = ObjectPoolManager.Instance.GetFromPool(unitPrefab, pos, rot);
             var agent = go.GetComponent<UnitAgent>();
             agent.Bind(_owner);
-            _units.Add(agent);
+            _activeUnits.Add(agent);
         }
     }
 
     private void RemoveUnits(int count)
     {
-        for (int i = 0; i < count && _units.Count > 0; i++)
+        for (int i = 0; i < count && _activeUnits.Count > 0; i++)
         {
-            int last = _units.Count - 1;
-            var agent = _units[last];
-            _units.RemoveAt(last);
+            int last = _activeUnits.Count - 1;
+            var agent = _activeUnits[last];
+            _activeUnits.RemoveAt(last);
 
             agent.OnDespawn();
             ObjectPoolManager.Instance.ReturnToPool(unitPrefab, agent.gameObject);
         }
     }
 
-    // ===== 발사 루프 =====
+    /// <summary>
+    /// globalIndex(0부터 시작)를 기준으로 어느 링/몇 번째 슬롯인지 계산해서 위치 반환
+    /// </summary>
+    private Vector3 GetSpawnPosAroundPlayer(int globalIndex, Vector3 center)
+    {
+        // 몇 번째 링인지/그 링의 수용량은 얼마인지 계산
+        int ring = 0;
+        int capacityThisRing = firstRingCapacity;
+        int idxInRing = globalIndex;
+
+        while (idxInRing >= capacityThisRing)
+        {
+            idxInRing -= capacityThisRing;
+            ring++;
+            capacityThisRing += ringCapacityStep; // 다음 링은 더 많은 슬롯
+        }
+
+        float radius = baseRadius + ring * ringGap;
+        float t = (idxInRing + 0.5f) / capacityThisRing; // 0~1 분포(0.5 오프셋으로 겹침 방지)
+        float angle = t * Mathf.PI * 2f;
+
+        // 약간의 랜덤 흔들림
+        float r = radius + Random.Range(-jitter, jitter);
+        float x = center.x + Mathf.Cos(angle) * r;
+        float z = center.z + Mathf.Sin(angle) * r;
+        var pos = new Vector3(x, center.y, z);
+
+        return pos;
+    }
+
+    // ===== (있다면) 발사 루프 =====
     public void StartFireLoop()
     {
         if (_fireLoop != null) return;
@@ -75,53 +121,22 @@ public class UnitManager : MonoBehaviour
         _fireLoop = null;
     }
 
-    private IEnumerable<IMuzzleProvider> EnumerateSources()
-    {
-        if (_playerProvider != null && _playerProvider.Muzzle != null)
-            yield return _playerProvider; // ★ 플레이어도 포함
-
-        // 유닛들 포함
-        for (int i = 0; i < _units.Count; i++)
-        {
-            var u = _units[i];
-            if (u != null && u.Muzzle != null)
-                yield return u;
-        }
-    }
-
     private IEnumerator FireTick()
     {
         while (true)
         {
-            // 스냅샷 떠서 중간 변경에도 안전
-            var sources = new List<IMuzzleProvider>(EnumerateSources());
+            // 현재 유닛 스냅샷
+            var list = _activeUnits.ToArray();
+            foreach (var agent in list)
+            {
+                if (agent == null || agent.Muzzle == null || _owner == null) continue;
 
-            // 전원 발사 (원하면 분산도 가능)
-            foreach (var src in sources)
-                ShootFrom(src);
+                var pos = agent.Muzzle.position;
+                var rot = agent.Muzzle.rotation;
+                GameManager.Instance.BulletController.Shoot(pos, rot, _owner);
+            }
 
             yield return new WaitForSeconds(fireInterval);
         }
-    }
-
-    private void ShootFrom(IMuzzleProvider src)
-    {
-        if (src?.Muzzle == null || _owner == null) return;
-
-        Vector3 pos = src.Muzzle.position;
-        Quaternion rot = src.Muzzle.rotation;
-
-        GameManager.Instance.BulletController.Shoot(pos, rot, _owner);
-    }
-
-    // ★ 수동 발사(탭/스킬 버튼용) – 플레이어만 한 발
-    public void ShootOnceFromPlayer()
-    {
-        if (_playerProvider?.Muzzle == null || _owner == null) return;
-
-        Vector3 pos = _playerProvider.Muzzle.position;
-        Quaternion rot = _playerProvider.Muzzle.rotation;
-
-        GameManager.Instance.BulletController.Shoot(pos, rot, _owner);
     }
 }
