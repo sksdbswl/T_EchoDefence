@@ -10,10 +10,9 @@ public class GrenadeThrowController : MonoBehaviour
     [Header("Refs")]
     [SerializeField] private GameObject grenadePrefab;   // 수류탄 프리팹(ThrowingWeapon + Rigidbody + LineRenderer)
     [SerializeField] private Camera cam;                 // 메인 카메라 (없으면 자동 할당)
-    
-    [Header("Fire Origin")]
-    [Tooltip("던지기 기준점(회전/방향만 사용). 비워두면 (0,0,0)에서 동적 생성.")]
-    [SerializeField] private Transform firePos;          // 기준 트랜스폼
+
+    [Header("Fire Origin")] [Tooltip("던지기 기준점(회전/방향만 사용). 비워두면 (0,0,0)에서 동적 생성.")] [SerializeField]
+    private Transform firePos;        // 기준 트랜스폼
 
     [Header("Aim (Right Mouse Drag Up/Down)")]
     [SerializeField] private float baseThrowForce = 12f; // ThrowingWeapon.throwForce에 적용
@@ -42,7 +41,7 @@ public class GrenadeThrowController : MonoBehaviour
         {
             var go = new GameObject("FirePos (Runtime)");
             firePos = go.transform;
-            firePos.position = Vector3.zero; // 요구사항: (0,0,0)
+            firePos.position = new Vector3(0,1,0); 
         }
     }
 

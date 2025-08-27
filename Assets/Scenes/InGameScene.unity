@@ -311,7 +311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8179039656167474940, guid: f76b92687a718a348948bfbbfb4761a0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -786,7 +786,7 @@ GameObject:
   - component: {fileID: 867292673}
   - component: {fileID: 867292672}
   m_Layer: 0
-  m_Name: 123
+  m_Name: GrenadeThrowController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -821,12 +821,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867292671}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1482013713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &881474714
 GameObject:
@@ -1293,6 +1293,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2018735563}
+  - {fileID: 867292673}
   - {fileID: 193757031}
   - {fileID: 2117605344}
   - {fileID: 1803696873}
@@ -1539,7 +1541,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1482013713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2087087359
 GameObject:
@@ -1632,9 +1634,8 @@ GameObject:
   - component: {fileID: 2117605343}
   - component: {fileID: 2117605345}
   - component: {fileID: 2117605348}
-  - component: {fileID: 2117605349}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameManager/BulletController/UnitManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1655,7 +1656,6 @@ MonoBehaviour:
   BulletController: {fileID: 0}
   VirtualJoystick: {fileID: 100585021}
   Units: {fileID: 0}
-  Grenade: {fileID: 0}
 --- !u!4 &2117605344
 Transform:
   m_ObjectHideFlags: 0
@@ -1706,28 +1706,6 @@ MonoBehaviour:
   ringCapacityStep: 6
   jitter: 0.15
   fireInterval: 1.5
---- !u!114 &2117605349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117605342}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c302e299b66435c9513a7e679910f48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillManager
-  GrenadePrefab: {fileID: 1389354387952999919, guid: a9ba3e2c6c344804982c15fcbe33a867, type: 3}
-  GrenadeCount: {fileID: 881474716}
-  preview: {fileID: 2018735561}
-  startPos: {fileID: 2117605344}
-  baseThrowSpeed: 12
-  minPitchDeg: 5
-  maxPitchDeg: 60
-  minPower: 0.6
-  maxPower: 1.4
-  dragSensitivity: 0.003
 --- !u!1001 &2136681064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1856,10 +1834,8 @@ SceneRoots:
   - {fileID: 534527178}
   - {fileID: 1482013713}
   - {fileID: 2136681064}
-  - {fileID: 2018735563}
   - {fileID: 809007901}
   - {fileID: 761311693}
   - {fileID: 326481428}
   - {fileID: 3416957187758562521}
   - {fileID: 1935485870}
-  - {fileID: 867292673}
