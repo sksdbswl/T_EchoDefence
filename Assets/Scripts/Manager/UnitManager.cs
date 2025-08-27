@@ -7,7 +7,8 @@ public class UnitManager : MonoBehaviour
     [Header("Unit Pool")]
     [SerializeField] private GameObject unitPrefab;
     [SerializeField] private int prewarmCount = 20;
-
+    [SerializeField] private Transform parents;
+    
     [Header("Spawn Ring Settings")]
     [SerializeField] private float baseRadius = 1.0f;     // 첫 링 반지름
     [SerializeField] private float ringGap    = 1.0f;     // 링 간격
@@ -24,7 +25,7 @@ public class UnitManager : MonoBehaviour
 
     void Awake()
     {
-        ObjectPoolManager.Instance.CreatePool(unitPrefab, prewarmCount);
+        ObjectPoolManager.Instance.CreatePool(unitPrefab, prewarmCount, parents);
     }
 
     public void Init(Player owner)
@@ -57,7 +58,7 @@ public class UnitManager : MonoBehaviour
 
             Quaternion rot = Quaternion.identity;
 
-            var go = ObjectPoolManager.Instance.GetFromPool(unitPrefab, pos, rot);
+            var go = ObjectPoolManager.Instance.GetFromPool(unitPrefab, pos, rot, parents);
             var agent = go.GetComponent<UnitAgent>();
             agent.Bind(_owner);
             _activeUnits.Add(agent);
@@ -73,7 +74,7 @@ public class UnitManager : MonoBehaviour
             _activeUnits.RemoveAt(last);
 
             agent.OnDespawn();
-            ObjectPoolManager.Instance.ReturnToPool(unitPrefab, agent.gameObject);
+            ObjectPoolManager.Instance.ReturnToPool(unitPrefab, agent.gameObject, parents);
         }
     }
 

@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         
-        ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject);
+        ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject, GameManager.Instance.BulletController.Parents);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
             monster.TakeDamage(Player.playerStat.Damage);
 
             StopCoroutine(ReturnToPool());
-            ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject);
+            ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject, GameManager.Instance.BulletController.Parents);
         }
         
         UnitDef unitDef = other.GetComponent<UnitDef>();

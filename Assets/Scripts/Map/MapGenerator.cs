@@ -10,10 +10,12 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private float spawnDelay = 0.01f;      // 줄마다 생성 간격 시간
     [SerializeField] private float chunkSpacing = 1f;      // 줄 간격 (Z축 기준)
     [SerializeField] private Transform startChunk;         // 시작 초기 스폰 위치
-
+    private MapScrollController mapScrollController;
+    
     private void Awake()
     {
-        var startChunkPos =  Instantiate(startChunk.gameObject, transform.position, quaternion.identity);
+        var startChunkPos =  Instantiate(startChunk.gameObject, transform.position, quaternion.identity, gameObject.transform);
+        mapScrollController = GetComponent<MapScrollController>();
         startChunk = startChunkPos.transform;
     }
 
@@ -33,5 +35,7 @@ public class MapGenerator : MonoBehaviour
 
             yield return new WaitForSeconds(spawnDelay);
         }
+        
+        mapScrollController.isScrolling = true;
     }
 }

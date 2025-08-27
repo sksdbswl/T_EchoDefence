@@ -15,7 +15,7 @@ public class ObjectPoolManager : MonoBehaviour
     /// <summary>
     /// 풀 생성 (필요한 프리팹과 개수 지정)
     /// </summary>
-    public void CreatePool(GameObject prefab, int count)
+    public void CreatePool(GameObject prefab, int count, Transform parent)
     {
         // 이미 풀 존재하면 무시
         if (pools.ContainsKey(prefab)) return; 
@@ -24,28 +24,25 @@ public class ObjectPoolManager : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            GameObject obj = Instantiate(prefab, transform);
+            GameObject obj = Instantiate(prefab, parent);
             obj.SetActive(false);
             newPool.Enqueue(obj);
         }
 
         pools.Add(prefab, newPool);
     }
-
-    /// <summary>
-    /// 풀에서 오브젝트 꺼내오기
-    /// </summary>
-    public GameObject GetFromPool(GameObject prefab, Vector3 position, Quaternion rotation)
+    
+    public GameObject GetFromPool(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
     {
         if (!pools.ContainsKey(prefab))
         {
             // 없으면 즉시 풀 생성
-            CreatePool(prefab, 1); 
+            CreatePool(prefab, 1, parent); 
         }
-
+    
         Queue<GameObject> pool = pools[prefab];
         GameObject obj;
-
+    
         if (pool.Count > 0)
         {
             obj = pool.Dequeue();
@@ -53,22 +50,22 @@ public class ObjectPoolManager : MonoBehaviour
         else
         {
             // 부족하면 새로 생성
-            obj = Instantiate(prefab, transform); 
+            obj = Instantiate(prefab, parent); 
         }
-
+    
         obj.SetActive(true);
         obj.transform.SetPositionAndRotation(position, rotation);
-
+    
         return obj;
     }
 
     /// <summary>
     /// 오브젝트를 풀로 반환
     /// </summary>
-    public void ReturnToPool(GameObject prefab, GameObject obj)
+    public void ReturnToPool(GameObject prefab, GameObject obj, Transform parent)
     {
         obj.SetActive(false);
-        obj.transform.SetParent(transform);
+        obj.transform.SetParent(parent);
 
         if (!pools.ContainsKey(prefab))
         {
