@@ -5,6 +5,10 @@ public class Monster : MonoBehaviour
     public int maxHp = 10;
     private int currentHp = 1;
     private GameObject monsterPrefab;
+
+    public Player _player;
+    public bool isDetect = false;
+    public float speed = 0.005f;
     
     public void Init(GameObject prefabRef, Player player)
     {
@@ -15,6 +19,17 @@ public class Monster : MonoBehaviour
     {
         monsterPrefab = this.gameObject;
         currentHp = maxHp;
+    }
+
+    private void Update()
+    {
+        if (isDetect)
+        {
+            Vector3 dir = (_player.transform.position - transform.position).normalized;
+
+            // 위치 이동
+            transform.position += dir * (speed * Time.deltaTime);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -36,4 +51,6 @@ public class Monster : MonoBehaviour
         Destroy(monsterPrefab);
         //ObjectPoolManager.Instance.ReturnToPool(monsterPrefab, gameObject);
     }
+    
+    
 }
