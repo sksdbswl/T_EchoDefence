@@ -638,6 +638,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e843006f36bbe9d41a0792f8e1ab4f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+--- !u!1001 &761311693
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5447098638533784428, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
+      propertyPath: m_Name
+      value: GrenadeDef
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
 --- !u!1 &809007900
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,6 +770,59 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.4, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &867292671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 867292673}
+  - component: {fileID: 867292672}
+  m_Layer: 0
+  m_Name: 123
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &867292672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867292671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5585e57f7eb840c1aa6c8cc859199a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrenadeThrowController
+  grenadePrefab: {fileID: 1389354387952999919, guid: a9ba3e2c6c344804982c15fcbe33a867, type: 3}
+  cam: {fileID: 330585545}
+  firePos: {fileID: 0}
+  baseThrowForce: 12
+  minPitchDeg: 5
+  maxPitchDeg: 60
+  minPowerMul: 0.6
+  maxPowerMul: 1.6
+  dragSensitivity: 0.003
+--- !u!4 &867292673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867292671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -970,9 +1080,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2117605349}
-        m_TargetAssemblyTypeName: SkillManager, Assembly-CSharp
-        m_MethodName: UseGrenade
+      - m_Target: {fileID: 867292672}
+        m_TargetAssemblyTypeName: GrenadeThrowController, Assembly-CSharp
+        m_MethodName: ActivateGrenade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1285,7 +1395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2018735561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,7 +1655,7 @@ MonoBehaviour:
   BulletController: {fileID: 0}
   VirtualJoystick: {fileID: 100585021}
   Units: {fileID: 0}
-  Skills: {fileID: 0}
+  Grenade: {fileID: 0}
 --- !u!4 &2117605344
 Transform:
   m_ObjectHideFlags: 0
@@ -1603,17 +1713,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117605342}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c302e299b66435c9513a7e679910f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillManager
   GrenadePrefab: {fileID: 1389354387952999919, guid: a9ba3e2c6c344804982c15fcbe33a867, type: 3}
-  GrenadeBtn: {fileID: 915642495}
   GrenadeCount: {fileID: 881474716}
   preview: {fileID: 2018735561}
   startPos: {fileID: 2117605344}
-  throwSpeed: 12
+  baseThrowSpeed: 12
+  minPitchDeg: 5
+  maxPitchDeg: 60
+  minPower: 0.6
+  maxPower: 1.4
+  dragSensitivity: 0.003
 --- !u!1001 &2136681064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1728,63 +1842,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffdd9a1f6578bb5419bac03aa78b0774, type: 3}
---- !u!1001 &4798657853583700826
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1064542911404606146, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5447098638533784428, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-      propertyPath: m_Name
-      value: Grenade
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1801,7 +1858,8 @@ SceneRoots:
   - {fileID: 2136681064}
   - {fileID: 2018735563}
   - {fileID: 809007901}
-  - {fileID: 4798657853583700826}
+  - {fileID: 761311693}
   - {fileID: 326481428}
   - {fileID: 3416957187758562521}
   - {fileID: 1935485870}
+  - {fileID: 867292673}

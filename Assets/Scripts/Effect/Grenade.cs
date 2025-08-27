@@ -1,19 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class Grenade:ThrowingWeapon
 {
-    private bool _triggered;
+    public int damage = 100;                    // 데미지
+    public LayerMask attackableMask;
 
-    private void OnTriggerEnter(Collider other)
+    protected override IEnumerator Explode()
     {
-        var provider = other.GetComponentInParent<IProvider>();
-        if (provider == null || provider.PlayerProvider == null) return;
-        
-        _triggered = true;
+        yield return new WaitForSeconds(explosiondelay);
 
-        provider.PlayerProvider.playerStat.Grenade++;
-        Destroy(gameObject);
-        
-        _triggered = false;
+        Collider[] _colliders = Physics.OverlapSphere(transform.position, explosionRadius, attackableMask);
+
+        // foreach(Collider _collider in _colliders)
+        // {
+        //     float _distance = Vector3.Distance(transform.position, _collider.transform.position);
+        //     float _damagePersent = 1 - (_distance/explosionRadius);
+        //     int _calDamage = Mathf.RoundToInt(damage * _damagePersent);
+        //     _collider.GetComponent<IDamageAble>().Damaged(_calDamage);
+        // }
     }
 }
