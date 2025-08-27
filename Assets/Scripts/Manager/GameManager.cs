@@ -6,15 +6,15 @@ using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public BulletController BulletController;
     public VirtualJoystick VirtualJoystick;
     public UnitManager Units;
+    public BulletController BulletController;
     
     private void Awake()
     {
         Instance = this;
-        BulletController = GetComponent<BulletController>();
         Units = GetComponent<UnitManager>();
+        BulletController = GetComponent<BulletController>();
     }
     
     public void ExitGame()

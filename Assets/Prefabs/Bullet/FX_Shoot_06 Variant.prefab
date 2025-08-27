@@ -13,6 +13,18 @@ PrefabInstance:
       value: FX_Shoot_06 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1706274480334191768, guid: 82fb447b746a6874aa37fb20f325c91f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706274480334191768, guid: 82fb447b746a6874aa37fb20f325c91f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706274480334191768, guid: 82fb447b746a6874aa37fb20f325c91f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706274480334191768, guid: 82fb447b746a6874aa37fb20f325c91f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.11549
       objectReference: {fileID: 0}
