@@ -62,6 +62,11 @@ public class MonsterController : MonoBehaviour
 
         // === 일반 몬스터 다 스폰 후 보스 생성 ===
         CreateBossMonster(endChunkTransform, StageManager.Instance.Stage);
+        
+        // === 스크롤 시작 ===
+        var scroll = StageManager.Instance.GetComponent<MapScrollController>();
+        scroll.endPos = endChunkTransform.gameObject; 
+        scroll.isScrolling = true;
     }
 
 

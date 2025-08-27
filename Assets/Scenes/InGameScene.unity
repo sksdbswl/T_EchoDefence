@@ -130,8 +130,9 @@ GameObject:
   - component: {fileID: 61629263}
   - component: {fileID: 61629265}
   - component: {fileID: 61629264}
+  - component: {fileID: 61629266}
   m_Layer: 0
-  m_Name: StageManager/MonsterController
+  m_Name: StageManager/MonsterController/MapScrollController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,6 +170,9 @@ MonoBehaviour:
   BossMonsters:
   - {fileID: 3272305622727065846, guid: 88046354c6ba14c448d5e9cfbebbc1e7, type: 3}
   monsterParent: {fileID: 1868459745}
+  spawnInterval: 1
+  minMonsterCount: 50
+  maxMonsterCount: 100
 --- !u!114 &61629265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +187,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   MonsterController: {fileID: 0}
   Stage: 1
+--- !u!114 &61629266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61629262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eee06373ebd4a8b9b28ea49b0fd68c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapScrollController
+  mapRoot: {fileID: 1803696873}
+  scrollSpeed: 4
+  isScrolling: 0
 --- !u!1 &100585017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,7 +1489,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1803696873}
   - component: {fileID: 1803696874}
-  - component: {fileID: 1803696875}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -1513,21 +1531,6 @@ MonoBehaviour:
   chunkSpacing: 1
   startChunk: {fileID: 810908809796722689, guid: 552beebce38492d4ba83db73f2af27d1, type: 3}
   endChunk: {fileID: 1363910312240726272, guid: 9e1d38a7331be2942a1200f35efff221, type: 3}
---- !u!114 &1803696875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803696872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eee06373ebd4a8b9b28ea49b0fd68c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MapScrollController
-  mapRoot: {fileID: 1803696873}
-  scrollSpeed: 4
-  isScrolling: 0
 --- !u!1 &1868459744
 GameObject:
   m_ObjectHideFlags: 0
