@@ -1887,6 +1887,20 @@ MonoBehaviour:
   BulletPrefabs:
   - {fileID: 6308931787622046970, guid: 98e1b553ad7758847ab890a49a650524, type: 3}
   - {fileID: 3307465512734650322, guid: 5e182eb435925ae40a20b5baeee9cfd2, type: 3}
+  - {fileID: 7193906544215498660, guid: 05f3cf3a8ee9e4e478b481d56a09dd96, type: 3}
+  - {fileID: 2255538693314999928, guid: 0a94d30437af5e04f9654d14729bdd10, type: 3}
+  - {fileID: 4872624875595844859, guid: a8184d1fddec4e44fbe0aed90af652c7, type: 3}
+  - {fileID: 1053122275283630892, guid: 2b586c8ddfd0ca14b9c7dbc1cc66d918, type: 3}
+  - {fileID: 7179667544198631428, guid: dc7a0cfeea21e6d429988c75c747b8cf, type: 3}
+  - {fileID: 3235618879705780189, guid: 61c4ece3cde7214448b97f9243f3ab0d, type: 3}
+  - {fileID: 2263062885795067855, guid: 6169b724fa3f116479e8ebc51e78cb23, type: 3}
+  - {fileID: 2527237660285329094, guid: f16f325ffa9b8b14f9d2e3882932dea0, type: 3}
+  - {fileID: 3672063147134637919, guid: ed315f8859c67eb4f8c70ff9a96764d0, type: 3}
+  - {fileID: 1169243429065005224, guid: 9fff3765a45aeea429cc60ea66ea71ca, type: 3}
+  - {fileID: 2440050089796682101, guid: 1c453b773d3e9b245a5ee6a29e1d528d, type: 3}
+  - {fileID: 8559214373395357638, guid: 0d585aa410abca442a1a0af22fbc9f6b, type: 3}
+  - {fileID: 1444574971996534436, guid: 91b91b86937d2914892465a96fef9d92, type: 3}
+  - {fileID: 2104967627229789491, guid: 8de5a8ae23264b94bbaedb977e2fd194, type: 3}
   Parents: {fileID: 271226608}
 --- !u!114 &2117605348
 MonoBehaviour:
