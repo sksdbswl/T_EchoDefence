@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     public Player _player;
     public bool isDetect = false;
     public float speed = 0.005f;
+    private float stopDistance = 0.2f; // 너무 가까우면 멈춤
     
     public void Init(GameObject prefabRef, Player player)
     {
@@ -26,7 +27,11 @@ public class Monster : MonoBehaviour
         if (isDetect)
         {
             Vector3 dir = (_player.transform.position - transform.position).normalized;
-
+            
+            // 일정 범위에 도착하면 멈춤
+            float dist = dir.magnitude;
+            if (dist <= stopDistance) return;
+            
             // 위치 이동
             transform.position += dir * (speed * Time.deltaTime);
         }

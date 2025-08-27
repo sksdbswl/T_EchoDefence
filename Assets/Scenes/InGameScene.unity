@@ -1367,6 +1367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803696873}
   - component: {fileID: 1803696874}
+  - component: {fileID: 1803696875}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -1406,6 +1407,20 @@ MonoBehaviour:
   spawnDelay: 0.1
   chunkSpacing: 1
   startChunk: {fileID: 810908809796722689, guid: 552beebce38492d4ba83db73f2af27d1, type: 3}
+--- !u!114 &1803696875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803696872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eee06373ebd4a8b9b28ea49b0fd68c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapScrollController
+  mapRoot: {fileID: 193757031}
+  scrollSpeed: 4
 --- !u!1 &1935485869
 GameObject:
   m_ObjectHideFlags: 0
