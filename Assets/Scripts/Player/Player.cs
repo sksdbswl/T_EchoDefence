@@ -43,4 +43,10 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     {
         
     }
+    
+    public void ResetToStart(Vector3 startPos)
+    {
+        transform.position = startPos;
+        transform.rotation = Quaternion.identity;
+    }
 }

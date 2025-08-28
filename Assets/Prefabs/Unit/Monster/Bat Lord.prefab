@@ -1230,6 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272d3021c527e3d44a48d301427d46b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
+  MonsterType: 1
   maxHp: 100
   _player: {fileID: 0}
   isDetect: 0

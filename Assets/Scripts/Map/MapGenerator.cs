@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    private MapScrollController mapScrollController;
-    
     [SerializeField] private GameObject bridgeChunkPrefab; // 1줄짜리 블럭 묶음 프리팹
     [SerializeField] private int height = 30; // 총 몇 줄 생성할지
     [SerializeField] private float spawnDelay = 0.01f; // 줄마다 생성 간격 시간
@@ -21,7 +19,6 @@ public class MapGenerator : MonoBehaviour
     {
         var startChunkPos = Instantiate(startChunk.gameObject, transform.position,
             quaternion.identity, gameObject.transform);
-        mapScrollController = GetComponent<MapScrollController>();
         startChunk = startChunkPos.transform;
         
         // === Chunk 폭 계산 (한 번만) ===

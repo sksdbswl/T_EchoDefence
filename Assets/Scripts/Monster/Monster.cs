@@ -1,7 +1,15 @@
 using UnityEngine;
 
+public enum MonsterType
+{
+    Normal,
+    Boss
+}
+
 public class Monster : MonoBehaviour
 {
+    [SerializeField]private MonsterType MonsterType;
+    
     public int maxHp = 10;
     private int currentHp = 1;
     private GameObject monsterPrefab;
@@ -48,14 +56,45 @@ public class Monster : MonoBehaviour
         }
     }
 
+    // private void Die()
+    // {
+    //     Debug.Log($"{name} 사망");
+    //     
+    //     // TODO :: 오브젝트 풀 적용
+    //     Destroy(monsterPrefab);
+    //     //ObjectPoolManager.Instance.ReturnToPool(monsterPrefab, gameObject);
+    // }
+    
+    
     private void Die()
     {
         Debug.Log($"{name} 사망");
-        
-        // TODO :: 오브젝트 풀 적용
-        Destroy(monsterPrefab);
-        //ObjectPoolManager.Instance.ReturnToPool(monsterPrefab, gameObject);
+
+        if (MonsterType == MonsterType.Boss)
+        {
+            // === 보스 사망 처리 ===
+            Debug.Log("보스가 사망했습니다. 스테이지 클리어!");
+
+            // 남아있는 모든 몬스터 제거
+            foreach (var m in FindObjectsOfType<Monster>())
+            {
+                if (m != this) Destroy(m.gameObject);
+            }
+
+            // 스테이지 증가
+            StageManager.Instance.Stage++;
+            Debug.Log($"스테이지 {StageManager.Instance.Stage} 시작!");
+            
+            // 새로운 맵 생성
+            //StageManager.Instance.StartNextStage();
+            
+            // 플레이어 startpos로 변경 
+            
+            // 
+        }
+
+        // 일반 몬스터 or 보스 몬스터 공통 처리
+        Destroy(gameObject);
+        // ObjectPoolManager.Instance.ReturnToPool(monsterPrefab, gameObject);
     }
-    
-    
 }
