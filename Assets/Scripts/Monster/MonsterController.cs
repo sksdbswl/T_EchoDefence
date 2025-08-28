@@ -69,27 +69,6 @@ public class MonsterController : MonoBehaviour
         scroll.isScrolling = true;
     }
 
-
-    // private IEnumerator SpawnRoutine(Vector3 mapOrigin, Vector2 mapSize)
-    // {
-    //     int spawnCount = Random.Range(minMonsterCount, maxMonsterCount + 1);
-    //
-    //     float halfWidth = mapSize.x / 2f;
-    //
-    //     for (int i = 0; i < spawnCount; i++)
-    //     {
-    //         // 맵 중앙 기준 좌우 범위 내에서만 랜덤
-    //         float randX = Random.Range(-halfWidth * 0.9f, halfWidth * 0.9f); // 살짝 줄여서 안전 margin
-    //         float randZ = Random.Range(0, mapSize.y);
-    //
-    //         Vector3 pos = mapOrigin + new Vector3(randX, 0, randZ);
-    //
-    //         ObjectPoolManager.Instance.GetFromPool(stageMonsterPrefab, pos, Quaternion.Euler(0,180f,0), monsterParent);
-    //
-    //         yield return new WaitForSeconds(spawnInterval);
-    //     }
-    // }
-    
     public void CreateBossMonster(Transform endChunk, int stage)
     {
         Vector3 bossPos = endChunk.position;
@@ -111,4 +90,23 @@ public class MonsterController : MonoBehaviour
         }
     }
 
+    // private IEnumerator SpawnRoutine(Vector3 mapOrigin, Vector2 mapSize)
+    // {
+    //     int spawnCount = Random.Range(minMonsterCount, maxMonsterCount + 1);
+    //
+    //     float halfWidth = mapSize.x / 2f;
+    //
+    //     for (int i = 0; i < spawnCount; i++)
+    //     {
+    //         // 맵 중앙 기준 좌우 범위 내에서만 랜덤
+    //         float randX = Random.Range(-halfWidth * 0.9f, halfWidth * 0.9f); // 살짝 줄여서 안전 margin
+    //         float randZ = Random.Range(0, mapSize.y);
+    //
+    //         Vector3 pos = mapOrigin + new Vector3(randX, 0, randZ);
+    //
+    //         ObjectPoolManager.Instance.GetFromPool(stageMonsterPrefab, pos, Quaternion.Euler(0,180f,0), monsterParent);
+    //
+    //         yield return new WaitForSeconds(spawnInterval);
+    //     }
+    // }
 }

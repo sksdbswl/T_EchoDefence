@@ -82,17 +82,6 @@ public class Monster : MonoBehaviour
             }
 
             GameManager.Instance.IsBattleClear = true;
-            
-            // 스테이지 증가
-            StageManager.Instance.Stage++;
-            Debug.Log($"스테이지 {StageManager.Instance.Stage} 시작!");
-            
-            // 새로운 맵 생성
-            //StageManager.Instance.StartNextStage();
-            
-            // 플레이어 startpos로 변경 
-            
-            // 
         }
 
         // 일반 몬스터 or 보스 몬스터 공통 처리

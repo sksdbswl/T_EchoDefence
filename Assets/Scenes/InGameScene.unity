@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   MonsterController: {fileID: 0}
+  MapGenerator: {fileID: 1803696874}
   Stage: 1
 --- !u!114 &61629266
 MonoBehaviour:
@@ -200,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapScrollController
   mapRoot: {fileID: 1803696873}
-  scrollSpeed: 0.5
+  scrollSpeed: 5
   isScrolling: 0
   endPos: {fileID: 0}
 --- !u!1 &100585017
@@ -1871,6 +1872,8 @@ MonoBehaviour:
   VirtualJoystick: {fileID: 100585021}
   Units: {fileID: 0}
   BulletController: {fileID: 0}
+  IsBattleClear: 0
+  IsPlayerDead: 0
 --- !u!4 &2117605344
 Transform:
   m_ObjectHideFlags: 0

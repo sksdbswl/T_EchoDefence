@@ -13,6 +13,13 @@ public class ClearState : PlayerBaseState
         // 카메라 초기위치로 셋팅
         // 플레이어 startpos로 이동
         // PrevState로 전환
+        
+        // 새로운 맵 생성
+        StageManager.Instance.NextStageSettings();
+            
+        // 플레이어 startpos로 변경 
+            
+         
     }
 
     public override void HandleInput() { }
