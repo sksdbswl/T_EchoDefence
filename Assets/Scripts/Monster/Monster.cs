@@ -55,16 +55,6 @@ public class Monster : MonoBehaviour
             Die();
         }
     }
-
-    // private void Die()
-    // {
-    //     Debug.Log($"{name} 사망");
-    //     
-    //     // TODO :: 오브젝트 풀 적용
-    //     Destroy(monsterPrefab);
-    //     //ObjectPoolManager.Instance.ReturnToPool(monsterPrefab, gameObject);
-    // }
-    
     
     private void Die()
     {
