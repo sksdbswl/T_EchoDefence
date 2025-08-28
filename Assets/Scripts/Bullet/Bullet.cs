@@ -34,7 +34,6 @@ public class Bullet : MonoBehaviour
         
         if (target)
         {
-            Debug.Log("Monster 감지 ============================================");
             var monster = other.gameObject.GetComponent<Monster>();
             
             monster.TakeDamage(Player.playerStat.Damage);

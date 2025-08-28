@@ -7,15 +7,18 @@ public class PrevState : PlayerBaseState
 
     public override void Enter()
     {
-        //Debug.Log("Prev State Enter");
         stateMachine.Player.StartCoroutine(DelayToSpawn());
     }
 
     private IEnumerator DelayToSpawn()
     {
+        
         // TODO :: 타이머 연출 추가
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         stateMachine.ChangeState(stateMachine.FightState);
+        
+        var scroll = StageManager.Instance.GetComponent<MapScrollController>();
+        scroll.ScrollUntilBossZone();
     }
 
     public override void HandleInput() { }

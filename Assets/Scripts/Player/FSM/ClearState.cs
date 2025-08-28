@@ -14,12 +14,19 @@ public class ClearState : PlayerBaseState
         // 플레이어 startpos로 이동
         // PrevState로 전환
         
-        // 새로운 맵 생성
-        StageManager.Instance.NextStageSettings();
-            
-        // 플레이어 startpos로 변경 
-            
-         
+        // 몹/보스/맵 생성 이후 진행과정
+        StageManager.Instance.StageSettings((startPos) =>
+        {
+            stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Run);
+
+            var scroll = StageManager.Instance.GetComponent<MapScrollController>();
+            scroll.ScrollUntilStartAtZero(startPos, () =>
+            {
+                GameManager.Instance.IsBattleClear = false;
+                stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
+                stateMachine.ChangeState(new PrevState(stateMachine));
+            });
+        });
     }
 
     public override void HandleInput() { }
@@ -33,4 +40,5 @@ public class ClearState : PlayerBaseState
     {
         Debug.Log("Clear State Exit");
     }
+    
 }

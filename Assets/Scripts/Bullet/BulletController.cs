@@ -9,7 +9,6 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         // 기본 총알 생성 
-        Debug.Log("기본 총알 생성");
         ObjectPoolManager.Instance.CreatePool(BulletPrefabs[0], 20, Parents);
     }
     

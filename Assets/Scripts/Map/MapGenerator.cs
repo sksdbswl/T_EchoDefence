@@ -36,7 +36,7 @@ public class MapGenerator : MonoBehaviour
         StartCoroutine(GenerateMap());
     }
     
-    public IEnumerator GenerateMap(Action onComplete = null)
+    public IEnumerator GenerateMap(Action<Transform> onComplete = null)
     {
         // === StartChunk 먼저 생성 ===
         Vector3 spawnPos;
@@ -74,17 +74,22 @@ public class MapGenerator : MonoBehaviour
         Transform endChunkTransform = endChunkObj.transform;
 
         // === 몬스터 스폰 ===
-        TrySpawnEntry(basePos, endChunkTransform);
+        yield return StartCoroutine(TrySpawnEntry(basePos, endChunkTransform));
 
         // 다음 스테이지 이어붙이기 기준 갱신
         lastEndChunk = endChunkTransform;
         
-        onComplete?.Invoke();
+        onComplete?.Invoke(startChunk);
     }
     
-    private void TrySpawnEntry(Vector3 basePos, Transform endChunkTransform)
+    private IEnumerator TrySpawnEntry(Vector3 basePos, Transform endChunkTransform)
     {
         Vector2 mapSize = new Vector2(mapWidth, height * chunkSpacing);
-        StageManager.Instance.MonsterController.SpawnMonstersOnMap(basePos, mapSize, endChunkTransform);
+        yield return StartCoroutine(StageManager.Instance.MonsterController.SpawnMonstersOnMap(basePos, mapSize, endChunkTransform));
+    }
+    
+    public Transform GetLastEndChunk()
+    {
+        return lastEndChunk;
     }
 }

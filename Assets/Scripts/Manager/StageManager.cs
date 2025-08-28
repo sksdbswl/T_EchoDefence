@@ -21,9 +21,21 @@ public class StageManager : MonoBehaviour
     {
         MonsterController.CreateStageMonster(Stage);
     }
+
+    // public void NextStageSettings(Action onComplete = null)
+    // {
+    //     StartCoroutine(MapGenerator.GenerateMap(() =>
+    //     {
+    //         // 맵 생성이 끝났을 때 실행
+    //         onComplete?.Invoke();
+    //     }));
+    // }
     
-    public void NextStageSettings()
+    public void StageSettings(Action<Transform> onComplete = null)
     {
-        StartCoroutine(MapGenerator.GenerateMap());
+        StartCoroutine(MapGenerator.GenerateMap(startPos =>
+        {
+            onComplete?.Invoke(startPos);
+        }));
     }
 }

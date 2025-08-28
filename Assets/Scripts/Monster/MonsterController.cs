@@ -30,11 +30,17 @@ public class MonsterController : MonoBehaviour
         ObjectPoolManager.Instance.CreatePool(stageMonsterPrefab, maxMonsterCount, monsterParent);
     }
     
-    public void SpawnMonstersOnMap(Vector3 mapOrigin, Vector2 mapSize, Transform endChunk)
+    public IEnumerator SpawnMonstersOnMap(Vector3 mapOrigin, Vector2 mapSize, Transform endChunk)
     {
         this.endChunkTransform = endChunk;
-        StartCoroutine(SpawnRoutine(mapOrigin, mapSize));
+        yield return StartCoroutine(SpawnRoutine(mapOrigin, mapSize));
     }
+    
+    // public void SpawnMonstersOnMap(Vector3 mapOrigin, Vector2 mapSize, Transform endChunk)
+    // {
+    //     this.endChunkTransform = endChunk;
+    //     StartCoroutine(SpawnRoutine(mapOrigin, mapSize));
+    // }
 
     private IEnumerator SpawnRoutine(Vector3 mapOrigin, Vector2 mapSize)
     {
@@ -64,9 +70,8 @@ public class MonsterController : MonoBehaviour
         CreateBossMonster(endChunkTransform, StageManager.Instance.Stage);
         
         // === 스크롤 시작 ===
-        var scroll = StageManager.Instance.GetComponent<MapScrollController>();
-        scroll.endPos = endChunkTransform.gameObject; 
-        scroll.isScrolling = true;
+        // var scroll = StageManager.Instance.GetComponent<MapScrollController>();
+        // scroll.ScrollUntilBossZone();
     }
 
     public void CreateBossMonster(Transform endChunk, int stage)
