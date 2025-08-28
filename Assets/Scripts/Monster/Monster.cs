@@ -16,7 +16,7 @@ public class Monster : MonoBehaviour
 
     public Player _player;
     public bool isDetect = false;
-    public float speed = 0.005f;
+    public float speed = 0.5f;
     private float stopDistance = 0.2f; // 너무 가까우면 멈춤
     
     public void Init(GameObject prefabRef, Player player)

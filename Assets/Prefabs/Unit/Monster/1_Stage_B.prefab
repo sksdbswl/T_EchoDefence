@@ -1116,7 +1116,7 @@ GameObject:
   - component: {fileID: 367286911212377993}
   - component: {fileID: 1261975270122254684}
   m_Layer: 6
-  m_Name: Bat Lord
+  m_Name: 1_Stage_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

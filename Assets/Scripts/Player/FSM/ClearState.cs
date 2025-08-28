@@ -8,6 +8,8 @@ public class ClearState : PlayerBaseState
     {
         Debug.Log("Clear State Enter");
         stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
+        StageManager.Instance.Stage++;
+        StageManager.Instance.CreateStageMonster(StageManager.Instance.Stage);
         
         //TODO::
         // 카메라 초기위치로 셋팅
@@ -23,6 +25,7 @@ public class ClearState : PlayerBaseState
             scroll.ScrollUntilStartAtZero(startPos, () =>
             {
                 GameManager.Instance.IsBattleClear = false;
+              
                 stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
                 stateMachine.ChangeState(new PrevState(stateMachine));
             });

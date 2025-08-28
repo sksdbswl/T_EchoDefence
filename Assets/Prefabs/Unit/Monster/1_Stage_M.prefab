@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 8932336572866541138}
   - component: {fileID: 766775833639641414}
   m_Layer: 6
-  m_Name: Bat
+  m_Name: 1_Stage_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272d3021c527e3d44a48d301427d46b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
+  MonsterType: 0
   maxHp: 10
   _player: {fileID: 0}
   isDetect: 0
