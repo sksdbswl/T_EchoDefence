@@ -21,7 +21,7 @@ public class UnitManager : MonoBehaviour
     private readonly List<UnitAgent> _activeUnits = new();
     
     private Coroutine _fireLoop;
-    [SerializeField] private float fireInterval = 1.5f;
+    private float fireInterval = 1f;
 
     void Awake()
     {
@@ -111,6 +111,7 @@ public class UnitManager : MonoBehaviour
     // ===== (있다면) 발사 루프 =====
     public void StartFireLoop()
     {
+        fireInterval = Mathf.Clamp(1f / _owner.playerStat.Speed, 0.05f, 1f);
         if (_fireLoop != null) return;
         _fireLoop = StartCoroutine(FireTick());
     }

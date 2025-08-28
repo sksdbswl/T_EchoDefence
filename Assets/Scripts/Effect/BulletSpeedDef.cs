@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WeaponUpgrade : MonoBehaviour
+public class BulletSpeedDef : MonoBehaviour
 {
     private bool _triggered;
 
@@ -11,7 +11,7 @@ public class WeaponUpgrade : MonoBehaviour
         
         _triggered = true;
 
-        provider.PlayerProvider.playerStat.WeaponLevel++;
+        provider.PlayerProvider.playerStat.Speed++;
         
         Destroy(gameObject);
         

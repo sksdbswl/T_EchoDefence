@@ -35,5 +35,16 @@ public class DevelopMode : MonoBehaviour
         {
             Player.playerStat.WeaponLevel--;
         }
+        
+        // 3 키: 무기 스피트 업
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            Player.playerStat.Speed++;
+        }
+        // 4 키: 무기 스피드 다운
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            Player.playerStat.Speed--;
+        }
     }
 }
