@@ -81,6 +81,8 @@ public class Monster : MonoBehaviour
                 if (m != this) Destroy(m.gameObject);
             }
 
+            GameManager.Instance.IsBattleClear = true;
+            
             // 스테이지 증가
             StageManager.Instance.Stage++;
             Debug.Log($"스테이지 {StageManager.Instance.Stage} 시작!");

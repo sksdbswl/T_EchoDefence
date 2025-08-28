@@ -16,12 +16,19 @@ public class FightState : PlayerBaseState
 
     public override void Update()
     {
-        if (stateMachine.Player.IsBattleClear)
+        if (GameManager.Instance.IsBattleClear)
             stateMachine.ChangeState(stateMachine.ClearState);
-        else if (stateMachine.Player.IsPlayerDead)
+        else if (GameManager.Instance.IsPlayerDead)
         {
             // TODO: GameOver
         }
+        
+        // if (stateMachine.Player.IsBattleClear)
+        //     stateMachine.ChangeState(stateMachine.ClearState);
+        // else if (stateMachine.Player.IsPlayerDead)
+        // {
+        //     // TODO: GameOver
+        // }
     }
 
     public override void Exit()

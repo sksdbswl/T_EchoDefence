@@ -8,8 +8,6 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     public Transform Muzzle => Weapon.MuzzlePoint;    
     public Player PlayerProvider => this;
     
-    public bool IsBattleClear = false;
-    public bool IsPlayerDead = false;
     public Animator animator;
     
     [Header("InGameSettings")]

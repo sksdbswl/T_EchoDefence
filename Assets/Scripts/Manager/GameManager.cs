@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public UnitManager Units;
     public BulletController BulletController;
     
+    public bool IsBattleClear = false;
+    public bool IsPlayerDead = false;
+    
     private void Awake()
     {
         Instance = this;

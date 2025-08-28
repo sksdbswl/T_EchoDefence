@@ -14,7 +14,7 @@ public class PrevState : PlayerBaseState
     private IEnumerator DelayToSpawn()
     {
         // TODO :: 타이머 연출 추가
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         stateMachine.ChangeState(stateMachine.FightState);
     }
 
