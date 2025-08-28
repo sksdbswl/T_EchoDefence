@@ -200,8 +200,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapScrollController
   mapRoot: {fileID: 1803696873}
-  scrollSpeed: 4
+  scrollSpeed: 0.5
   isScrolling: 0
+  endPos: {fileID: 0}
 --- !u!1 &100585017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,6 +1532,7 @@ MonoBehaviour:
   chunkSpacing: 1
   startChunk: {fileID: 810908809796722689, guid: 552beebce38492d4ba83db73f2af27d1, type: 3}
   endChunk: {fileID: 1363910312240726272, guid: 9e1d38a7331be2942a1200f35efff221, type: 3}
+  endChunkOffsetZ: 1
 --- !u!1 &1868459744
 GameObject:
   m_ObjectHideFlags: 0

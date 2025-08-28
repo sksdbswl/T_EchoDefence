@@ -13,6 +13,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private float chunkSpacing = 1f; // 줄 간격 (Z축 기준)
     [SerializeField] private Transform startChunk; // 시작 초기 스폰 위치
     [SerializeField] private Transform endChunk;
+    [SerializeField] private float endChunkOffsetZ = 1f;
+    
     private float mapWidth; // 미리 계산해둔 맵 폭
     
     private void Awake()
@@ -51,7 +53,8 @@ public class MapGenerator : MonoBehaviour
         }
 
         // === 실제 endChunk 인스턴스 생성 ===
-        GameObject endChunkObj = Instantiate(endChunk.gameObject, endPos, Quaternion.identity, transform);
+        Vector3 endChunkPos = endPos + new Vector3(0, 0, chunkSpacing + endChunkOffsetZ);
+        GameObject endChunkObj = Instantiate(endChunk.gameObject, endChunkPos, Quaternion.identity, transform);
         Transform endChunkTransform = endChunkObj.transform;
 
         // === 몬스터 스폰 ===
