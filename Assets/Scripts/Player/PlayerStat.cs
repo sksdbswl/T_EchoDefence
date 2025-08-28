@@ -1,23 +1,36 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// 플레이어의 핵심 스탯 데이터
+/// - 직렬화되어 Inspector에서 기본값을 설정 가능
+/// - 값 변경 시 OnChanged 이벤트 발생
+/// </summary>
 [Serializable]
 public class PlayerStat
 {
-    // ---- 직렬화 필드(인스펙터 노출) + 기본값 ----
+    // ---- 직렬화 필드 (기본값 Inspector 노출) ----
     [SerializeField] private int   health      = 100;
     [SerializeField] private int   level       = 1;
     [SerializeField] private int   weaponLevel = 1;   // 1~10 권장
     [SerializeField] private float speed       = 1f;
     [SerializeField] private int   unitCnt     = 1;   // 0 이상 권장
-    [SerializeField] private int   damage      = 100;
+    [SerializeField] private int   baseDamage  = 100; // 기본 공격력
     [SerializeField] private int   grenade     = 1;
-    
+
+    // ---- 상수 정의 (클램프 기준) ----
+    private const int   MinLevel       = 1;
+    private const int   MaxLevel       = 99;
+    private const int   MinWeaponLevel = 1;
+    private const int   MaxWeaponLevel = 10;
+    private const float MinSpeed       = 0.1f;
+    private const float MaxSpeed       = 50f;
+
     // ---- 변경 알림 ----
     public event Action OnChanged;
     private bool _suppressNotify = false;
 
-    // ---- 공통 알림 헬퍼 ----
+    // ---- 공통 알림 유틸 ----
     private void RaiseChanged()
     {
         if (!_suppressNotify) OnChanged?.Invoke();
@@ -25,100 +38,65 @@ public class PlayerStat
     public void BeginBatch() => _suppressNotify = true;
     public void EndBatch()   { _suppressNotify = false; RaiseChanged(); }
 
-    // ---- 프로퍼티 (값이 바뀔 때만 알림) ----
+    // ---- 프로퍼티 ----
     public int Health
     {
         get => health;
-        set { if (health == value) return; health = Mathf.Max(0, value); RaiseChanged(); }
+        set => SetValue(ref health, Mathf.Max(0, value));
     }
 
     public int Level
     {
         get => level;
-        set { if (level == value) return; level = Mathf.Max(1, value); RaiseChanged(); }
+        set => SetValue(ref level, Mathf.Clamp(value, MinLevel, MaxLevel));
     }
 
     public int WeaponLevel
     {
         get => weaponLevel;
-        set
-        {
-            int v = Mathf.Clamp(value, 1, 10);     // 필요 시 상한 조정
-            if (weaponLevel == v) return;
-            weaponLevel = v;
-            RaiseChanged();
-        }
+        set => SetValue(ref weaponLevel, Mathf.Clamp(value, MinWeaponLevel, MaxWeaponLevel));
     }
 
     public float Speed
     {
         get => speed;
-        set
-        {
-            float v = Mathf.Clamp(value, 0.1f, 50f);
-            if (Mathf.Approximately(speed, v)) return;
-            speed = v;
-            RaiseChanged();
-        }
+        set => SetValue(ref speed, Mathf.Clamp(value, MinSpeed, MaxSpeed));
     }
 
     public int UnitCnt
     {
         get => unitCnt;
-        set
-        {
-            int v = Mathf.Max(0, value);
-            if (unitCnt == v) return;
-            unitCnt = v;
-            RaiseChanged();
-        }
+        set => SetValue(ref unitCnt, Mathf.Max(0, value));
     }
 
-    public int Damage
+    public int BaseDamage
     {
-        get => damage;
-        set
-        {
-            int v = Mathf.Max(0, value);
-            if (damage == v) return;
-            damage = v;
-            RaiseChanged();
-        }
+        get => baseDamage;
+        set => SetValue(ref baseDamage, Mathf.Max(0, value));
     }
-    
+
+    /// <summary>
+    /// 실제 최종 데미지 (무기 레벨에 따라 배율 적용)
+    /// </summary>
+    public int Damage => baseDamage * weaponLevel;
+
     public int Grenade
     {
         get => grenade;
-        set
-        {
-            int v = Mathf.Max(0, value);
-            if (grenade == v) return;
-            grenade = v;
-            RaiseChanged();
-        }
+        set => SetValue(ref grenade, Mathf.Max(0, value));
     }
 
-    // ---- 유틸 메서드(클램프/증감) ----
-    // public void AddUnits(int delta, int min = 0, int max = 999)
-    //     => UnitCnt = Mathf.Clamp(UnitCnt + delta, min, max);
-    //
-    // public void AddWeaponLevels(int delta, int min = 1, int max = 10)
-    //     => WeaponLevel = Mathf.Clamp(WeaponLevel + delta, min, max);
-    //
-    // public void SetWeaponLevelClamped(int lv, int min = 1, int max = 10)
-    //     => WeaponLevel = Mathf.Clamp(lv, min, max);
-    //
-    // public void AddDamage(int delta)
-    //     => Damage = Mathf.Max(0, Damage + delta);
-    //
-    // public void SetSpeedClamped(float v, float min = 0.1f, float max = 50f)
-    //     => Speed = Mathf.Clamp(v, min, max);
-    //
-    // // ---- Damage 오버로드(기존 float 호출 대응) ----
-    // public void SetDamage(int v)   => Damage = v;
-    // public void SetDamage(float v) => Damage = Mathf.Max(0, Mathf.RoundToInt(v));
+    // ---- 공통 Setter 유틸 ----
+    private void SetValue<T>(ref T field, T newValue) where T : IEquatable<T>
+    {
+        if (field.Equals(newValue)) return;
+        field = newValue;
+        RaiseChanged();
+    }
 
-    // 주의: Unity 직렬화 특성상 생성자(initializer)보다
-    // 인스펙터 값이 우선됩니다. Awake에서 new PlayerStat()로 덮지 마세요.
-    // (Inspector 값을 쓰려면 Player.Awake에서 new 호출 제거)
+    // ---- 유틸 메서드 ----
+    public void AddHealth(int delta)   => Health    = Mathf.Max(0, Health + delta);
+    public void AddWeaponLevel(int d)  => WeaponLevel = Mathf.Clamp(WeaponLevel + d, MinWeaponLevel, MaxWeaponLevel);
+    public void AddUnit(int delta)     => UnitCnt   = Mathf.Max(0, UnitCnt + delta);
+    public void AddGrenade(int delta)  => Grenade   = Mathf.Max(0, Grenade + delta);
 }

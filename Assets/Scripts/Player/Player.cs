@@ -36,11 +36,6 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     {
         PlayerStateMachine.Update(); 
     }
-
-    public void OnStateChanged()
-    {
-        
-    }
     
     public void ResetToStart(Vector3 startPos)
     {

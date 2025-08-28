@@ -28,12 +28,12 @@ public class DevelopMode : MonoBehaviour
         // 3 키: 무기 레벨업
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Player.playerStat.Level++;
+            Player.playerStat.WeaponLevel++;
         }
         // 4 키: 무기 레벨감소
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            Player.playerStat.Level--;
+            Player.playerStat.WeaponLevel--;
         }
     }
 }
