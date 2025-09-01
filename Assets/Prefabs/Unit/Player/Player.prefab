@@ -1496,8 +1496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e843006f36bbe9d41a0792f8e1ab4f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  IsBattleClear: 0
-  IsPlayerDead: 0
   animator: {fileID: 0}
   playerStat:
     health: 100
@@ -1505,7 +1503,7 @@ MonoBehaviour:
     weaponLevel: 1
     speed: 1
     unitCnt: 1
-    damage: 100
+    baseDamage: 100
     grenade: 1
 --- !u!54 &7082865003355903656
 Rigidbody:
@@ -1824,7 +1822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7306944679532326780
 Transform:
   m_ObjectHideFlags: 0
@@ -2341,7 +2339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5647574272829619237
 Transform:
   m_ObjectHideFlags: 0
@@ -3715,7 +3713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &120448679509690191
 Transform:
   m_ObjectHideFlags: 0
@@ -5324,7 +5322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3035861321374097405
 Transform:
   m_ObjectHideFlags: 0
@@ -5700,7 +5698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9222538615769144309
 Transform:
   m_ObjectHideFlags: 0
@@ -7265,7 +7263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5985888958717710600
 Transform:
   m_ObjectHideFlags: 0
@@ -7767,7 +7765,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1604573706598129850
 Transform:
   m_ObjectHideFlags: 0
