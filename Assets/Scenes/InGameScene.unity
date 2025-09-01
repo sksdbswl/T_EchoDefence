@@ -1938,8 +1938,8 @@ MonoBehaviour:
   parents: {fileID: 1728049949}
   baseRadius: 0.5
   ringGap: 0.5
-  firstRingCapacity: 5
-  ringCapacityStep: 5
+  firstRingCapacity: 6
+  ringCapacityStep: 6
   jitter: 0.15
 --- !u!1001 &1301433800856846916
 PrefabInstance:

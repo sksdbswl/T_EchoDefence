@@ -107,8 +107,6 @@ public class UnitManager : MonoBehaviour
             }
         }
     }
-
-
     
     // private void AddUnits(int count)
     // {
@@ -221,14 +219,39 @@ public class UnitManager : MonoBehaviour
         }
 
         float radius = baseRadius + ring * ringGap;
-        float t = (idxInRing + 0.5f) / capacityThisRing;
+
+        // 슬롯 계산: 원형 정렬
+        float t = (float)idxInRing / capacityThisRing;
         float angle = t * Mathf.PI * 2f;
 
-        float r = radius + Random.Range(-jitter, jitter);
+        float r = radius; // jitter 없이 원형 고정
         float x = center.x + Mathf.Cos(angle) * r;
         float z = center.z + Mathf.Sin(angle) * r;
         return new Vector3(x, center.y, z);
     }
+    
+    // private Vector3 GetSpawnPosAroundPlayer(int globalIndex, Vector3 center)
+    // {
+    //     int ring = 0;
+    //     int capacityThisRing = firstRingCapacity;
+    //     int idxInRing = globalIndex;
+    //
+    //     while (idxInRing >= capacityThisRing)
+    //     {
+    //         idxInRing -= capacityThisRing;
+    //         ring++;
+    //         capacityThisRing += ringCapacityStep;
+    //     }
+    //
+    //     float radius = baseRadius + ring * ringGap;
+    //     float t = (idxInRing + 0.5f) / capacityThisRing;
+    //     float angle = t * Mathf.PI * 2f;
+    //
+    //     float r = radius + Random.Range(-jitter, jitter);
+    //     float x = center.x + Mathf.Cos(angle) * r;
+    //     float z = center.z + Mathf.Sin(angle) * r;
+    //     return new Vector3(x, center.y, z);
+    // }
 
     // ===== 발사 루프 =====
     public void StartFireLoop()
