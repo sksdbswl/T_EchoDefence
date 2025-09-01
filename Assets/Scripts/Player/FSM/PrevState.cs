@@ -12,13 +12,12 @@ public class PrevState : PlayerBaseState
 
     private IEnumerator DelayToSpawn()
     {
-        
         // TODO :: 타이머 연출 추가
         yield return new WaitForSeconds(5f);
         stateMachine.ChangeState(stateMachine.FightState);
         
-        var scroll = StageManager.Instance.GetComponent<MapScrollController>();
-        scroll.ScrollUntilBossZone();
+        // var scroll = StageManager.Instance.GetComponent<MapScrollController>();
+        // scroll.ScrollUntilBossZone();
     }
 
     public override void HandleInput() { }
