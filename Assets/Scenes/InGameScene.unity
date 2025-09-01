@@ -1932,13 +1932,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057d1917a0c043a4dbd3ec2de3ce212a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
-  unitPrefab: {fileID: 6647617584678554108, guid: 52d8661c18a0cb143a718da71cd6cd42, type: 3}
+  NormalUnitPrefab: {fileID: 4108888149656303740, guid: 6522c7d148936414ba30e4277ce2213e, type: 3}
+  UpgradeUnitPrefab: {fileID: 884535843909682259, guid: 932c8b16681f932488691910dbbdc131, type: 3}
   prewarmCount: 20
   parents: {fileID: 1728049949}
   baseRadius: 0.5
   ringGap: 0.5
-  firstRingCapacity: 6
-  ringCapacityStep: 6
+  firstRingCapacity: 5
+  ringCapacityStep: 5
   jitter: 0.15
 --- !u!1001 &1301433800856846916
 PrefabInstance:
@@ -1996,6 +1997,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3619586598729394196, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
+      propertyPath: mergedModel
+      value: 
+      objectReference: {fileID: 2388115130108495960}
     - target: {fileID: 7264829905823087224, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2070,6 +2075,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1f8408e7c1536c4f8ebff2d2a49825a, type: 3}
+--- !u!1 &2388115130108495960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7867908493492059896, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
+  m_PrefabInstance: {fileID: 1301433800856846916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3416957187758562521
 PrefabInstance:
   m_ObjectHideFlags: 0

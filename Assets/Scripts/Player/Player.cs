@@ -43,19 +43,17 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
         transform.rotation = Quaternion.identity;
     }
     
-    [SerializeField] private GameObject normalModel;
+    //[SerializeField] private GameObject normalModel;
     [SerializeField] private GameObject mergedModel;
 
     // 유닛 증감 처리
-    private void MergeToUpgradedPlayer()
+    public void MergeToUpgradedPlayer()
     {
-        normalModel.SetActive(false);
         mergedModel.SetActive(true);
     }
     
-    private void DivideToUpgradedPlayer()
+    public void DivideToUpgradedPlayer()
     {
-        normalModel.SetActive(true);
         mergedModel.SetActive(false);
         // playerStat.Damage *= 3; // 강화 예시
         // playerStat.Speed  *= 2;

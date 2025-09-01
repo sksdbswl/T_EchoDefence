@@ -474,7 +474,6 @@ MonoBehaviour:
     unitCnt: 1
     baseDamage: 100
     grenade: 1
-  normalModel: {fileID: 7006942394546292765}
   mergedModel: {fileID: 5647223583093623764}
 --- !u!54 &7542520507161493456
 Rigidbody:

@@ -5,7 +5,8 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour
 {
     [Header("Unit Pool")]
-    [SerializeField] private GameObject unitPrefab;
+    [SerializeField] private GameObject NormalUnitPrefab;
+    [SerializeField] private GameObject UpgradeUnitPrefab;
     [SerializeField] private int prewarmCount = 20;
     [SerializeField] private Transform parents;
     
@@ -23,9 +24,12 @@ public class UnitManager : MonoBehaviour
     private Coroutine _fireLoop;
     private float fireInterval = 1f;
 
+    private bool isPlayerUpgraded = false; // 플레이어 합체 상태 여부
+
     void Awake()
     {
-        ObjectPoolManager.Instance.CreatePool(unitPrefab, prewarmCount, parents);
+        ObjectPoolManager.Instance.CreatePool(NormalUnitPrefab, prewarmCount, parents);
+        ObjectPoolManager.Instance.CreatePool(UpgradeUnitPrefab, prewarmCount, parents);
     }
 
     public void Init(Player owner)
@@ -38,32 +42,98 @@ public class UnitManager : MonoBehaviour
         _playerProvider = playerProvider;        
     }
 
+    /// <summary>
+    /// 유닛 수 증감
+    /// </summary>
     public void ApplyDelta(int delta)
     {
         if (delta > 0) AddUnits(delta);
         else if (delta < 0) RemoveUnits(-delta);
+
+        CheckUpgradeState();
     }
 
     private void AddUnits(int count)
     {
-        // 현재 활성 유닛 수를 기준으로 “연속 인덱스”를 부여
-        int baseIndex = _activeUnits.Count;
-
-        for (int i = 0; i < count; i++)
+        // 1. 플레이어가 업그레이드 안되어있다면
+        if (!isPlayerUpgraded)
         {
-            Vector3 center = _owner.transform.position;
+            if (count >= 10)
+            {
+                // 업그레이드 조건 충족 → 플레이어 업그레이드
+                MergePlayer();
+                count -= 10; // 유닛 10개는 합쳐져서 플레이어 강화됨
+            }
+        }
 
-            int globalIndex = baseIndex + i; // 전체에서의 인덱스
-            Vector3 pos = GetSpawnPosAroundPlayer(globalIndex, center);
+        // 2. 플레이어가 업그레이드된 상태라면
+        if (isPlayerUpgraded)
+        {
+            int countUpgrade = count / 10; // 몫: 강화 유닛 수
+            int countNormal  = count % 10; // 나머지: 일반 유닛 수
 
-            Quaternion rot = Quaternion.identity;
+            // (A) 강화 유닛 추가
+            for (int i = 0; i < countUpgrade; i++)
+            {
+                Vector3 pos = GetSpawnPosAroundPlayer(_activeUnits.Count, _owner.transform.position);
+                var go = ObjectPoolManager.Instance.GetFromPool(UpgradeUnitPrefab, pos, Quaternion.identity, parents);
+                var agent = go.GetComponent<UnitAgent>();
+                agent.Bind(_owner);
+                _activeUnits.Insert(0, agent); // 리스트 맨 앞에 강화유닛
+            }
 
-            var go = ObjectPoolManager.Instance.GetFromPool(unitPrefab, pos, rot, parents);
-            var agent = go.GetComponent<UnitAgent>();
-            agent.Bind(_owner);
-            _activeUnits.Add(agent);
+            // (B) 일반 유닛 추가
+            int baseIndex = _activeUnits.Count;
+            for (int i = 0; i < countNormal; i++)
+            {
+                Vector3 pos = GetSpawnPosAroundPlayer(baseIndex + i, _owner.transform.position);
+                var go = ObjectPoolManager.Instance.GetFromPool(NormalUnitPrefab, pos, Quaternion.identity, parents);
+                var agent = go.GetComponent<UnitAgent>();
+                agent.Bind(_owner);
+                _activeUnits.Add(agent);
+            }
+        }
+        else
+        {
+            // 업그레이드 조건이 안되면 전부 일반 유닛 추가
+            int baseIndex = _activeUnits.Count;
+            for (int i = 0; i < count; i++)
+            {
+                Vector3 pos = GetSpawnPosAroundPlayer(baseIndex + i, _owner.transform.position);
+                var go = ObjectPoolManager.Instance.GetFromPool(NormalUnitPrefab, pos, Quaternion.identity, parents);
+                var agent = go.GetComponent<UnitAgent>();
+                agent.Bind(_owner);
+                _activeUnits.Add(agent);
+            }
         }
     }
+
+
+    
+    // private void AddUnits(int count)
+    // {
+    //     int baseIndex = _activeUnits.Count;
+    //
+    //     for (int i = 0; i < count; i++)
+    //     {
+    //         Vector3 center = _owner.transform.position;
+    //         int globalIndex = baseIndex + i;
+    //         Vector3 pos = GetSpawnPosAroundPlayer(globalIndex, center);
+    //
+    //         Quaternion rot = Quaternion.identity;
+    //
+    //         var go = ObjectPoolManager.Instance.GetFromPool(NormalUnitPrefab, pos, rot, parents);
+    //         var agent = go.GetComponent<UnitAgent>();
+    //         agent.Bind(_owner);
+    //         _activeUnits.Add(agent);
+    //     }
+    //
+    //     // 업그레이드 상태라면 → 10단위 체크 후 맨 앞 유닛 업그레이드
+    //     if (isPlayerUpgraded && _activeUnits.Count > 0 && _activeUnits.Count % 10 == 0)
+    //     {
+    //         UpgradeFrontUnit();
+    //     }
+    // }
 
     private void RemoveUnits(int count)
     {
@@ -74,8 +144,64 @@ public class UnitManager : MonoBehaviour
             _activeUnits.RemoveAt(last);
 
             agent.OnDespawn();
-            ObjectPoolManager.Instance.ReturnToPool(unitPrefab, agent.gameObject, parents);
+            ObjectPoolManager.Instance.ReturnToPool(NormalUnitPrefab, agent.gameObject, parents);
         }
+    }
+
+    /// <summary>
+    /// 유닛 수를 확인해서 플레이어 업그레이드/다운그레이드 여부 결정
+    /// </summary>
+    private void CheckUpgradeState()
+    {
+        if (!isPlayerUpgraded && _activeUnits.Count >= 9)
+        {
+            // 조건 충족 → 플레이어 업그레이드
+            MergePlayer();
+        }
+        else if (isPlayerUpgraded && _activeUnits.Count < 9)
+        {
+            // 조건 해제 → 플레이어 다운그레이드
+            DividePlayer();
+        }
+    }
+
+    private void MergePlayer()
+    {
+        isPlayerUpgraded = true;
+        _owner.MergeToUpgradedPlayer();
+
+        // 유닛 9개 제거
+        for (int i = 0; i < 9 && _activeUnits.Count > 0; i++)
+        {
+            var agent = _activeUnits[0];
+            _activeUnits.RemoveAt(0);
+            agent.OnDespawn();
+            ObjectPoolManager.Instance.ReturnToPool(NormalUnitPrefab, agent.gameObject, parents);
+        }
+    }
+
+    private void DividePlayer()
+    {
+        isPlayerUpgraded = false;
+        _owner.DivideToUpgradedPlayer();
+    }
+
+    /// <summary>
+    /// 맨 앞 유닛을 업그레이드 프리팹으로 교체
+    /// </summary>
+    private void UpgradeFrontUnit()
+    {
+        var first = _activeUnits[0];
+        _activeUnits.RemoveAt(0);
+
+        first.OnDespawn();
+        ObjectPoolManager.Instance.ReturnToPool(NormalUnitPrefab, first.gameObject, parents);
+
+        Vector3 pos = GetSpawnPosAroundPlayer(0, _owner.transform.position);
+        var upgradeGo = ObjectPoolManager.Instance.GetFromPool(UpgradeUnitPrefab, pos, Quaternion.identity, parents);
+        var upgradeAgent = upgradeGo.GetComponent<UnitAgent>();
+        upgradeAgent.Bind(_owner);
+        _activeUnits.Insert(0, upgradeAgent);
     }
 
     /// <summary>
@@ -83,7 +209,6 @@ public class UnitManager : MonoBehaviour
     /// </summary>
     private Vector3 GetSpawnPosAroundPlayer(int globalIndex, Vector3 center)
     {
-        // 몇 번째 링인지/그 링의 수용량은 얼마인지 계산
         int ring = 0;
         int capacityThisRing = firstRingCapacity;
         int idxInRing = globalIndex;
@@ -92,23 +217,20 @@ public class UnitManager : MonoBehaviour
         {
             idxInRing -= capacityThisRing;
             ring++;
-            capacityThisRing += ringCapacityStep; // 다음 링은 더 많은 슬롯
+            capacityThisRing += ringCapacityStep;
         }
 
         float radius = baseRadius + ring * ringGap;
-        float t = (idxInRing + 0.5f) / capacityThisRing; // 0~1 분포(0.5 오프셋으로 겹침 방지)
+        float t = (idxInRing + 0.5f) / capacityThisRing;
         float angle = t * Mathf.PI * 2f;
 
-        // 약간의 랜덤 흔들림
         float r = radius + Random.Range(-jitter, jitter);
         float x = center.x + Mathf.Cos(angle) * r;
         float z = center.z + Mathf.Sin(angle) * r;
-        var pos = new Vector3(x, center.y, z);
-
-        return pos;
+        return new Vector3(x, center.y, z);
     }
 
-    // ===== (있다면) 발사 루프 =====
+    // ===== 발사 루프 =====
     public void StartFireLoop()
     {
         fireInterval = Mathf.Clamp(1f / _owner.playerStat.Speed, 0.05f, 1f);
@@ -127,24 +249,20 @@ public class UnitManager : MonoBehaviour
     {
         while (true)
         {
-            // 플레이어 스냅샷
+            // 플레이어 발사
             if (_playerProvider != null)
             {
                 var pos = _playerProvider.Muzzle.transform.position;
                 var rot = _playerProvider.Muzzle.rotation;
-                
                 GameManager.Instance.BulletController.Shoot(pos, rot, _owner);
             }
-            
-            // 유닛 스냅샷
+
+            // 유닛 발사
             var list = _activeUnits.ToArray();
             foreach (var agent in list)
             {
                 if (agent == null || agent.Muzzle == null || _owner == null) continue;
-
-                var pos = agent.Muzzle.position;
-                var rot = agent.Muzzle.rotation;
-                GameManager.Instance.BulletController.Shoot(pos, rot, _owner);
+                GameManager.Instance.BulletController.Shoot(agent.Muzzle.position, agent.Muzzle.rotation, _owner);
             }
 
             yield return new WaitForSeconds(fireInterval);

@@ -25,6 +25,9 @@ public class UnitDef : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent<Player>(out var player)) return;
+        
+        Debug.Log($"{unitValue} 증가합니다.");
+        
         GameManager.Instance.Units.ApplyDelta(unitValue); 
         Destroy(gameObject);
     }
