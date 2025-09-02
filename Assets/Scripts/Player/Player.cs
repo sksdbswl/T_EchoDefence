@@ -49,6 +49,8 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     // 유닛 증감 처리
     public void MergeToUpgradedPlayer()
     {
+        Debug.Log("Merge player:: 외형 변화");
+        
         mergedModel.SetActive(true);
     }
     
