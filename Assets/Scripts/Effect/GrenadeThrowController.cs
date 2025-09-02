@@ -41,7 +41,7 @@ public class GrenadeThrowController : MonoBehaviour
         {
             var go = new GameObject("FirePos (Runtime)");
             firePos = go.transform;
-            firePos.position = new Vector3(0,1,0); 
+            firePos.position = new Vector3(0,2,0); 
         }
     }
 
@@ -54,7 +54,8 @@ public class GrenadeThrowController : MonoBehaviour
         {
             Debug.Log("조준시작");
             _isAiming = true;
-            _dragAnchor = Input.mousePosition;
+            // 마우스 드래그 감지 ( 세로 이동량 )
+            _dragAnchor = Input.mousePosition; 
 
             // 시작 시 기본값
             _aim01 = 0.5f;
@@ -88,7 +89,7 @@ public class GrenadeThrowController : MonoBehaviour
     }
 
     /// <summary>
-    /// UI 버튼 OnClick에 연결: 수류탄 생성만 (0,0,0) / 정지 상태
+    /// UI 버튼 OnClick에 연결: 수류탄 생성만 / 정지 상태
     /// </summary>
     public void ActivateGrenade()
     {
@@ -96,8 +97,8 @@ public class GrenadeThrowController : MonoBehaviour
         if (_activeGrenadeGO) Destroy(_activeGrenadeGO);
         _isAiming = false;
 
-        // (0,0,0)에 생성
-        _activeGrenadeGO = Instantiate(grenadePrefab, Vector3.zero, Quaternion.identity);
+        // (0,1,0)에 생성
+        _activeGrenadeGO = Instantiate(grenadePrefab, new Vector3(0,1,0), Quaternion.identity);
         _activeWeapon = _activeGrenadeGO.GetComponent<ThrowingWeapon>();
         _activeRb = _activeGrenadeGO.GetComponent<Rigidbody>();
 
@@ -112,8 +113,8 @@ public class GrenadeThrowController : MonoBehaviour
         {
             _activeRb.isKinematic = true;
             _activeRb.useGravity = false;
-            _activeRb.linearVelocity = Vector3.zero;
-            _activeRb.angularVelocity = Vector3.zero;
+            //_activeRb.linearVelocity = Vector3.zero;
+            //_activeRb.angularVelocity = Vector3.zero;
         }
 
         // 기준 회전(카메라 전방의 수평 투영을 기본 yaw로)
@@ -137,7 +138,7 @@ public class GrenadeThrowController : MonoBehaviour
     {
         if (_activeGrenadeGO)
         {
-            _activeGrenadeGO.transform.position = Vector3.zero;
+            //_activeGrenadeGO.transform.position = Vector3.zero;
             // 시각적으로 방향 맞추고 싶으면 아래 라인 사용
             _activeGrenadeGO.transform.rotation = firePos.rotation;
         }
@@ -145,7 +146,7 @@ public class GrenadeThrowController : MonoBehaviour
 
     private void UpdateAimFromDrag(float dy)
     {
-        float delta01 = dy * dragSensitivity;
+        float delta01 = dy * dragSensitivity; // dragSensitivity 민감도 보정
         _aim01 = Mathf.Clamp01(0.5f + delta01);
         _curPitchDeg = Mathf.Lerp(minPitchDeg, maxPitchDeg, _aim01);
         _curPowerMul = Mathf.Lerp(minPowerMul, maxPowerMul, _aim01);
