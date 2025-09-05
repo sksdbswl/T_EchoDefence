@@ -22,10 +22,13 @@ public class GrenadeThrowController : MonoBehaviour
 
     private void Awake()
     {
+        PosCircleSettings();
         lineRenderer = GetComponent<LineRenderer>();
-        circleRenderer = GetComponent<LineRenderer>();
+        
+        lineRenderer.enabled = false;
+        circleRenderer.enabled = false;
     }
-    
+
     private void Update()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
@@ -42,6 +45,9 @@ public class GrenadeThrowController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1)) // 우클릭 시작
         {
+            lineRenderer.enabled = true;
+            circleRenderer.enabled = true;
+            
             dragStart = Input.mousePosition;
             SpawnGrenade();
         }
@@ -52,7 +58,11 @@ public class GrenadeThrowController : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1)) // 던지기
         {
+            lineRenderer.enabled = false;
+            circleRenderer.enabled = false;
+            
             ThrowGrenade();
+            DetectMonster(p2);
         }
     }
 
@@ -64,6 +74,9 @@ public class GrenadeThrowController : MonoBehaviour
 
             if (t.phase == TouchPhase.Began)
             {
+                lineRenderer.enabled = true;
+                circleRenderer.enabled = true;
+                
                 dragStart = t.position;
                 SpawnGrenade();
             }
@@ -74,7 +87,11 @@ public class GrenadeThrowController : MonoBehaviour
             }
             else if (t.phase == TouchPhase.Ended)
             {
+                lineRenderer.enabled = false;
+                circleRenderer.enabled = false;
+            
                 ThrowGrenade();
+                DetectMonster(p2);
             }
         }
     }
@@ -142,8 +159,8 @@ public class GrenadeThrowController : MonoBehaviour
             Vector3 pos = BezierCurve.Quadratic(p0, p1, p2, t);
             lineRenderer.SetPosition(i, pos);
         }
-
-        //Debug.Log($"{p0}, {p1}, {p2}");
+        
+        DrawCircle(p2);
     }
     
 
@@ -156,7 +173,6 @@ public class GrenadeThrowController : MonoBehaviour
 
         lineRenderer.positionCount = 0; // 궤적 지우기
         StartCoroutine(ShotArrowCoroutine(currentGrenade.transform, p0, p1, p2));
-        DrawCircle(p2);
         
         currentGrenade = null;
     }
@@ -202,6 +218,23 @@ public class GrenadeThrowController : MonoBehaviour
             circleRenderer.SetPosition(i, new Vector3(center.x + x, center.y, center.z + z));
         }
         
+        
+    }
+    
+    // 도착지점 설정
+    public void PosCircleSettings()
+    {
+        GameObject circleObj = new GameObject("TargetCircle");
+        circleRenderer = circleObj.AddComponent<LineRenderer>();
+        circleRenderer.loop = true;
+        circleRenderer.widthMultiplier = 0.05f;
+        circleRenderer.material = circleMaterial;
+        circleRenderer.positionCount = 0;
+    }
+    
+    // 몬스터 감지
+    public void DetectMonster(Vector3 center)
+    {
         Collider[] hits = Physics.OverlapSphere(center, circleRadius, LayerMask.GetMask("Monster"));
         
         foreach (Collider hit in hits)
