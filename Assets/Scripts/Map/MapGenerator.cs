@@ -93,7 +93,6 @@ public class MapGenerator : MonoBehaviour
         onComplete?.Invoke(startChunk);
     }
     
-    //[SerializeField] private GameObject[] itemPrefabs;
     [SerializeField] private float itemSpacingZ = 5f; // Z 간격
     [SerializeField] private float itemOffsetX = 0.5f; // 좌/우 아이템 간격
     [SerializeField] private int maxItemLines = 10;    // 최대 라인 수 (안전장치)

@@ -1,12 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class overlapsphere : MonoBehaviour
+public class PlayerOverlapSphere : MonoBehaviour
 {
     public float radius = 0f;
     public LayerMask layer;
     public Collider[] colliders;
+    
+    private void Awake()
+    {
+        this.enabled = false;
+    }
     
     void Update()
     {

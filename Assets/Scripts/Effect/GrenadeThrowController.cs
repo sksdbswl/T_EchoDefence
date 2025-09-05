@@ -217,8 +217,6 @@ public class GrenadeThrowController : MonoBehaviour
             float z = Mathf.Sin(angle) * circleRadius;
             circleRenderer.SetPosition(i, new Vector3(center.x + x, center.y, center.z + z));
         }
-        
-        
     }
     
     // 도착지점 설정

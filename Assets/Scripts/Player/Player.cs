@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour,IMuzzleProvider, IProvider
 {
     public PlayerStateMachine PlayerStateMachine { get; private set; }
+    public PlayerOverlapSphere PlayerOverlapSphere { get; set; }
     public Weapon Weapon { get; private set; }
     public Transform Muzzle => Weapon.MuzzlePoint;    
     public Player PlayerProvider => this;
@@ -12,11 +13,13 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     
     [Header("InGameSettings")]
     [SerializeField] public PlayerStat playerStat;
+        
     private void Awake()
     {
         // 초기 플레이어 설정
         playerStat = new PlayerStat();
         animator = GetComponent<Animator>();
+        PlayerOverlapSphere = GetComponent<PlayerOverlapSphere>();
         
         // 기본 무기 설정
         Weapon = GetComponentInChildren<Weapon>();

@@ -8,6 +8,7 @@ public class FightState : PlayerBaseState
     public override void Enter()
     {
         Debug.Log("Fight Enter :: 전투 시작");
+        stateMachine.Player.PlayerOverlapSphere.enabled = true;
         stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Run);
 
         // 플레이어에 바인딩된 유닛 발사 루프 시작
@@ -28,5 +29,6 @@ public class FightState : PlayerBaseState
     {
         Debug.Log("Fight Exit");
         GameManager.Instance.Units.StopFireLoop();
+        stateMachine.Player.PlayerOverlapSphere.enabled = false;
     }
 }
