@@ -13,7 +13,7 @@ public class PlayerStat
     [SerializeField] private int   health      = 100;
     [SerializeField] private int   level       = 1;
     [SerializeField] private int   weaponLevel = 1;   // 1~10 권장
-    [SerializeField] private float speed       = 1f;
+    [SerializeField] private float speed       = 3f;
     [SerializeField] private int   unitCnt     = 1;   // 0 이상 권장
     [SerializeField] private int   baseDamage  = 100; // 기본 공격력
     [SerializeField] private int   grenade     = 1;

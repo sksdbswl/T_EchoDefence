@@ -2093,6 +2093,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2388115130108495960}
     - target: {fileID: 3619586598729394196, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
+      propertyPath: playerStat.speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3619586598729394196, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: playerStat.grenade
       value: 100
       objectReference: {fileID: 0}
