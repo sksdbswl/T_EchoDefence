@@ -26,6 +26,7 @@ public class StageManager : MonoBehaviour
     {
         MonsterController.CreateStageMonster(stage);
     }
+    
     // public void NextStageSettings(Action onComplete = null)
     // {
     //     StartCoroutine(MapGenerator.GenerateMap(() =>

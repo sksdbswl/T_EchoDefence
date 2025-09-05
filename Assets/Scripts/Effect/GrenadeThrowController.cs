@@ -1,189 +1,213 @@
 using UnityEngine;
+using System.Collections;
 
-/// <summary>
-/// 버튼으로 수류탄을 (0,0,0)에 생성하고,
-/// 마우스 우클릭 드래그(위/아래)로 피치/파워를 조절하며 궤적을 그리고,
-/// 우클릭을 떼면 실제로 던지는 컨트롤러.
-/// </summary>
 public class GrenadeThrowController : MonoBehaviour
 {
-    [Header("Refs")]
-    [SerializeField] private GameObject grenadePrefab;   // 수류탄 프리팹(ThrowingWeapon + Rigidbody + LineRenderer)
-    [SerializeField] private Camera cam;                 // 메인 카메라 (없으면 자동 할당)
+    [Header("Grenade Settings")]
+    [SerializeField] private GameObject grenadePrefab;
+    [SerializeField] private Transform spawnPoint;   // 화면 중앙 or 캐릭터 손 위치
+    ///[SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private int curveResolution = 20; // 곡선 샘플 개수
 
-    [Header("Fire Origin")] [Tooltip("던지기 기준점(회전/방향만 사용). 비워두면 (0,0,0)에서 동적 생성.")] [SerializeField]
-    private Transform firePos;        // 기준 트랜스폼
+    private LineRenderer lineRenderer;
+    private LineRenderer circleRenderer;
+    [SerializeField] private int circleResolution = 40;     // 원 세분화
+    [SerializeField] private float circleRadius = 2.0f;     // 원 반지름
+    [SerializeField] private Material circleMaterial;       // 원 표시용 머티리얼
+    
+    private GameObject currentGrenade;
 
-    [Header("Aim (Right Mouse Drag Up/Down)")]
-    [SerializeField] private float baseThrowForce = 12f; // ThrowingWeapon.throwForce에 적용
-    [SerializeField] private float minPitchDeg = 5f;
-    [SerializeField] private float maxPitchDeg = 60f;
-    [SerializeField] private float minPowerMul = 0.6f;   // throwForce 배수 최소
-    [SerializeField] private float maxPowerMul = 1.6f;   // throwForce 배수 최대
-    [SerializeField] private float dragSensitivity = 0.003f;
+    private Vector2 dragStart, dragEnd;
+    private Vector3 p0, p1, p2;
 
-    // 상태
-    private GameObject _activeGrenadeGO;
-    private ThrowingWeapon _activeWeapon;
-    private Rigidbody _activeRb;
-
-    private bool _isAiming;           // 우클릭 드래그 중 여부
-    private Vector2 _dragAnchor;      // 드래그 기준 스크린 좌표
-    private float _aim01 = 0.5f;      // 0~1 (아래~위) 맵
-    private float _curPitchDeg;
-    private float _curPowerMul;
-
-    // 초기화
     private void Awake()
     {
-        if (!cam) cam = Camera.main;
-        if (!firePos)
-        {
-            var go = new GameObject("FirePos (Runtime)");
-            firePos = go.transform;
-            firePos.position = new Vector3(0,2,0); 
-        }
+        lineRenderer = GetComponent<LineRenderer>();
+        circleRenderer = GetComponent<LineRenderer>();
     }
-
+    
     private void Update()
     {
-        if (!_activeWeapon) return;
+#if UNITY_EDITOR || UNITY_STANDALONE
+        HandleMouseInput();
+#elif UNITY_ANDROID || UNITY_IOS
+        HandleTouchInput();
+#endif
+    }
 
-        // 우클릭 시작 → 조준 시작
-        if (Input.GetMouseButtonDown(1))
+    // ========================
+    // 입력 처리
+    // ========================
+    private void HandleMouseInput()
+    {
+        if (Input.GetMouseButtonDown(1)) // 우클릭 시작
         {
-            Debug.Log("조준시작");
-            _isAiming = true;
-            // 마우스 드래그 감지 ( 세로 이동량 )
-            _dragAnchor = Input.mousePosition; 
-
-            // 시작 시 기본값
-            _aim01 = 0.5f;
-            UpdateAimFromDrag(0f);
-            ApplyAimToFirePos();
-            UpdatePreview();
+            dragStart = Input.mousePosition;
+            SpawnGrenade();
         }
-
-        // 우클릭 드래그 중 → 궤적 업데이트
-        if (_isAiming && Input.GetMouseButton(1))
+        else if (Input.GetMouseButton(1)) // 드래그 중
         {
-            Debug.Log("궤적 업데이트");
-            Vector2 cur = Input.mousePosition;
-            float dy = cur.y - _dragAnchor.y;
-            UpdateAimFromDrag(dy);
-            ApplyAimToFirePos();
-            UpdatePreview();
-
-            // 손에 들려있는 동안은 기준 위치를 따라감
-            HoldGrenadeAtOrigin();
+            dragEnd = Input.mousePosition;
+            UpdateTrajectory();
         }
-
-        // 우클릭 해제 → 실제 던지기
-        if (_isAiming && Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButtonUp(1)) // 던지기
         {
-            Debug.Log("투척");
-            _isAiming = false;
-            ApplyAimToFirePos();
-            ThrowNow();
+            ThrowGrenade();
         }
     }
 
-    /// <summary>
-    /// UI 버튼 OnClick에 연결: 수류탄 생성만 / 정지 상태
-    /// </summary>
-    public void ActivateGrenade()
+    private void HandleTouchInput()
     {
-        // 이전 것이 남아있다면 정리
-        if (_activeGrenadeGO) Destroy(_activeGrenadeGO);
-        _isAiming = false;
-
-        // (0,1,0)에 생성
-        _activeGrenadeGO = Instantiate(grenadePrefab, new Vector3(0,1,0), Quaternion.identity);
-        _activeWeapon = _activeGrenadeGO.GetComponent<ThrowingWeapon>();
-        _activeRb = _activeGrenadeGO.GetComponent<Rigidbody>();
-
-        if (!_activeWeapon)
+        if (Input.touchCount > 0)
         {
-            Debug.LogError("[GrenadeThrowController] ThrowingWeapon 컴포넌트가 필요합니다.");
-            return;
-        }
+            Touch t = Input.GetTouch(0);
 
-        // 초기 물리 정지
-        if (_activeRb)
-        {
-            _activeRb.isKinematic = true;
-            _activeRb.useGravity = false;
-            //_activeRb.linearVelocity = Vector3.zero;
-            //_activeRb.angularVelocity = Vector3.zero;
-        }
-
-        // 기준 회전(카메라 전방의 수평 투영을 기본 yaw로)
-        Vector3 camFwdXZ = Vector3.ProjectOnPlane(cam ? cam.transform.forward : Vector3.forward, Vector3.up).normalized;
-        if (camFwdXZ.sqrMagnitude < 1e-4f) camFwdXZ = Vector3.forward;
-
-        firePos.position = Vector3.zero;
-        firePos.rotation = Quaternion.LookRotation(camFwdXZ, Vector3.up);
-
-        // 무기 기본 힘 세팅
-        _activeWeapon.throwForce = baseThrowForce;
-
-        // 궤적(우클릭 전이므로 숨김)
-        if (_activeWeapon.trajectoryLine) _activeWeapon.trajectoryLine.enabled = false;
-
-        // 손에 들려있는 동안은 (0,0,0)에 고정 표시
-        HoldGrenadeAtOrigin();
-    }
-
-    private void HoldGrenadeAtOrigin()
-    {
-        if (_activeGrenadeGO)
-        {
-            //_activeGrenadeGO.transform.position = Vector3.zero;
-            // 시각적으로 방향 맞추고 싶으면 아래 라인 사용
-            _activeGrenadeGO.transform.rotation = firePos.rotation;
+            if (t.phase == TouchPhase.Began)
+            {
+                dragStart = t.position;
+                SpawnGrenade();
+            }
+            else if (t.phase == TouchPhase.Moved)
+            {
+                dragEnd = t.position;
+                UpdateTrajectory();
+            }
+            else if (t.phase == TouchPhase.Ended)
+            {
+                ThrowGrenade();
+            }
         }
     }
 
-    private void UpdateAimFromDrag(float dy)
+    // ========================
+    // 수류탄 생성
+    // ========================
+    private void SpawnGrenade()
     {
-        float delta01 = dy * dragSensitivity; // dragSensitivity 민감도 보정
-        _aim01 = Mathf.Clamp01(0.5f + delta01);
-        _curPitchDeg = Mathf.Lerp(minPitchDeg, maxPitchDeg, _aim01);
-        _curPowerMul = Mathf.Lerp(minPowerMul, maxPowerMul, _aim01);
+        if (currentGrenade != null) Destroy(currentGrenade);
 
-        // 무기 힘 갱신(배수 반영)
-        if (_activeWeapon) _activeWeapon.throwForce = baseThrowForce * _curPowerMul;
+        Vector3 spawnPos = spawnPoint ? spawnPoint.position : Vector3.zero;
+        currentGrenade = Instantiate(grenadePrefab, spawnPos, Quaternion.identity);
+
+        p0 = spawnPos; // 시작점
+        lineRenderer.positionCount = 0;
     }
 
-    private void ApplyAimToFirePos()
+    // ========================
+    // 궤적 미리보기
+    // ========================
+    
+    private void UpdateTrajectory()
     {
-        // yaw는 유지(카메라 수평 전방), pitch만 올림
-        Vector3 fwdXZ = firePos.forward; // 현재 yaw 유지
-        Vector3 right = Vector3.Cross(Vector3.up, Vector3.Cross(fwdXZ, Vector3.up)).normalized; // 수평 fwd 기준의 right
-        if (right.sqrMagnitude < 1e-4f) right = Vector3.right;
+        if (currentGrenade == null) return;
 
-        Quaternion pitchRot = Quaternion.AngleAxis(_curPitchDeg, right);
-        Vector3 dir = (pitchRot * fwdXZ).normalized;
+        // 드래그 벡터
+        Vector2 dragVec = dragEnd - dragStart;
 
-        firePos.position = Vector3.zero;
-        firePos.rotation = Quaternion.LookRotation(dir, Vector3.up);
+        // 시작점
+        Vector3 p0 = spawnPoint.position;
+
+        // 카메라의 전방 벡터를 가져와서 Y축을 0으로 만들어 수평 방향으로 고정
+        Vector3 cameraForward = Camera.main.transform.forward;
+        cameraForward.y = 0f;
+        cameraForward.Normalize();
+
+        // 카메라의 우측 벡터를 가져와서 Y축을 0으로 만들어 수평 방향으로 고정
+        Vector3 cameraRight = Camera.main.transform.right;
+        cameraRight.y = 0f;
+        cameraRight.Normalize();
+
+        // 드래그 방향에 따라 힘 계산
+        // dragVec.y: 수직 드래그는 투척 거리와 높이에 영향
+        // dragVec.x: 수평 드래그는 좌우 방향에 영향
+        float forwardDistance = dragVec.y * 0.05f; // 드래그 상하 이동량 → 전진 거리
+        float sideDistance = dragVec.x * 0.02f;    // 드래그 좌우 이동량 → 좌우 이동 거리
+        float height = dragVec.y * 0.03f;         // 드래그 상하 이동량 → 높이
+
+        // 도착점 (p2)
+        // p0를 기준으로 카메라 전방 및 우측 방향으로 이동
+        p2 = p0 + (cameraForward * forwardDistance) + (cameraRight * sideDistance);
+        p2.y = 0;
+        
+        // 중간 제어점 (p1)
+        // p0와 p2의 중간에 높이를 더해 포물선 모양 생성
+        Vector3 midPoint = Vector3.Lerp(p0, p2, 0.5f);
+        p1 = midPoint + Vector3.up * height;
+
+        // 궤적 그리기
+        lineRenderer.positionCount = curveResolution;
+        for (int i = 0; i < curveResolution; i++)
+        {
+            float t = i / (float)(curveResolution - 1);
+            Vector3 pos = BezierCurve.Quadratic(p0, p1, p2, t);
+            lineRenderer.SetPosition(i, pos);
+        }
+
+        //Debug.Log($"{p0}, {p1}, {p2}");
+    }
+    
+
+    // ========================
+    // 던지기
+    // ========================
+    private void ThrowGrenade()
+    {
+        if (currentGrenade == null) return;
+
+        lineRenderer.positionCount = 0; // 궤적 지우기
+        StartCoroutine(ShotArrowCoroutine(currentGrenade.transform, p0, p1, p2));
+        DrawCircle(p2);
+        
+        currentGrenade = null;
     }
 
-    private void UpdatePreview()
+    // ========================
+    // 베지어 이동 코루틴
+    // ========================
+    private IEnumerator ShotArrowCoroutine(Transform target, Vector3 p0, Vector3 p1, Vector3 p2)
     {
-        if (_activeWeapon) _activeWeapon.UpdateTrajectory(firePos);
+        Vector3 previousPos = p0;
+        float elapsedTime = 0f;
+        float Duration = 1f; // 이동 시간 (조정 가능)
+
+        while (elapsedTime < Duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / Duration;
+
+            Vector3 pos = BezierCurve.Quadratic(p0, p1, p2, t);
+            target.position = pos;
+
+            // 3D 공간에서 진행 방향을 바라보게 회전
+            Vector3 direction = (pos - previousPos).normalized;
+            if (direction != Vector3.zero)
+            {
+                target.rotation = Quaternion.LookRotation(direction);
+            }
+
+            previousPos = pos;
+            yield return null;
+        }
     }
-
-    private void ThrowNow()
+    
+    //도착점 표시
+    public void DrawCircle(Vector3 center)
     {
-        if (!_activeWeapon) return;
-
-        // 던지기 (물리 ON + 초기속도)
-        _activeWeapon.Throw(firePos);
-
-        // 더 이상 컨트롤하지 않음
-        _activeGrenadeGO = null;
-        _activeWeapon = null;
-        _activeRb = null;
+        circleRenderer.positionCount = circleResolution;
+        for (int i = 0; i < circleResolution; i++)
+        {
+            float angle = i * Mathf.PI * 2f / circleResolution;
+            float x = Mathf.Cos(angle) * circleRadius;
+            float z = Mathf.Sin(angle) * circleRadius;
+            circleRenderer.SetPosition(i, new Vector3(center.x + x, center.y, center.z + z));
+        }
+        
+        Collider[] hits = Physics.OverlapSphere(center, circleRadius, LayerMask.GetMask("Monster"));
+        
+        foreach (Collider hit in hits)
+        {
+            Debug.Log("몬스터 감지됨: " + hit.name);
+            MonsterController mc = hit.GetComponent<MonsterController>();
+        }
     }
 }
