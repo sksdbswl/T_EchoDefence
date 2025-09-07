@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1179734100, guid: abb58be17ce65f1498fcba97103427c7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1516460614792707521, guid: abb58be17ce65f1498fcba97103427c7, type: 3}
       propertyPath: m_Enabled
       value: 0

@@ -1063,6 +1063,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifle_Full_Body
       objectReference: {fileID: 0}
+    - target: {fileID: 1252462557264303137, guid: 9620196a5d390a64dbda2551f225ae81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1885447640767205019, guid: 9620196a5d390a64dbda2551f225ae81, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

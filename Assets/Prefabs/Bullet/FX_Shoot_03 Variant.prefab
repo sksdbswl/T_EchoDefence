@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1329337507704057851, guid: ac0660a84ddbe3247af9f977b889f331, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1329337507704057853, guid: ac0660a84ddbe3247af9f977b889f331, type: 3}
       propertyPath: m_Name
       value: FX_Shoot_03 Variant

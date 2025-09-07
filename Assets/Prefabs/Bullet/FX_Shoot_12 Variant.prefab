@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7933887214091448455, guid: 7b43631ad819e2b44acbf60d6fec5695, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7933887214091448473, guid: 7b43631ad819e2b44acbf60d6fec5695, type: 3}
       propertyPath: m_Name
       value: FX_Shoot_12 Variant

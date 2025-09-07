@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Shoot_09 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7454493389440352600, guid: 9b8943fffd7ffc241b324e345cf95361, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7454493389440352602, guid: 9b8943fffd7ffc241b324e345cf95361, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.3
