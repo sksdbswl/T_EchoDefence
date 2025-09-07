@@ -13,7 +13,8 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     
     [Header("InGameSettings")]
     [SerializeField] public PlayerStat playerStat;
-        
+    [SerializeField] private GameObject mergedModel;
+
     private void Awake()
     {
         // 초기 플레이어 설정
@@ -40,15 +41,6 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
         PlayerStateMachine.Update(); 
     }
     
-    public void ResetToStart(Vector3 startPos)
-    {
-        transform.position = startPos;
-        transform.rotation = Quaternion.identity;
-    }
-    
-    //[SerializeField] private GameObject normalModel;
-    [SerializeField] private GameObject mergedModel;
-
     // 유닛 증감 처리
     public void MergeToUpgradedPlayer()
     {
@@ -60,7 +52,5 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     public void DivideToUpgradedPlayer()
     {
         mergedModel.SetActive(false);
-        // playerStat.Damage *= 3; // 강화 예시
-        // playerStat.Speed  *= 2;
     }
 }

@@ -7,7 +7,6 @@ public class FightState : PlayerBaseState
 
     public override void Enter()
     {
-        Debug.Log("Fight Enter :: 전투 시작");
         stateMachine.Player.PlayerOverlapSphere.enabled = true;
         stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Run);
 
@@ -27,7 +26,6 @@ public class FightState : PlayerBaseState
 
     public override void Exit()
     {
-        Debug.Log("Fight Exit");
         GameManager.Instance.Units.StopFireLoop();
         stateMachine.Player.PlayerOverlapSphere.enabled = false;
     }

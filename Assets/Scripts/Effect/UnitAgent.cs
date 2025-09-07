@@ -24,13 +24,4 @@ public class UnitAgent : MonoBehaviour, IMuzzleProvider, IProvider
         _stats = null;
         gameObject.SetActive(false);
     }
-
-    // private void Update()
-    // {
-    //     if (_owner == null) return;
-    //
-    //     float moveSpeed = _owner.playerStat.Speed;
-    //     Vector3 target = _owner.transform.position;
-    //     transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
-    // }
 }
