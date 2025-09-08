@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public VirtualJoystick VirtualJoystick;
     public UnitManager Units;
     public BulletController BulletController;
+    public CameraController CameraController;
     
     public bool IsBattleClear = false;
     public bool IsPlayerDead = false;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         Units = GetComponent<UnitManager>();
         BulletController = GetComponent<BulletController>();
+        CameraController = GetComponent<CameraController>();
     }
     
     public void ExitGame()
