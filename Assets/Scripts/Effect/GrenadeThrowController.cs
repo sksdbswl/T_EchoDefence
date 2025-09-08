@@ -225,7 +225,7 @@ public class GrenadeThrowController : MonoBehaviour
         GameObject circleObj = new GameObject("TargetCircle");
         circleRenderer = circleObj.AddComponent<LineRenderer>();
         circleRenderer.loop = true;
-        circleRenderer.widthMultiplier = 0.05f;
+        circleRenderer.widthMultiplier = 0.5f;
         circleRenderer.material = circleMaterial;
         circleRenderer.positionCount = 0;
     }
