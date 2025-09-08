@@ -9,7 +9,8 @@ public class FightState : PlayerBaseState
     {
         stateMachine.Player.PlayerOverlapSphere.enabled = true;
         stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Run);
-
+        GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Run);
+        
         // 플레이어에 바인딩된 유닛 발사 루프 시작
         GameManager.Instance.Units.StartFireLoop();
     }
@@ -17,7 +18,10 @@ public class FightState : PlayerBaseState
     public override void Update()
     {
         if (GameManager.Instance.IsBattleClear)
+        {
             stateMachine.ChangeState(stateMachine.ClearState);
+            GameManager.Instance.Units.StopFireLoop();
+        }
         else if (GameManager.Instance.IsPlayerDead)
         {
             // TODO: GameOver

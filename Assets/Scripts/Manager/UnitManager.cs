@@ -20,6 +20,7 @@ public class UnitManager : MonoBehaviour
     private Player _owner;
     private IMuzzleProvider _playerProvider; 
     private readonly List<UnitAgent> _activeUnits = new();
+    public IReadOnlyList<UnitAgent> ActiveUnits => _activeUnits;
     
     private Coroutine _fireLoop;
     private float fireInterval = 1f;
@@ -289,6 +290,17 @@ public class UnitManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(fireInterval);
+        }
+    }
+
+    /// <summary>
+    /// 유닛 애니메이션 오버라이드
+    /// </summary>
+    public void SetUnitAnimation(int animationHash)
+    {
+        foreach (var unit in GameManager.Instance.Units.ActiveUnits)
+        {
+            unit.SetAnimation(animationHash);
         }
     }
 }

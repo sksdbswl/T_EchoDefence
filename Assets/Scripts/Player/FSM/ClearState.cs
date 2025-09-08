@@ -8,6 +8,8 @@ public class ClearState : PlayerBaseState
     {
         Debug.Log("Clear State Enter");
         stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
+        GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Idle);
+        
         StageManager.Instance.Stage++;
         StageManager.Instance.CreateStageMonster(StageManager.Instance.Stage);
         
@@ -20,13 +22,16 @@ public class ClearState : PlayerBaseState
         StageManager.Instance.StageSettings((startPos) =>
         {
             stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Run);
-
+            GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Run);
+            
             var scroll = StageManager.Instance.GetComponent<MapScrollController>();
             scroll.ScrollUntilStartAtZero(startPos, () =>
             {
                 GameManager.Instance.IsBattleClear = false;
               
                 stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
+                GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Idle);
+                
                 stateMachine.ChangeState(new PrevState(stateMachine));
             });
         });

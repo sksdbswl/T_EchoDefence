@@ -24,4 +24,9 @@ public class UnitAgent : MonoBehaviour, IMuzzleProvider, IProvider
         _stats = null;
         gameObject.SetActive(false);
     }
+
+    public void SetAnimation(int animation)
+    {
+        _anim.SetTrigger(animation);
+    }
 }

@@ -867,6 +867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitAgent
   muzzle: {fileID: 5040364458373625809}
+  unitOverride: {fileID: 22100000, guid: f2b35a9ca50270c46b43c0b908db2b14, type: 2}
 --- !u!1 &926665405498639007
 GameObject:
   m_ObjectHideFlags: 0
