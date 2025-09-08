@@ -1952,7 +1952,7 @@ MonoBehaviour:
   maxHp: 10
   _player: {fileID: 0}
   isDetect: 0
-  speed: 0.5
+  speed: 0.4
 --- !u!1 &8008218561890331165
 GameObject:
   m_ObjectHideFlags: 0

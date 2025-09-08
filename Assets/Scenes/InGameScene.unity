@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapScrollController
   mapRoot: {fileID: 1803696873}
-  scrollSpeed: 1.5
+  scrollSpeed: 1
   stopZ: 9
 --- !u!1 &100585017
 GameObject:
@@ -2381,7 +2381,7 @@ PrefabInstance:
       objectReference: {fileID: 2388115130108495960}
     - target: {fileID: 3619586598729394196, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: playerStat.speed
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3619586598729394196, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: playerStat.grenade

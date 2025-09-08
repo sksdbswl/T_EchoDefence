@@ -367,7 +367,7 @@ MonoBehaviour:
   maxHp: 10
   _player: {fileID: 0}
   isDetect: 0
-  speed: 0.5
+  speed: 0.2
 --- !u!136 &766775833639641414
 CapsuleCollider:
   m_ObjectHideFlags: 0
