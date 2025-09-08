@@ -7,7 +7,8 @@ public class StageManager : MonoBehaviour
     public static StageManager Instance { get; private set; }
     public MonsterController MonsterController;
     [SerializeField]public MapGenerator MapGenerator;
-    
+
+    public GameObject BossPos;
     public int Stage = 1;
     
     private void Awake()

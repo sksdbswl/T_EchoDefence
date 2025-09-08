@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98dd065452b593945ab2611e4c149f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
-  speed: 5
+  speed: 1.5
 --- !u!114 &3619586598729394196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +469,6 @@ MonoBehaviour:
   playerStat:
     health: 100
     level: 1
-    weaponLevel: 1
     speed: 1.5
     unitCnt: 1
     baseDamage: 100

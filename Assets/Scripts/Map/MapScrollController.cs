@@ -48,6 +48,7 @@ public class MapScrollController : MonoBehaviour
                     isScrolling = false;
                     stopType = ScrollStopType.None;
                     Debug.Log("[Scroll] 보스존 도착 → 스크롤 정지");
+                    StageManager.Instance.BossPos.GetComponent<Collider>().enabled = false;
                 }
                 break;
         }
@@ -55,7 +56,6 @@ public class MapScrollController : MonoBehaviour
 
     private System.Action onScrollComplete; 
     
-    // === 외부에서 호출 ===
     public void ScrollUntilStartAtZero(Transform startPos, System.Action onComplete = null)
     {
         targetStartPos = startPos;

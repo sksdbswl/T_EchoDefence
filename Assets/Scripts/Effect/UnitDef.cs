@@ -24,6 +24,12 @@ public class UnitDef : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.GetComponent<Bullet>())
+        {
+            if (unitValue == 20) return;
+            unitValue++;
+        }
+        
         if (!other.TryGetComponent<Player>(out var player)) return;
         
         GameManager.Instance.Units.ApplyDelta(unitValue); 

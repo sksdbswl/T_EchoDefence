@@ -203,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   MonsterController: {fileID: 61629264}
   MapGenerator: {fileID: 1803696874}
+  BossPos: {fileID: 0}
   Stage: 1
 --- !u!114 &61629266
 MonoBehaviour:
@@ -2105,6 +2106,7 @@ MonoBehaviour:
   BulletController: {fileID: 0}
   IsBattleClear: 0
   IsPlayerDead: 0
+  IsBossZoneTrigger: 0
 --- !u!4 &2117605344
 Transform:
   m_ObjectHideFlags: 0
@@ -2389,9 +2391,13 @@ PrefabInstance:
       propertyPath: playerStat.unitCnt
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7006942394546292765, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7264555925496417592, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: speed
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7264555925496417592, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: m_Enabled

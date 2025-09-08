@@ -31,6 +31,13 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        int endPosLayer = LayerMask.NameToLayer("EndPos");
+        if (other.gameObject.layer == endPosLayer)
+        {
+            ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject, GameManager.Instance.BulletController.Parents);
+            return;
+        }
+        
         Monster target = other.GetComponent<Monster>();
 
         if (target)

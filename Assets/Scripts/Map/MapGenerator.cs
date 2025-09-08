@@ -83,7 +83,9 @@ public class MapGenerator : MonoBehaviour
         Vector3 endChunkPos = endPos + new Vector3(0, 0, chunkSpacing + endChunkOffsetZ);
         GameObject endChunkObj = Instantiate(endChunk.gameObject, endChunkPos, Quaternion.identity, transform);
         Transform endChunkTransform = endChunkObj.transform;
-
+        StageManager.Instance.BossPos = endChunkObj;
+        StageManager.Instance.BossPos.GetComponent<Collider>().enabled = true;
+        
         // === 몬스터 스폰 ===
         yield return StartCoroutine(TrySpawnEntry(basePos, endChunkTransform));
 

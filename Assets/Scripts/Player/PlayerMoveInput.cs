@@ -12,7 +12,7 @@ public class PlayerMoveInput : MonoBehaviour
     private PlayerInputActions playerInputActions;
     private VirtualJoystick joystick; 
     
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 1.5f;
     
     public Vector2 MoveInput { get; private set; }
 

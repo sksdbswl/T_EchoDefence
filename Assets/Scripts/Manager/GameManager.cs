@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     
     public bool IsBattleClear = false;
     public bool IsPlayerDead = false;
+    public bool IsBossZoneTrigger = false;
     
     private void Awake()
     {

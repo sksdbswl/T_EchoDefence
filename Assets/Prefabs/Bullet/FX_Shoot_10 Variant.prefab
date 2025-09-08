@@ -72,7 +72,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Shoot_10 Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2570534919409470595, guid: b93d5e127ffa55e40ba4fc5c38b23972, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2570534919409470594, guid: b93d5e127ffa55e40ba4fc5c38b23972, type: 3}
