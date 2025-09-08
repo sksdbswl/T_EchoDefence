@@ -12,21 +12,21 @@ public class Monster : MonoBehaviour
     
     public int maxHp = 10;
     private int currentHp = 1;
-    private GameObject monsterPrefab;
+    //private GameObject monsterPrefab;
 
     public Player _player;
     public bool isDetect = false;
     public float speed = 0.5f;
     private float stopDistance = 0.2f; // 너무 가까우면 멈춤
     
-    public void Init(GameObject prefabRef, Player player)
-    {
-        monsterPrefab = prefabRef;
-    }
+    // public void Init(GameObject prefabRef, Player player)
+    // {
+    //     monsterPrefab = prefabRef;
+    // }
     
     private void Awake()
     {
-        monsterPrefab = this.gameObject;
+        //monsterPrefab = this.gameObject;
         currentHp = maxHp;
     }
 

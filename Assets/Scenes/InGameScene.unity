@@ -1008,7 +1008,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 994968429}
   curveResolution: 20
   circleResolution: 40
-  circleRadius: 1
+  circleRadius: 2.5
   circleMaterial: {fileID: 2100000, guid: 9c29bd71bf8715142af0b009c41d47ad, type: 2}
 --- !u!4 &867292673
 Transform:

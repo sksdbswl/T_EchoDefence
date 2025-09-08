@@ -12,7 +12,7 @@ public class GrenadeThrowController : MonoBehaviour
     private LineRenderer lineRenderer;
     private LineRenderer circleRenderer;
     [SerializeField] private int circleResolution = 40;     // 원 세분화
-    [SerializeField] private float circleRadius = 2.0f;     // 원 반지름
+    [SerializeField] private float circleRadius = 0f;     // 원 반지름
     [SerializeField] private Material circleMaterial;       // 원 표시용 머티리얼
     
     private GameObject currentGrenade;
@@ -174,7 +174,7 @@ public class GrenadeThrowController : MonoBehaviour
         lineRenderer.positionCount = 0; // 궤적 지우기
         StartCoroutine(ShotArrowCoroutine(currentGrenade.transform, p0, p1, p2));
         
-        currentGrenade = null;
+        //currentGrenade = null;
     }
 
     // ========================
@@ -234,11 +234,8 @@ public class GrenadeThrowController : MonoBehaviour
     public void DetectMonster(Vector3 center)
     {
         Collider[] hits = Physics.OverlapSphere(center, circleRadius, LayerMask.GetMask("Monster"));
-        
-        foreach (Collider hit in hits)
-        {
-            Debug.Log("몬스터 감지됨: " + hit.name);
-            MonsterController mc = hit.GetComponent<MonsterController>();
-        }
+        var Grenade = currentGrenade.GetComponent<Grenade>();
+
+        Grenade.hitMoster = hits;
     }
 }

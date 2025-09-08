@@ -1,23 +1,43 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class Grenade:ThrowingWeapon
+public class Grenade : MonoBehaviour
 {
-    public int damage = 100;                    // 데미지
-    public LayerMask attackableMask;
+    public int damage = 500;
+    [SerializeField] public ParticleSystem hitParticle;
+    [SerializeField] private LayerMask monsterLayer;
 
-    protected override IEnumerator Explode()
+    private bool exploded = false;
+
+    public Collider[] hitMoster;
+
+    private void Update()
     {
-        yield return new WaitForSeconds(explosiondelay);
+        if (gameObject.transform.position.y <= 0)
+        {
+            Vector3 hitPos = gameObject.transform.position;
+            
+            hitParticle.transform.position = hitPos;
+            hitParticle.gameObject.SetActive(true);
+            hitParticle.Play();
 
-        Collider[] _colliders = Physics.OverlapSphere(transform.position, explosionRadius, attackableMask);
+            StartCoroutine(ReturnAfterParticle());
+        }
+    }
 
-        // foreach(Collider _collider in _colliders)
-        // {
-        //     float _distance = Vector3.Distance(transform.position, _collider.transform.position);
-        //     float _damagePersent = 1 - (_distance/explosionRadius);
-        //     int _calDamage = Mathf.RoundToInt(damage * _damagePersent);
-        //     _collider.GetComponent<IDamageAble>().Damaged(_calDamage);
-        // }
+    private IEnumerator ReturnAfterParticle()
+    {
+        yield return new WaitForSeconds(0.28f);
+
+        foreach (Collider hit in hitMoster)
+        {
+            Debug.Log("몬스터 감지됨: " + hit.name);
+            Monster mc = hit.GetComponent<Monster>();
+            
+            Destroy(mc.gameObject);
+        }
+        
+        Destroy(gameObject);
     }
 }
