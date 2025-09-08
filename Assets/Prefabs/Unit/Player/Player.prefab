@@ -470,7 +470,7 @@ MonoBehaviour:
     health: 100
     level: 1
     weaponLevel: 1
-    speed: 1
+    speed: 1.5
     unitCnt: 1
     baseDamage: 100
     grenade: 1

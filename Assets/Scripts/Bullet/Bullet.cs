@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
     private GameObject prefab;
     private Player Player;
+    [SerializeField] private ParticleSystem hitParticle;
     
     public void Init(GameObject prefabRef, Player player)
     {
@@ -31,22 +32,39 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Monster target = other.GetComponent<Monster>();
-        
+
         if (target)
         {
-            var monster = other.gameObject.GetComponent<Monster>();
-            
+            var monster = other.GetComponent<Monster>();
             monster.TakeDamage(Player.playerStat.Damage);
 
-            StopCoroutine(ReturnToPool());
-            ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject, GameManager.Instance.BulletController.Parents);
+            if (hitParticle != null)
+            {
+                Vector3 hitPos = other.ClosestPoint(transform.position);
+
+                hitParticle.transform.position = hitPos;
+                hitParticle.transform.rotation = Quaternion.LookRotation(transform.forward);
+                hitParticle.gameObject.SetActive(true);
+                
+                hitParticle.Play();
+
+                StartCoroutine(ReturnAfterParticle());
+            }
+            else
+            {
+                ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject, GameManager.Instance.BulletController.Parents);
+            }
         }
-        
-        UnitDef unitDef = other.GetComponent<UnitDef>();
-        if (unitDef)
-        {
-            unitDef.unitValue++;
-        }
+    }
+
+    private IEnumerator ReturnAfterParticle()
+    {
+        var main = hitParticle.main;
+        float duration = main.duration + main.startLifetime.constantMax;
+
+        yield return new WaitForSeconds(duration);
+
+        ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject, GameManager.Instance.BulletController.Parents);
     }
 }
 

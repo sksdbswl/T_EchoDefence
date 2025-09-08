@@ -11,7 +11,7 @@ public class BulletSpeedDef : MonoBehaviour
         
         _triggered = true;
 
-        provider.PlayerProvider.playerStat.Speed++;
+        provider.PlayerProvider.playerStat.Speed += 0.2f;
         
         Destroy(gameObject);
         

@@ -166,25 +166,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterController
   Monsters:
-  - {fileID: 5926726198213917790, guid: eeca50508165db544bcf8ffd3c681b07, type: 3}
-  - {fileID: 2049239672823951423, guid: e282c3590af3b4b4b94b4dd02795a4a1, type: 3}
   - {fileID: 8587050976810819127, guid: f65e6cb59905f024ab6db1b47f0265f9, type: 3}
   - {fileID: 2859722453231621878, guid: f978c942a0820b9468dc6503134dbcbc, type: 3}
   - {fileID: 6530068719422837949, guid: ae8b1e6ed1a428f4a9292659f299a0f8, type: 3}
-  - {fileID: 2667323928422705224, guid: 9b8fb4b2b29c68b419c6b428eec7b225, type: 3}
+  - {fileID: 2667323928422705224, guid: 094da5a77634b0242a285ed9848c1775, type: 3}
   - {fileID: 5082190938594177410, guid: ba53bbdf0fb42db4d849a80a79ee191a, type: 3}
   - {fileID: 2494533842170652062, guid: 51c895ec8e5771a43a8b573502a82ad4, type: 3}
+  - {fileID: 2049239672823951423, guid: e282c3590af3b4b4b94b4dd02795a4a1, type: 3}
   - {fileID: 2175014929597184368, guid: fb5fa600128af7c438e8b0488b670cdd, type: 3}
+  - {fileID: 5926726198213917790, guid: eeca50508165db544bcf8ffd3c681b07, type: 3}
   BossMonsters:
-  - {fileID: 5100314699680291301, guid: ec30b613ab7f8f5409330fc5f57a70c5, type: 3}
-  - {fileID: 7964627700606061015, guid: ac91a74400b0e044b9f4fc151827269e, type: 3}
   - {fileID: 3968516245632352353, guid: e1a475daf062b5043beab844ccea0548, type: 3}
   - {fileID: 3272305622727065846, guid: 88046354c6ba14c448d5e9cfbebbc1e7, type: 3}
   - {fileID: 8300494284743153735, guid: 7cd62d4b18d27d94da589d768eea9669, type: 3}
-  - {fileID: 2333908159223302472, guid: 094da5a77634b0242a285ed9848c1775, type: 3}
+  - {fileID: 2333908159223302472, guid: 9b8fb4b2b29c68b419c6b428eec7b225, type: 3}
   - {fileID: 4785582232520108710, guid: cb8f31de09541514285bc059a2f9f8f4, type: 3}
   - {fileID: 1350075592249358764, guid: f8a4acec7d941ca40a8fbdd7f0d62d68, type: 3}
+  - {fileID: 7964627700606061015, guid: ac91a74400b0e044b9f4fc151827269e, type: 3}
   - {fileID: 7893953840813641466, guid: 8ee13126ef7295249aa0563bb6f1b32b, type: 3}
+  - {fileID: 5100314699680291301, guid: ec30b613ab7f8f5409330fc5f57a70c5, type: 3}
   monsterParent: {fileID: 1868459745}
   spawnInterval: 1
   minMonsterCount: 30
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapScrollController
   mapRoot: {fileID: 1803696873}
-  scrollSpeed: 3
+  scrollSpeed: 1.5
   stopZ: 9
 --- !u!1 &100585017
 GameObject:
@@ -854,7 +854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &842280811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1764,7 +1764,7 @@ MonoBehaviour:
   itemSpawnChance: 0.1
   itemSpacingZ: 5
   itemOffsetX: 1
-  maxItemLines: 10
+  maxItemLines: 5
 --- !u!1 &1868459744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,7 +2133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletManager
   BulletPrefabs:
-  - {fileID: 2440050089796682101, guid: 1c453b773d3e9b245a5ee6a29e1d528d, type: 3}
   - {fileID: 6308931787622046970, guid: 98e1b553ad7758847ab890a49a650524, type: 3}
   - {fileID: 3307465512734650322, guid: 5e182eb435925ae40a20b5baeee9cfd2, type: 3}
   - {fileID: 7193906544215498660, guid: 05f3cf3a8ee9e4e478b481d56a09dd96, type: 3}
@@ -2146,6 +2145,7 @@ MonoBehaviour:
   - {fileID: 2527237660285329094, guid: f16f325ffa9b8b14f9d2e3882932dea0, type: 3}
   - {fileID: 3672063147134637919, guid: ed315f8859c67eb4f8c70ff9a96764d0, type: 3}
   - {fileID: 1169243429065005224, guid: 9fff3765a45aeea429cc60ea66ea71ca, type: 3}
+  - {fileID: 2440050089796682101, guid: 1c453b773d3e9b245a5ee6a29e1d528d, type: 3}
   - {fileID: 8559214373395357638, guid: 0d585aa410abca442a1a0af22fbc9f6b, type: 3}
   - {fileID: 1444574971996534436, guid: 91b91b86937d2914892465a96fef9d92, type: 3}
   - {fileID: 2104967627229789491, guid: 8de5a8ae23264b94bbaedb977e2fd194, type: 3}
@@ -2379,7 +2379,7 @@ PrefabInstance:
       objectReference: {fileID: 2388115130108495960}
     - target: {fileID: 3619586598729394196, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: playerStat.speed
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3619586598729394196, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: playerStat.grenade
@@ -2388,6 +2388,10 @@ PrefabInstance:
     - target: {fileID: 3619586598729394196, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: playerStat.unitCnt
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264555925496417592, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
+      propertyPath: speed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7264555925496417592, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
       propertyPath: m_Enabled

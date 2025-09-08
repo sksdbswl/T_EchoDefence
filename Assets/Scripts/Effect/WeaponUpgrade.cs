@@ -11,7 +11,7 @@ public class WeaponUpgrade : MonoBehaviour
         
         _triggered = true;
 
-        provider.PlayerProvider.playerStat.WeaponLevel++;
+        provider.PlayerProvider.playerStat.Level++;
         
         Destroy(gameObject);
         

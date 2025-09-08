@@ -12,7 +12,7 @@ public class PlayerStat
     // ---- 직렬화 필드 (기본값 Inspector 노출) ----
     [SerializeField] private int   health      = 100;
     [SerializeField] private int   level       = 1;
-    [SerializeField] private int   weaponLevel = 1;   // 1~10 권장
+    //[SerializeField] private int   weaponLevel = 1;   // 1~10 권장
     [SerializeField] private float speed       = 3f;
     [SerializeField] private int   unitCnt     = 1;   // 0 이상 권장
     [SerializeField] private int   baseDamage  = 100; // 기본 공격력
@@ -20,11 +20,11 @@ public class PlayerStat
 
     // ---- 상수 정의 (클램프 기준) ----
     private const int   MinLevel       = 1;
-    private const int   MaxLevel       = 99;
-    private const int   MinWeaponLevel = 1;
-    private const int   MaxWeaponLevel = 10;
+    private const int   MaxLevel       = 12;
+    // private const int   MinWeaponLevel = 1;
+    // private const int   MaxWeaponLevel = 10;
     private const float MinSpeed       = 0.1f;
-    private const float MaxSpeed       = 50f;
+    private const float MaxSpeed       = 3f;
 
     // ---- 변경 알림 ----
     public event Action OnChanged;
@@ -51,11 +51,11 @@ public class PlayerStat
         set => SetValue(ref level, Mathf.Clamp(value, MinLevel, MaxLevel));
     }
 
-    public int WeaponLevel
-    {
-        get => weaponLevel;
-        set => SetValue(ref weaponLevel, Mathf.Clamp(value, MinWeaponLevel, MaxWeaponLevel));
-    }
+    // public int WeaponLevel
+    // {
+    //     get => weaponLevel;
+    //     set => SetValue(ref weaponLevel, Mathf.Clamp(value, MinWeaponLevel, MaxWeaponLevel));
+    // }
 
     public float Speed
     {
@@ -78,7 +78,7 @@ public class PlayerStat
     /// <summary>
     /// 실제 최종 데미지 (무기 레벨에 따라 배율 적용)
     /// </summary>
-    public int Damage => baseDamage * weaponLevel;
+    public int Damage => baseDamage * level;
 
     public int Grenade
     {
@@ -96,7 +96,7 @@ public class PlayerStat
 
     // ---- 유틸 메서드 ----
     public void AddHealth(int delta)   => Health    = Mathf.Max(0, Health + delta);
-    public void AddWeaponLevel(int d)  => WeaponLevel = Mathf.Clamp(WeaponLevel + d, MinWeaponLevel, MaxWeaponLevel);
+    public void AddWeaponLevel(int d)  => level = Mathf.Clamp(level + d, MinLevel, MaxLevel);
     public void AddUnit(int delta)     => UnitCnt   = Mathf.Max(0, UnitCnt + delta);
     public void AddGrenade(int delta)  => Grenade   = Mathf.Max(0, Grenade + delta);
 }
