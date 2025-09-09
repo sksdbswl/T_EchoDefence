@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using Unity.Cinemachine;
 
@@ -10,13 +11,6 @@ public enum CameraState
     Clear
 }
 
-public enum StageState
-{
-    Init,
-    Step,
-    Clear
-}
-
 public class CameraController : MonoBehaviour
 {
     [Header("FreeLook Cameras")]
@@ -24,8 +18,10 @@ public class CameraController : MonoBehaviour
     public CinemachineCamera fightCam;
     public CinemachineCamera bossCam;
     public CinemachineCamera clearCam; // 필요하면 추가
-
     private CameraState currentState;
+
+    [Header("Count UI Settings")] 
+    [SerializeField] private TMP_Text[] CountText;
 
     public void SetCameraState(CameraState state)
     {
@@ -68,10 +64,11 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         GameManager.Instance.CameraController.SetCameraState(CameraState.Prev);
         
-        for (int i = 3; i > 0; i--)
+        for (int i = 3; i >= 0; i--)
         {
-            Debug.Log(i); 
+            CountText[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(1f);
+            CountText[i].gameObject.SetActive(false);
         }
 
         StageManager.Instance.StageActive = true;
