@@ -221,6 +221,7 @@ MonoBehaviour:
   mapRoot: {fileID: 1803696873}
   scrollSpeed: 0.5
   stopZ: 9
+  resetScrollSpeed: 3
 --- !u!1 &66030419
 GameObject:
   m_ObjectHideFlags: 0
