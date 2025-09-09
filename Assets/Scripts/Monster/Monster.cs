@@ -37,6 +37,8 @@ public class Monster : MonoBehaviour
             hpRoot = worldCanvas.transform.Find("MonsterHpRoot"); 
             if (hpRoot != null) hpParents = hpRoot.GetComponent<RectTransform>();
         }
+
+        currentHp = maxHp;
     }
 
     private void Start()
