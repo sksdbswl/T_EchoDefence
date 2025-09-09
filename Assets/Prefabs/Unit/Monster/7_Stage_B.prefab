@@ -1949,10 +1949,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   MonsterType: 1
-  maxHp: 10
+  maxHp: 1900
   _player: {fileID: 0}
   isDetect: 0
-  speed: 0.4
+  speed: 2.4
   hpBarPrefab: {fileID: 8140508679524901334, guid: c8624cc8574584d7a883f347ae9671a2, type: 3}
   hpBarObj: {fileID: 0}
 --- !u!1 &8008218561890331165

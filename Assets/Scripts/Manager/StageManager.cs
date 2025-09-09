@@ -6,6 +6,7 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance { get; private set; }
     public MonsterController MonsterController;
+    public MapScrollController MapScrollController;
     [SerializeField]public MapGenerator MapGenerator;
 
     public GameObject BossPos;
@@ -17,6 +18,7 @@ public class StageManager : MonoBehaviour
         Instance = this;
         
         MonsterController = GetComponent<MonsterController>();
+        MapScrollController= GetComponent<MapScrollController>();
     }
 
     private void Start()
@@ -26,6 +28,7 @@ public class StageManager : MonoBehaviour
 
     public void CreateStageMonster(int stage)
     {
+        MapScrollController.scrollSpeed += 0.3f;
         MonsterController.CreateStageMonster(stage);
     }
     

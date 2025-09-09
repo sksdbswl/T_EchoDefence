@@ -6,17 +6,13 @@ public class ClearState : PlayerBaseState
 
     public override void Enter()
     {
-        if (StageManager.Instance.Stage == 1)
+        if (StageManager.Instance.Stage == 8)
         {
-            Debug.Log("게임 클리어 !");
-            
             stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
             GameManager.Instance.Units.UnitSetFalse();
             
             GameManager.Instance.IsGameClear = true;
             
-            // TODO:: 카메라 전환 및 애니메이션 추가
-            Debug.Log("애니메이션 추가하고 카메라 전환해");
             GameManager.Instance.CameraController.SetCameraState(CameraState.Clear);
             stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Clear);
             
@@ -34,12 +30,14 @@ public class ClearState : PlayerBaseState
         // 플레이어 startpos로 이동
         // PrevState로 전환
         
+        GameManager.Instance.CameraController.SetCameraState(CameraState.Prev);
+        
         // 몹/보스/맵 생성 이후 진행과정
         StageManager.Instance.StageSettings((startPos) =>
         {
             stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Run);
             GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Run);
-            GameManager.Instance.CameraController.SetCameraState(CameraState.Prev);
+            
             
             var scroll = StageManager.Instance.GetComponent<MapScrollController>();
             scroll.ScrollUntilStartAtZero(startPos, () =>

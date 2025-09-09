@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   MonsterType: 0
-  maxHp: 300
+  maxHp: 800
   _player: {fileID: 0}
   isDetect: 0
   speed: 0.2

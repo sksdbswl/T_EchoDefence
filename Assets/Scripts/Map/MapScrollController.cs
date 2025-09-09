@@ -11,14 +11,14 @@ public enum ScrollStopType
 public class MapScrollController : MonoBehaviour
 {
     [SerializeField] private Transform mapRoot;
-    [SerializeField] private float scrollSpeed = 2f;
+    [SerializeField] public float scrollSpeed = 2f;
     [SerializeField] private float stopZ = 9.0f; // 보스존 트리거 거리
     [SerializeField] private float resetScrollSpeed = 5f;
     
     private bool isScrolling = false;
     private Transform targetStartPos; 
     private ScrollStopType stopType = ScrollStopType.None;
-
+    
     void Awake()
     {
         if (!mapRoot) mapRoot = transform;
