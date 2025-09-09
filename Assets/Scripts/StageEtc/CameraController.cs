@@ -82,8 +82,9 @@ public class CameraController : MonoBehaviour
         
         for (int i = 3; i > 0; i--)
         {
-            Debug.Log(i); 
+            CountText[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(1f);
+            CountText[i].gameObject.SetActive(false);
         }
 
         StageManager.Instance.StageActive = true;

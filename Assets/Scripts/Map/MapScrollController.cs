@@ -13,6 +13,7 @@ public class MapScrollController : MonoBehaviour
     [SerializeField] private Transform mapRoot;
     [SerializeField] private float scrollSpeed = 2f;
     [SerializeField] private float stopZ = 9.0f; // 보스존 트리거 거리
+    [SerializeField] private float resetScrollSpeed = 5f;
     
     private bool isScrolling = false;
     private Transform targetStartPos; 
@@ -26,12 +27,18 @@ public class MapScrollController : MonoBehaviour
     void Update()
     {
         if (!isScrolling) return;
-
-        mapRoot.position += Vector3.back * (scrollSpeed * Time.deltaTime);
-
+        
+        
         switch (stopType)
         {
+            case ScrollStopType.None:
+                mapRoot.position += Vector3.back * (scrollSpeed * Time.deltaTime);
+
+                break;
+            
             case ScrollStopType.MoveToStart:
+                mapRoot.position += Vector3.back * (resetScrollSpeed * Time.deltaTime);
+                
                 if (targetStartPos != null && targetStartPos.position.z <= 0f)
                 {
                     isScrolling = false;
@@ -43,6 +50,8 @@ public class MapScrollController : MonoBehaviour
                 break;
             
             case ScrollStopType.BossZone:
+                mapRoot.position += Vector3.back * (scrollSpeed * Time.deltaTime);
+                
                 if (stopZ >= StageManager.Instance.MapGenerator.GetLastEndChunk().position.z)
                 {
                     isScrolling = false;
