@@ -303,4 +303,15 @@ public class UnitManager : MonoBehaviour
             unit.SetAnimation(animationHash);
         }
     }
+    
+    /// <summary>
+    /// 유닛 비활성화
+    /// </summary>
+    public void UnitSetFalse()
+    {
+        foreach (var unit in GameManager.Instance.Units.ActiveUnits)
+        {
+            unit.gameObject.SetActive(false);
+        }
+    }
 }

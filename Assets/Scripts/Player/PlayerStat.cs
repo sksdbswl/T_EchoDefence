@@ -13,7 +13,7 @@ public class PlayerStat
     [SerializeField] private int   health      = 100;
     [SerializeField] private int   level       = 1;
     //[SerializeField] private int   weaponLevel = 1;   // 1~10 권장
-    [SerializeField] private float speed       = 0.8f;
+    [SerializeField] private float speed       = 1.5f;
     [SerializeField] private int   unitCnt     = 1;   // 0 이상 권장
     [SerializeField] private int   baseDamage  = 100; // 기본 공격력
     [SerializeField] private int   grenade     = 1;
@@ -23,7 +23,7 @@ public class PlayerStat
     private const int   MaxLevel       = 12;
     // private const int   MinWeaponLevel = 1;
     // private const int   MaxWeaponLevel = 10;
-    private const float MinSpeed       = 0.8f;
+    private const float MinSpeed       = 1.5f;
     private const float MaxSpeed       = 2f;
 
     // ---- 변경 알림 ----

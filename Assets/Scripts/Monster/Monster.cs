@@ -100,7 +100,7 @@ public class Monster : MonoBehaviour
                 ReturnToPoolHP(m);
             }
 
-            GameManager.Instance.IsBattleClear = true;
+            GameManager.Instance.IsStageClear = true;
         }
 
         // 일반 몬스터 or 보스 몬스터 공통 처리

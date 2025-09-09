@@ -6,7 +6,22 @@ public class ClearState : PlayerBaseState
 
     public override void Enter()
     {
-        Debug.Log("Clear State Enter");
+        if (StageManager.Instance.Stage == 2)
+        {
+            Debug.Log("게임 클리어 !");
+            
+            stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
+            GameManager.Instance.Units.UnitSetFalse();
+            
+            GameManager.Instance.IsGameClear = true;
+            
+            // TODO:: 카메라 전환 및 애니메이션 추가
+            Debug.Log("애니메이션 추가하고 카메라 전환해");
+            GameManager.Instance.CameraController.SetCameraState(CameraState.Clear);
+            
+            return;   
+        }
+        
         stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
         GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Idle);
         
@@ -28,7 +43,7 @@ public class ClearState : PlayerBaseState
             var scroll = StageManager.Instance.GetComponent<MapScrollController>();
             scroll.ScrollUntilStartAtZero(startPos, () =>
             {
-                GameManager.Instance.IsBattleClear = false;
+                GameManager.Instance.IsStageClear = false;
                 StageManager.Instance.StageActive = false;
               
                 
@@ -49,7 +64,7 @@ public class ClearState : PlayerBaseState
 
     public override void Exit()
     {
-        Debug.Log("Clear State Exit");
+        //Debug.Log("Clear State Exit");
     }
     
 }

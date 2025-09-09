@@ -30,8 +30,7 @@ public class CameraController : MonoBehaviour
         prevCam.Priority = 1;
         fightCam.Priority = 1;
         bossCam.Priority = 1;
-        if (clearCam != null)
-            clearCam.Priority = 1;
+        clearCam.Priority = 1;
         
         switch (state)
         {

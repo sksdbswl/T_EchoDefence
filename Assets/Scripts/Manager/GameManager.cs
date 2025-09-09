@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour
     public UnitManager Units;
     public BulletController BulletController;
     
-    public bool IsBattleClear = false;
+    public bool IsStageClear = false; 
     public bool IsPlayerDead = false;
-    public bool IsBossZoneTrigger = false;
+    public bool IsGameClear = false;
     
     private void Awake()
     {

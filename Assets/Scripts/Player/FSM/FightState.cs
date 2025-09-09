@@ -14,12 +14,18 @@ public class FightState : PlayerBaseState
         GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Run);
         
         // 플레이어에 바인딩된 유닛 발사 루프 시작
+        stateMachine.Player.StartCoroutine(StartFireAfterDelay(1f));
+    }
+
+    private IEnumerator StartFireAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         GameManager.Instance.Units.StartFireLoop();
     }
 
     public override void Update()
     {
-        if (GameManager.Instance.IsBattleClear)
+        if (GameManager.Instance.IsStageClear)
         {
             stateMachine.ChangeState(stateMachine.ClearState);
             GameManager.Instance.Units.StopFireLoop();
