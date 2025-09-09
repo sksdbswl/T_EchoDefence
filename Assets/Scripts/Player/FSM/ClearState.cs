@@ -18,6 +18,7 @@ public class ClearState : PlayerBaseState
             // TODO:: 카메라 전환 및 애니메이션 추가
             Debug.Log("애니메이션 추가하고 카메라 전환해");
             GameManager.Instance.CameraController.SetCameraState(CameraState.Clear);
+            stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Clear);
             
             return;   
         }
