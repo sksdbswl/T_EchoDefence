@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum MonsterType
@@ -19,15 +20,32 @@ public class Monster : MonoBehaviour
     public float speed = 0.5f;
     private float stopDistance = 0.2f; // 너무 가까우면 멈춤
     
-    // public void Init(GameObject prefabRef, Player player)
-    // {
-    //     monsterPrefab = prefabRef;
-    // }
+    [Header("HP UI")]
+    [SerializeField] private GameObject hpBarPrefab;
+    private RectTransform hpBarParentRoot; 
+    private RectTransform hpParents;
+    private MonsterHP hpBarScript;
+
+    public GameObject hpBarObj;
     
     private void Awake()
     {
-        //monsterPrefab = this.gameObject;
-        currentHp = maxHp;
+        Canvas worldCanvas = GameObject.Find("WorldCanvas")?.GetComponent<Canvas>();
+        Debug.Log(worldCanvas);
+        var hpRoot = worldCanvas.transform.Find("MonsterHpRoot"); 
+        if (worldCanvas != null)
+        {
+            hpRoot = worldCanvas.transform.Find("MonsterHpRoot"); 
+            if (hpRoot != null) hpParents = hpRoot.GetComponent<RectTransform>();
+        }
+    }
+
+    private void Start()
+    {
+        hpBarObj = ObjectPoolManager.Instance.GetFromPool(hpBarPrefab, Vector3.zero, Quaternion.identity, hpParents);
+        hpBarObj.SetActive(true);
+        
+        HpSetUp();
     }
 
     private void Update()
@@ -45,21 +63,28 @@ public class Monster : MonoBehaviour
         }
     }
 
+    public void HpSetUp()
+    {
+        //hpBarObj.GetComponent<MonsterHP>().Setup(this.transform);
+        hpBarScript = hpBarObj.GetComponent<MonsterHP>();
+        if(hpBarScript != null)
+        {
+            hpBarScript.Setup(transform);  
+            hpBarScript.SetHP(1f);       
+        }
+    }
+    
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
-        Debug.Log($"{name} : {damage} 데미지 받음, 남은 체력 {currentHp}");
+        if (hpBarScript != null)
+            hpBarScript.SetHP((float)currentHp / maxHp);
 
-        if (currentHp <= 0)
-        {
-            Die();
-        }
+        if (currentHp <= 0) Die();
     }
     
     private void Die()
     {
-        Debug.Log($"{name} 사망");
-
         if (MonsterType == MonsterType.Boss)
         {
             // === 보스 사망 처리 ===
@@ -76,6 +101,8 @@ public class Monster : MonoBehaviour
 
         // 일반 몬스터 or 보스 몬스터 공통 처리
         Destroy(gameObject);
-        // ObjectPoolManager.Instance.ReturnToPool(monsterPrefab, gameObject);
+        var hp = hpBarScript.Release();
+        //Destroy(hpBarPrefab.gameObject);
+        ObjectPoolManager.Instance.ReturnToPool(hpBarPrefab, hp, hpParents);
     }
 }

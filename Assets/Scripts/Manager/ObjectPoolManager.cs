@@ -74,4 +74,20 @@ public class ObjectPoolManager : MonoBehaviour
 
         pools[prefab].Enqueue(obj);
     }
+    
+    /// <summary>
+    /// UI오브젝트를 풀로 반환
+    /// </summary>
+    public void ReturnToPoolUI(GameObject prefab, GameObject obj, RectTransform parent)
+    {
+        obj.SetActive(false);
+        obj.transform.SetParent(parent);
+
+        if (!pools.ContainsKey(prefab))
+        {
+            pools.Add(prefab, new Queue<GameObject>());
+        }
+
+        pools[prefab].Enqueue(obj);
+    }
 }
