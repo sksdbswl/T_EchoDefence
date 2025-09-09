@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e70c1b22-09d7-40aa-8d2f-2841fee826a3" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/CharactorController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/CharactorController.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.T_EchoDefence/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.T_EchoDefence/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/InGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/InGameScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/FSM/ClearState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/FSM/ClearState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StageEtc/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StageEtc/CameraController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +98,7 @@
       <updated>1757231240996</updated>
       <workItem from="1757231240999" duration="7503000" />
       <workItem from="1757350570510" duration="19014000" />
-      <workItem from="1757425322964" duration="14961000" />
+      <workItem from="1757425322964" duration="16275000" />
     </task>
     <servers />
   </component>

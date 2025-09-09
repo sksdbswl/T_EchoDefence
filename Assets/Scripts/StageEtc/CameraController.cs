@@ -22,7 +22,8 @@ public class CameraController : MonoBehaviour
 
     [Header("Count UI Settings")] 
     [SerializeField] private TMP_Text[] CountText;
-
+    [SerializeField] private Transform ClaerPos;
+    
     public void SetCameraState(CameraState state)
     {
         currentState = state;
@@ -44,8 +45,8 @@ public class CameraController : MonoBehaviour
                 bossCam.Priority = 10;
                 break;
             case CameraState.Clear:
-                if (clearCam != null)
-                    clearCam.Priority = 10;
+                clearCam.Priority = 10;
+                clearCam.LookAt = ClaerPos;
                 break;
         }
     }

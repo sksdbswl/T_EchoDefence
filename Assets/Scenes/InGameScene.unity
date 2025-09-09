@@ -1890,6 +1890,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915642495}
   m_CullTransparentMesh: 1
+--- !u!1 &990968954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990968955}
+  m_Layer: 3
+  m_Name: ClearCmeraPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &990968955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990968954}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5165626583801151318}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &994968428
 GameObject:
   m_ObjectHideFlags: 0
@@ -2461,6 +2492,7 @@ MonoBehaviour:
   - {fileID: 2118469618}
   - {fileID: 1322672039}
   - {fileID: 66030421}
+  ClaerPos: {fileID: 990968955}
 --- !u!1 &1447899747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,7 +2924,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 98.67212
+    FieldOfView: 10
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -3086,13 +3118,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598408872}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25340128, y: 0.000000042284714, z: -0.000000011076525, w: 0.9673613}
-  m_LocalPosition: {x: 0, y: 2.25, z: -4}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1430264211}
-  m_LocalEulerAnglesHint: {x: 29.358, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1728049948
 GameObject:
   m_ObjectHideFlags: 0
@@ -3715,6 +3747,7 @@ MonoBehaviour:
   bossCam: {fileID: 0}
   clearCam: {fileID: 0}
   CountText: []
+  ClaerPos: {fileID: 0}
 --- !u!1 &2118469616
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,7 +3988,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 451976275196714217, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 990968955}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
 --- !u!1001 &2148802801389218047
@@ -4100,6 +4136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e843006f36bbe9d41a0792f8e1ab4f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+--- !u!4 &5165626583801151318 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 451976275196714217, guid: 804bda0781d545b49b75df1ec3eb7bd0, type: 3}
+  m_PrefabInstance: {fileID: 1301433800856846916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

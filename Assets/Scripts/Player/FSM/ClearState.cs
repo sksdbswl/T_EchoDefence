@@ -6,7 +6,7 @@ public class ClearState : PlayerBaseState
 
     public override void Enter()
     {
-        if (StageManager.Instance.Stage == 2)
+        if (StageManager.Instance.Stage == 1)
         {
             Debug.Log("게임 클리어 !");
             
