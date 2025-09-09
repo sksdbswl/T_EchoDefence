@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Unity.Cinemachine;
 
@@ -9,33 +10,33 @@ public enum CameraState
     Clear
 }
 
+public enum StageState
+{
+    Init,
+    Step,
+    Clear
+}
+
 public class CameraController : MonoBehaviour
 {
     [Header("FreeLook Cameras")]
-    public CinemachineFreeLook prevCam;
-    public CinemachineFreeLook fightCam;
-    public CinemachineFreeLook bossCam;
-    public CinemachineFreeLook clearCam; // 필요하면 추가
+    public CinemachineCamera prevCam;
+    public CinemachineCamera fightCam;
+    public CinemachineCamera bossCam;
+    public CinemachineCamera clearCam; // 필요하면 추가
 
     private CameraState currentState;
-
-    private void Start()
-    {
-        SetCameraState(CameraState.Prev);
-    }
 
     public void SetCameraState(CameraState state)
     {
         currentState = state;
-
-        // 모든 카메라 Priority 초기화
+        
         prevCam.Priority = 1;
         fightCam.Priority = 1;
         bossCam.Priority = 1;
         if (clearCam != null)
             clearCam.Priority = 1;
-
-        // 현재 상태 카메라 Priority 상승
+        
         switch (state)
         {
             case CameraState.Prev:
@@ -57,5 +58,37 @@ public class CameraController : MonoBehaviour
     public CameraState GetCurrentState()
     {
         return currentState;
+    }
+
+    public IEnumerator BossIntroSequence()
+    {
+        Debug.Log("Boss Intro Sequence");
+        
+        GameManager.Instance.CameraController.SetCameraState(CameraState.Boss);
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.CameraController.SetCameraState(CameraState.Prev);
+        
+        for (int i = 3; i > 0; i--)
+        {
+            Debug.Log(i); 
+            yield return new WaitForSeconds(1f);
+        }
+
+        StageManager.Instance.StageActive = true;
+    }
+    
+    public IEnumerator IntroSequence()
+    {
+        GameManager.Instance.CameraController.SetCameraState(CameraState.Boss);
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.CameraController.SetCameraState(CameraState.Prev);
+        
+        for (int i = 3; i > 0; i--)
+        {
+            Debug.Log(i); 
+            yield return new WaitForSeconds(1f);
+        }
+
+        StageManager.Instance.StageActive = true;
     }
 }

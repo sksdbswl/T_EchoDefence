@@ -23,12 +23,15 @@ public class ClearState : PlayerBaseState
         {
             stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Run);
             GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Run);
+            GameManager.Instance.CameraController.SetCameraState(CameraState.Prev);
             
             var scroll = StageManager.Instance.GetComponent<MapScrollController>();
             scroll.ScrollUntilStartAtZero(startPos, () =>
             {
                 GameManager.Instance.IsBattleClear = false;
+                StageManager.Instance.StageActive = false;
               
+                
                 stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
                 GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Idle);
                 

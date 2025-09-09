@@ -7,6 +7,8 @@ public class FightState : PlayerBaseState
 
     public override void Enter()
     {
+        GameManager.Instance.CameraController.SetCameraState(CameraState.Fight);
+        
         stateMachine.Player.PlayerOverlapSphere.enabled = true;
         stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Run);
         GameManager.Instance.Units.SetUnitAnimation(PlayerAnimationController.Run);

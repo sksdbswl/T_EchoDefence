@@ -35,12 +35,6 @@ public class MonsterController : MonoBehaviour
         this.endChunkTransform = endChunk;
         yield return StartCoroutine(SpawnRoutine(mapOrigin, mapSize));
     }
-    
-    // public void SpawnMonstersOnMap(Vector3 mapOrigin, Vector2 mapSize, Transform endChunk)
-    // {
-    //     this.endChunkTransform = endChunk;
-    //     StartCoroutine(SpawnRoutine(mapOrigin, mapSize));
-    // }
 
     private IEnumerator SpawnRoutine(Vector3 mapOrigin, Vector2 mapSize)
     {
@@ -86,7 +80,10 @@ public class MonsterController : MonoBehaviour
         if (BossMonsters.Length >= stage && BossMonsters[stage - 1] != null)
         {
             Instantiate(BossMonsters[stage - 1], bossPos, Quaternion.Euler(0,180f,0), monsterParent);
-            //Debug.Log($"[MonsterController] Stage {stage} 보스 스폰 at {bossPos}");
+            if (stage == 1)
+            {
+                StartCoroutine(GameManager.Instance.CameraController.BossIntroSequence());
+            }
         }
         else
         { 

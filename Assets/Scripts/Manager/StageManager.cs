@@ -10,6 +10,7 @@ public class StageManager : MonoBehaviour
 
     public GameObject BossPos;
     public int Stage = 1;
+    public bool StageActive = false; // 스테이지 셋팅 완료 여부 확인
     
     private void Awake()
     {
@@ -27,15 +28,6 @@ public class StageManager : MonoBehaviour
     {
         MonsterController.CreateStageMonster(stage);
     }
-    
-    // public void NextStageSettings(Action onComplete = null)
-    // {
-    //     StartCoroutine(MapGenerator.GenerateMap(() =>
-    //     {
-    //         // 맵 생성이 끝났을 때 실행
-    //         onComplete?.Invoke();
-    //     }));
-    // }
     
     public void StageSettings(Action<Transform> onComplete = null)
     {
