@@ -35,7 +35,9 @@ public class Grenade : MonoBehaviour
             //Debug.Log("몬스터 감지됨: " + hit.name);
             Monster mc = hit.GetComponent<Monster>();
             
-            Destroy(mc.gameObject);
+            mc.Die();
+            // mc.ReturnToPoolHP(mc);
+            // Destroy(mc.gameObject);
         }
         
         Destroy(gameObject);

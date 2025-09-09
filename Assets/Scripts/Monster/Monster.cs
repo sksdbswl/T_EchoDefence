@@ -31,7 +31,6 @@ public class Monster : MonoBehaviour
     private void Awake()
     {
         Canvas worldCanvas = GameObject.Find("WorldCanvas")?.GetComponent<Canvas>();
-        Debug.Log(worldCanvas);
         var hpRoot = worldCanvas.transform.Find("MonsterHpRoot"); 
         if (worldCanvas != null)
         {
@@ -61,6 +60,7 @@ public class Monster : MonoBehaviour
             // 위치 이동
             transform.position += dir * (speed * Time.deltaTime);
         }
+        
     }
 
     public void HpSetUp()
@@ -83,7 +83,7 @@ public class Monster : MonoBehaviour
         if (currentHp <= 0) Die();
     }
     
-    private void Die()
+    public void Die()
     {
         if (MonsterType == MonsterType.Boss)
         {
@@ -94,6 +94,8 @@ public class Monster : MonoBehaviour
             foreach (var m in FindObjectsOfType<Monster>())
             {
                 if (m != this) Destroy(m.gameObject);
+
+                ReturnToPoolHP(m);
             }
 
             GameManager.Instance.IsBattleClear = true;
@@ -102,7 +104,11 @@ public class Monster : MonoBehaviour
         // 일반 몬스터 or 보스 몬스터 공통 처리
         Destroy(gameObject);
         var hp = hpBarScript.Release();
-        //Destroy(hpBarPrefab.gameObject);
         ObjectPoolManager.Instance.ReturnToPool(hpBarPrefab, hp, hpParents);
+    }
+
+    public void ReturnToPoolHP(Monster monster)
+    {
+        ObjectPoolManager.Instance.ReturnToPool(hpBarPrefab, monster.hpBarObj, hpParents);
     }
 }

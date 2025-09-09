@@ -111,7 +111,7 @@ public class MapGenerator : MonoBehaviour
 
         foreach (float x in xOffsets)
         {
-            Vector3 pos = new Vector3(x, basePos.y + 0.5f, zPos);
+            Vector3 pos = new Vector3(x, basePos.y + 0.05f, zPos);
 
             // 랜덤 아이템 선택
             int idx = UnityEngine.Random.Range(0, itemPrefabs.Length);
