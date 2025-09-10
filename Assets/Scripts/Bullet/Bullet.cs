@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
     private GameObject prefab;
     private Player Player;
+    [SerializeField] private ParticleSystem fireParticle;
     [SerializeField] private ParticleSystem hitParticle;
     
     public void Init(GameObject prefabRef, Player player)
@@ -47,13 +48,27 @@ public class Bullet : MonoBehaviour
 
             if (hitParticle != null)
             {
-                Vector3 hitPos = other.ClosestPoint(transform.position);
+                //Vector3 hitPos = other.ClosestPoint(transform.position);
 
-                hitParticle.transform.position = hitPos;
-                hitParticle.transform.rotation = Quaternion.LookRotation(transform.forward);
-                hitParticle.gameObject.SetActive(true);
+                // 변경
+                if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1f))
+                {
+                    hitParticle.transform.position = hit.point;
+
+                    // 충돌 표면의 법선을 기준으로 회전
+                    hitParticle.transform.rotation = Quaternion.LookRotation(hit.normal);
+
+                    hitParticle.gameObject.SetActive(true);
+                    hitParticle.Play();
+                }
                 
-                hitParticle.Play();
+                // 기존 처리 방법
+                // hitParticle.transform.position = hitPos;
+                // hitParticle.transform.rotation = Quaternion.LookRotation(transform.forward);
+                // hitParticle.gameObject.SetActive(true);
+                //
+                // fireParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                // hitParticle.Play();
 
                 StartCoroutine(ReturnAfterParticle());
             }
@@ -62,6 +77,12 @@ public class Bullet : MonoBehaviour
                 ObjectPoolManager.Instance.ReturnToPool(prefab, gameObject, GameManager.Instance.BulletController.Parents);
             }
         }
+    }
+    
+    private IEnumerator DisableParticleAfterPlay(ParticleSystem ps)
+    {
+        yield return new WaitWhile(() => ps.isPlaying);
+        ps.gameObject.SetActive(false);
     }
 
     private IEnumerator ReturnAfterParticle()

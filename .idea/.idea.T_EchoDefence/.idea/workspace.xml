@@ -6,26 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e70c1b22-09d7-40aa-8d2f-2841fee826a3" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.T_EchoDefence/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.T_EchoDefence/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/0_Stage_B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/0_Stage_B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/0_Stage_M.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/0_Stage_M.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/1_Stage_B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/1_Stage_B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/2_Stage_B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/2_Stage_B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/2_Stage_M.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/2_Stage_M.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/3_Stage_B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/3_Stage_B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/3_Stage_M.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/3_Stage_M.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/4_Stage_B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/4_Stage_B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/4_Stage_M.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/4_Stage_M.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/5_Stage_B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/5_Stage_B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/5_Stage_M.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/5_Stage_M.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/6_Stage_B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/6_Stage_B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/6_Stage_M.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/6_Stage_M.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/7_Stage_B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/7_Stage_B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/7_Stage_M.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/7_Stage_M.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/8_Stage_B.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/8_Stage_B.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/8_Stage_M.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit/Monster/8_Stage_M.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/StageManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/StageManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapScrollController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MapScrollController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/FSM/ClearState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/FSM/ClearState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Bullet/Level1_Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Bullet/Level1_Bullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bullet/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Bullet/Bullet.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,19 +30,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.2.0f1/Unity.app/Contents/MacOS/Unity" />
