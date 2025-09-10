@@ -9,19 +9,24 @@ public class UnitAgent : MonoBehaviour, IMuzzleProvider, IProvider
     [SerializeField] private Transform muzzle;  // 유닛 모델의 총구 위치
     public Transform Muzzle => muzzle;       
 
-    public void Bind(Player owner)
+    public bool IsUpgraded { get; private set; } = false;
+
+    public void Bind(Player owner, bool isUpgraded = false)
     {
         _owner = owner;
         _stats = owner.playerStat;
         _anim  = GetComponent<Animator>();
         _anim.SetTrigger(PlayerAnimationController.Run);
+
+        IsUpgraded = isUpgraded; 
         gameObject.SetActive(true);
     }
-    
+
     public void OnDespawn()
     {
         _owner = null;
         _stats = null;
+        IsUpgraded = false; 
         gameObject.SetActive(false);
     }
 

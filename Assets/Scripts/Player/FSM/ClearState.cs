@@ -8,6 +8,7 @@ public class ClearState : PlayerBaseState
     {
         if (StageManager.Instance.Stage == 8)
         {
+            StageManager.Instance.ClearPanel.SetActive(true);
             stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
             GameManager.Instance.Units.UnitSetFalse();
             

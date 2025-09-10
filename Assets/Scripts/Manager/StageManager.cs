@@ -8,7 +8,8 @@ public class StageManager : MonoBehaviour
     public MonsterController MonsterController;
     public MapScrollController MapScrollController;
     [SerializeField]public MapGenerator MapGenerator;
-
+    [SerializeField]public GameObject ClearPanel;
+    
     public GameObject BossPos;
     public int Stage = 1;
     public bool StageActive = false; // 스테이지 셋팅 완료 여부 확인

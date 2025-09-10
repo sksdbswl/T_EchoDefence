@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e70c1b22-09d7-40aa-8d2f-2841fee826a3" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.T_EchoDefence/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.T_EchoDefence/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Bullet/Level1_Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Bullet/Level1_Bullet.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bullet/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Bullet/Bullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/InGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/InGameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Effect/UnitAgent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Effect/UnitAgent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/StageManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/StageManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/UnitManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/UnitManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/FSM/ClearState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/FSM/ClearState.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
