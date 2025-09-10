@@ -6,7 +6,6 @@ public class GrenadeThrowController : MonoBehaviour
     [Header("Grenade Settings")]
     [SerializeField] private GameObject grenadePrefab;
     [SerializeField] private Transform spawnPoint;   // 화면 중앙 or 캐릭터 손 위치
-    ///[SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private int curveResolution = 20; // 곡선 샘플 개수
 
     private LineRenderer lineRenderer;
@@ -38,9 +37,9 @@ public class GrenadeThrowController : MonoBehaviour
 #endif
     }
 
-    // ========================
-    // 입력 처리
-    // ========================
+    /// <summary>
+    /// 입력처리
+    /// </summary>
     private void HandleMouseInput()
     {
         if (Input.GetMouseButtonDown(1)) // 우클릭 시작
@@ -65,7 +64,6 @@ public class GrenadeThrowController : MonoBehaviour
             DetectMonster(p2);
         }
     }
-
     private void HandleTouchInput()
     {
         if (Input.touchCount > 0)
@@ -96,9 +94,9 @@ public class GrenadeThrowController : MonoBehaviour
         }
     }
 
-    // ========================
-    // 수류탄 생성
-    // ========================
+    /// <summary>
+    /// 수류탄 오브젝트 생성
+    /// </summary>
     private void SpawnGrenade()
     {
         if (currentGrenade != null) Destroy(currentGrenade);
@@ -110,10 +108,9 @@ public class GrenadeThrowController : MonoBehaviour
         lineRenderer.positionCount = 0;
     }
 
-    // ========================
-    // 궤적 미리보기
-    // ========================
-    
+    /// <summary>
+    /// 궤적 미리보기
+    /// </summary>
     private void UpdateTrajectory()
     {
         if (currentGrenade == null) return;
@@ -163,10 +160,9 @@ public class GrenadeThrowController : MonoBehaviour
         DrawCircle(p2);
     }
     
-
-    // ========================
-    // 던지기
-    // ========================
+    /// <summary>
+    /// 투척 (던지기)
+    /// </summary>
     private void ThrowGrenade()
     {
         if (currentGrenade == null) return;
@@ -177,9 +173,14 @@ public class GrenadeThrowController : MonoBehaviour
         //currentGrenade = null;
     }
 
-    // ========================
-    // 베지어 이동 코루틴
-    // ========================
+    /// <summary>
+    /// 배지어 곡선 처리
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="p0"></param>
+    /// <param name="p1"></param>
+    /// <param name="p2"></param>
+    /// <returns></returns>
     private IEnumerator ShotArrowCoroutine(Transform target, Vector3 p0, Vector3 p1, Vector3 p2)
     {
         Vector3 previousPos = p0;
@@ -206,7 +207,10 @@ public class GrenadeThrowController : MonoBehaviour
         }
     }
     
-    //도착점 표시
+    /// <summary>
+    /// 도착점 표시
+    /// </summary>
+    /// <param name="center"></param>
     public void DrawCircle(Vector3 center)
     {
         circleRenderer.positionCount = circleResolution;
@@ -219,7 +223,9 @@ public class GrenadeThrowController : MonoBehaviour
         }
     }
     
-    // 도착지점 설정
+    /// <summary>
+    /// 도착지점 범위 설정
+    /// </summary>
     public void PosCircleSettings()
     {
         GameObject circleObj = new GameObject("TargetCircle");
@@ -230,7 +236,9 @@ public class GrenadeThrowController : MonoBehaviour
         circleRenderer.positionCount = 0;
     }
     
-    // 몬스터 감지
+    /// <summary>
+    /// 몬스터 감지
+    /// </summary>
     public void DetectMonster(Vector3 center)
     {
         Collider[] hits = Physics.OverlapSphere(center, circleRadius, LayerMask.GetMask("Monster"));
