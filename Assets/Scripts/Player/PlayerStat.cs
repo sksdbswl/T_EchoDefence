@@ -12,17 +12,14 @@ public class PlayerStat
     // ---- 직렬화 필드 (기본값 Inspector 노출) ----
     [SerializeField] private int   health      = 100;
     [SerializeField] private int   level       = 1;
-    //[SerializeField] private int   weaponLevel = 1;   // 1~10 권장
     [SerializeField] private float speed       = 1.5f;
     [SerializeField] private int   unitCnt     = 1;   // 0 이상 권장
-    [SerializeField] private int   baseDamage  = 100; // 기본 공격력
+    [SerializeField] private int   baseDamage  = 50; // 기본 공격력
     [SerializeField] private int   grenade     = 1;
 
     // ---- 상수 정의 (클램프 기준) ----
     private const int   MinLevel       = 1;
     private const int   MaxLevel       = 12;
-    // private const int   MinWeaponLevel = 1;
-    // private const int   MaxWeaponLevel = 10;
     private const float MinSpeed       = 1.5f;
     private const float MaxSpeed       = 2f;
 
@@ -50,12 +47,6 @@ public class PlayerStat
         get => level;
         set => SetValue(ref level, Mathf.Clamp(value, MinLevel, MaxLevel));
     }
-
-    // public int WeaponLevel
-    // {
-    //     get => weaponLevel;
-    //     set => SetValue(ref weaponLevel, Mathf.Clamp(value, MinWeaponLevel, MaxWeaponLevel));
-    // }
 
     public float Speed
     {

@@ -1376,11 +1376,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   MonsterType: 1
-  maxHp: 1700
+  maxHp: 4000
   _player: {fileID: 0}
   isDetect: 0
   speed: 2.3
-  hpBarPrefab: {fileID: 8140508679524901334, guid: c8624cc8574584d7a883f347ae9671a2, type: 3}
+  hpBarPrefab: {fileID: 5249631782632869750, guid: a971324071a9df94bbbebcbb7a0b1c9f, type: 3}
   hpBarObj: {fileID: 0}
 --- !u!1 &8052049553037522541
 GameObject:

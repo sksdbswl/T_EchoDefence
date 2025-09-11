@@ -222,7 +222,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   isDetect: 0
   speed: 0.2
-  hpBarPrefab: {fileID: 8140508679524901334, guid: c8624cc8574584d7a883f347ae9671a2, type: 3}
+  hpBarPrefab: {fileID: 5249631782632869750, guid: a971324071a9df94bbbebcbb7a0b1c9f, type: 3}
   hpBarObj: {fileID: 0}
 --- !u!1 &7498252120436719388
 GameObject:

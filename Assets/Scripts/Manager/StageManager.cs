@@ -29,7 +29,7 @@ public class StageManager : MonoBehaviour
 
     public void CreateStageMonster(int stage)
     {
-        MapScrollController.scrollSpeed += 0.3f;
+        MapScrollController.scrollSpeed += 0.15f;
         MonsterController.CreateStageMonster(stage);
     }
     
