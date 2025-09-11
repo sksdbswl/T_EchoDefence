@@ -30,10 +30,11 @@ public class FightState : PlayerBaseState
             stateMachine.ChangeState(stateMachine.ClearState);
             GameManager.Instance.Units.StopFireLoop();
         }
-        else if (GameManager.Instance.IsPlayerDead)
+        else if (stateMachine.Player.playerStat.UnitCnt < 0)
         {
-            // TODO: GameOver
-        }
+            stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Die);
+            GameManager.Instance.GameOver();
+        } 
     }
 
     public override void Exit()

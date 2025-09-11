@@ -12,8 +12,7 @@ public class GameManager : MonoBehaviour
     public BulletController BulletController;
     
     public bool IsStageClear = false; 
-    public bool IsPlayerDead = false;
-    public bool IsGameClear = false;
+    public bool IsGameExit = false;
     
     private void Awake()
     {
@@ -22,9 +21,17 @@ public class GameManager : MonoBehaviour
         BulletController = GetComponent<BulletController>();
     }
     
-    public void ExitGame()
+    public void GameClear()
     {
-        Debug.Log("ExitGame");
-        //Application.Quit();
+        StageManager.Instance.ClearPanel.SetActive(true);
+        Units.UnitSetFalse();
+        IsGameExit = true;
+    }
+    
+    public void GameOver()
+    {
+        StageManager.Instance.GameOverPanel.SetActive(true);
+        Units.SetUnitAnimation(PlayerAnimationController.Die);
+        IsGameExit = true;
     }
 }

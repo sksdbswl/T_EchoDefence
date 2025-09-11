@@ -8,11 +8,8 @@ public class ClearState : PlayerBaseState
     {
         if (StageManager.Instance.Stage == 8)
         {
-            StageManager.Instance.ClearPanel.SetActive(true);
             stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Idle);
-            GameManager.Instance.Units.UnitSetFalse();
-            
-            GameManager.Instance.IsGameClear = true;
+            GameManager.Instance.GameClear();        
             
             GameManager.Instance.CameraController.SetCameraState(CameraState.Clear);
             stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Clear);
@@ -25,12 +22,6 @@ public class ClearState : PlayerBaseState
         
         StageManager.Instance.Stage++;
         StageManager.Instance.CreateStageMonster(StageManager.Instance.Stage);
-        
-        //TODO::
-        // 카메라 초기위치로 셋팅
-        // 플레이어 startpos로 이동
-        // PrevState로 전환
-        
         GameManager.Instance.CameraController.SetCameraState(CameraState.Prev);
         
         // 몹/보스/맵 생성 이후 진행과정
@@ -66,5 +57,4 @@ public class ClearState : PlayerBaseState
     {
         //Debug.Log("Clear State Exit");
     }
-    
 }

@@ -27,7 +27,7 @@ public class MapScrollController : MonoBehaviour
     void Update()
     {
         if (!isScrolling) return;
-        if (GameManager.Instance.IsGameClear) return;
+        if (GameManager.Instance.IsGameExit) return;
         
         switch (stopType)
         {

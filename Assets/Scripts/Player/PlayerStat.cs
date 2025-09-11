@@ -13,7 +13,7 @@ public class PlayerStat
     [SerializeField] private int   health      = 100;
     [SerializeField] private int   level       = 1;
     [SerializeField] private float speed       = 1.5f;
-    [SerializeField] private int   unitCnt     = 1;   // 0 이상 권장
+    [SerializeField] private int   unitCnt     = 0; 
     [SerializeField] private int   baseDamage  = 50; // 기본 공격력
     [SerializeField] private int   grenade     = 1;
 
@@ -57,7 +57,7 @@ public class PlayerStat
     public int UnitCnt
     {
         get => unitCnt;
-        set => SetValue(ref unitCnt, Mathf.Max(0, value));
+        set => SetValue(ref unitCnt, value);
     }
 
     public int BaseDamage

@@ -9,6 +9,7 @@ public class StageManager : MonoBehaviour
     public MapScrollController MapScrollController;
     [SerializeField]public MapGenerator MapGenerator;
     [SerializeField]public GameObject ClearPanel;
+    [SerializeField]public GameObject GameOverPanel;
     
     public GameObject BossPos;
     public int Stage = 1;

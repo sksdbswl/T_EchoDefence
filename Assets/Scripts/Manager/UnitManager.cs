@@ -37,6 +37,7 @@ public class UnitManager : MonoBehaviour
     public void Init(Player owner)
     {
         _owner = owner;
+        _totalUnitCount = _owner.playerStat.UnitCnt;
     }
 
     public void RegisterPlayer(IMuzzleProvider playerProvider)
@@ -49,7 +50,15 @@ public class UnitManager : MonoBehaviour
     /// </summary>
     public void ApplyDelta(int delta)
     {
-        _totalUnitCount = Mathf.Max(0, _totalUnitCount + delta); // 음수 방지
+        Debug.Log($"ApplyDelta:: {delta}");
+        Debug.Log($"_totalUnitCount(before):: {_totalUnitCount}");
+
+        _totalUnitCount += delta; 
+        _owner.playerStat.UnitCnt = _totalUnitCount; 
+
+        Debug.Log($"_totalUnitCount(after):: {_totalUnitCount}");
+        Debug.Log($"_owner.playerStat.UnitCnt:: {_owner.playerStat.UnitCnt}");
+
         ApplyTotalCount(_totalUnitCount);
     }
 
