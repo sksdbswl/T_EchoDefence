@@ -130,29 +130,6 @@ public class MapGenerator : MonoBehaviour
         int idx = UnityEngine.Random.Range(1, itemPrefabs.Length);
         return itemPrefabs[idx];
     }
-
-    // private void SpawnItemLine(Vector3 basePos, int lineIndex)
-    // {
-    //     if (lineIndex >= maxItemLines) return;
-    //
-    //     // 라인의 Z 위치
-    //     float zPos = basePos.z + lineIndex * itemSpacingZ;
-    //
-    //     // 좌/우 X 위치
-    //     float[] xOffsets = { -itemOffsetX, +itemOffsetX };
-    //
-    //     foreach (float x in xOffsets)
-    //     {
-    //         Vector3 pos = new Vector3(x, basePos.y + 0.05f, zPos);
-    //
-    //         // 랜덤 아이템 선택
-    //         int idx = UnityEngine.Random.Range(0, itemPrefabs.Length);
-    //         
-    //         GameObject prefab = itemPrefabs[idx];
-    //
-    //         Instantiate(prefab, pos, Quaternion.identity, transform);
-    //     }
-    // }
     
     private IEnumerator TrySpawnEntry(Vector3 basePos, Transform endChunkTransform)
     {
