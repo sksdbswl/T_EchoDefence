@@ -32,12 +32,8 @@ public class Grenade : MonoBehaviour
 
         foreach (Collider hit in hitMoster)
         {
-            //Debug.Log("몬스터 감지됨: " + hit.name);
             Monster mc = hit.GetComponent<Monster>();
-            
-            mc.Die();
-            // mc.ReturnToPoolHP(mc);
-            // Destroy(mc.gameObject);
+            if (mc != null) mc.Die();
         }
         
         Destroy(gameObject);
