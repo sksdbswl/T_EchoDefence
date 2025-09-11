@@ -19,7 +19,7 @@ public class MapGenerator : MonoBehaviour
     private Transform lastEndChunk; // 이어붙일 기준
     
     [SerializeField] private GameObject[] itemPrefabs; // 드롭 가능한 아이템 목록
-    [SerializeField, Range(0f, 1f)] private float itemSpawnChance = 0.1f; // 아이템 확률
+    //[SerializeField, Range(0f, 1f)] private float itemSpawnChance = 0.05f; // 아이템 확률
     
     private void Awake()
     {

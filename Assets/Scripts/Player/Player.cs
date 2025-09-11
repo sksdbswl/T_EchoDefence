@@ -5,6 +5,7 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
 {
     public PlayerStateMachine PlayerStateMachine { get; private set; }
     public PlayerOverlapSphere PlayerOverlapSphere { get; set; }
+    public PlayerModel PlayerModel { get; set; }
     public Weapon Weapon { get; private set; }
     public Transform Muzzle => Weapon.MuzzlePoint;    
     public Player PlayerProvider => this;
@@ -13,7 +14,6 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     
     [Header("InGameSettings")]
     [SerializeField] public PlayerStat playerStat;
-    [SerializeField] private GameObject mergedModel;
 
     private void Awake()
     {
@@ -21,6 +21,7 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
         playerStat = new PlayerStat();
         animator = GetComponent<Animator>();
         PlayerOverlapSphere = GetComponent<PlayerOverlapSphere>();
+        PlayerModel = GetComponent<PlayerModel>();
         
         // 기본 무기 설정
         Weapon = GetComponentInChildren<Weapon>();
@@ -44,12 +45,11 @@ public class Player : MonoBehaviour,IMuzzleProvider, IProvider
     // 유닛 증감 처리
     public void MergeToUpgradedPlayer()
     {
-        //Debug.Log("Merge player:: 외형 변화");
-        mergedModel.SetActive(true);
+        PlayerModel.SetUpgradeModel();
     }
     
     public void DivideToUpgradedPlayer()
     {
-        mergedModel.SetActive(false);
+        PlayerModel.SetDownModel();
     }
 }

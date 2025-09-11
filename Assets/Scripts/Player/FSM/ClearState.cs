@@ -13,6 +13,7 @@ public class ClearState : PlayerBaseState
             
             GameManager.Instance.CameraController.SetCameraState(CameraState.Clear);
             stateMachine.Player.animator.SetTrigger(PlayerAnimationController.Clear);
+            stateMachine.Player.PlayerModel.Rifle.SetActive(false);
             
             return;   
         }
