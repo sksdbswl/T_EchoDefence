@@ -61,8 +61,13 @@ public class Monster : MonoBehaviour
             
             // 위치 이동
             transform.position += dir * (speed * Time.deltaTime);
+            
+            if (transform.position.z <= _player.transform.position.z)
+            {
+                GameManager.Instance.Units.ApplyDelta(-1);
+                Die();
+            }
         }
-        
     }
 
     public void HpSetUp()
