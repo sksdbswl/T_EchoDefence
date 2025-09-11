@@ -3512,6 +3512,7 @@ MonoBehaviour:
   itemSpacingZ: 12
   itemOffsetX: 1
   maxItemLines: 4
+  unitItemChance: 0.3
 --- !u!1 &1868459744
 GameObject:
   m_ObjectHideFlags: 0
