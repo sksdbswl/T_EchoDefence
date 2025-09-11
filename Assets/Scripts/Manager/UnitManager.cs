@@ -73,50 +73,55 @@ public class UnitManager : MonoBehaviour
         foreach (var unit in _activeUnits)
         {
             unit.OnDespawn();
-            ObjectPoolManager.Instance.ReturnToPool(unit.IsUpgraded ? UpgradeUnitPrefab : NormalUnitPrefab, unit.gameObject, parents);
+            ObjectPoolManager.Instance.ReturnToPool(
+                unit.IsUpgraded ? UpgradeUnitPrefab : NormalUnitPrefab, 
+                unit.OriginPrefab, 
+                parents
+            );
         }
         _activeUnits.Clear();
 
-        // 2. 업그레이드 여부 결정
-        if (totalCount >= 10)
-        {
-            if (!isPlayerUpgraded)
-                MergePlayer();
-        }
-        else
-        {
-            if (isPlayerUpgraded)
-                DividePlayer();
-        }
+        // 2. 본체 업그레이드 여부 먼저 확정
+        if (totalCount >= 10 && !isPlayerUpgraded)
+            MergePlayer();
+        else if (totalCount < 10 && isPlayerUpgraded)
+            DividePlayer();
 
-        // 3. 업그레이드 유닛 수 / 일반 유닛 수 계산
-        int upgradedCount = isPlayerUpgraded ? totalCount / 10 : 0;
-        int normalCount = isPlayerUpgraded ? totalCount % 10 : totalCount;
+        // 3. 플레이어 본체를 제외한 나머지 유닛 수
+        int remain = totalCount;
+        if (isPlayerUpgraded)
+            remain -= 10; // 본체 1명은 이미 업그레이드 처리됐으니 제외
 
-        // 4. 유닛 생성
+        // 4. 업그레이드 유닛 / 일반 유닛 계산
+        int upgradedCount = remain / 10; // 10 단위마다 업그레이드 유닛
+        int normalCount   = remain % 10; // 나머지는 일반 유닛
+        
+        Debug.Log($"upgradedCount:: {upgradedCount}");
+        Debug.Log($"normalCount:: {normalCount}");
+        
         int globalIndex = 0;
 
-        // (A) 업그레이드 유닛
+        // (A) 업그레이드 유닛 생성
         for (int i = 0; i < upgradedCount; i++)
         {
             Vector3 pos = GetSpawnPosAroundPlayer(globalIndex++, _owner.transform.position);
             var go = ObjectPoolManager.Instance.GetFromPool(UpgradeUnitPrefab, pos, Quaternion.identity, parents);
             var agent = go.GetComponent<UnitAgent>();
-            agent.Bind(_owner);
+            agent.Bind(_owner,go.gameObject);
             _activeUnits.Add(agent);
         }
 
-        // (B) 일반 유닛
+        // (B) 일반 유닛 생성
         for (int i = 0; i < normalCount; i++)
         {
             Vector3 pos = GetSpawnPosAroundPlayer(globalIndex++, _owner.transform.position);
             var go = ObjectPoolManager.Instance.GetFromPool(NormalUnitPrefab, pos, Quaternion.identity, parents);
             var agent = go.GetComponent<UnitAgent>();
-            agent.Bind(_owner);
+            agent.Bind(_owner,go.gameObject);
             _activeUnits.Add(agent);
         }
     }
-
+    
     private void MergePlayer()
     {
         isPlayerUpgraded = true;

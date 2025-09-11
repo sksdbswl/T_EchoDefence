@@ -2802,7 +2802,7 @@ Transform:
   m_GameObject: {fileID: 1447899747}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 1.2, z: 30}
+  m_LocalPosition: {x: 0.01, y: 1.2, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3482,8 +3482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapGenerator
   bridgeChunkPrefab: {fileID: 6095234739337826108, guid: 60db65a812e887e40bf3a255fa814e15, type: 3}
-  height: 30
-  spawnDelay: 0.1
+  height: 50
+  spawnDelay: 0.05
   chunkSpacing: 1
   startChunk: {fileID: 810908809796722689, guid: 552beebce38492d4ba83db73f2af27d1, type: 3}
   endChunk: {fileID: 1363910312240726272, guid: 9e1d38a7331be2942a1200f35efff221, type: 3}

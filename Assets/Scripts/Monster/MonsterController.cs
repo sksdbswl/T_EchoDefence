@@ -40,8 +40,8 @@ public class MonsterController : MonoBehaviour
     {
         int spawnCount = Random.Range(minMonsterCount, maxMonsterCount + 1);
 
-        float halfWidth = mapSize.x / 2f;
-        float safeZone = 5f;
+        float halfWidth = mapSize.x / 2.5f;
+        float safeZone = 8f;
 
         for (int i = 0; i < spawnCount; i++)
         {

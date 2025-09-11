@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         StageManager.Instance.GameOverPanel.SetActive(true);
         Units.SetUnitAnimation(PlayerAnimationController.Die);
+        Units.StopFireLoop();
         IsGameExit = true;
     }
 }

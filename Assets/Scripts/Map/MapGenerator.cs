@@ -7,7 +7,7 @@ public class MapGenerator : MonoBehaviour
 {
     // 초기 설정
     [SerializeField] private GameObject bridgeChunkPrefab; // 1줄짜리 블럭 묶음 프리팹
-    [SerializeField] private int height = 30; // 총 몇 줄 생성할지
+    [SerializeField] private int height = 50; // 총 몇 줄 생성할지
     [SerializeField] private float spawnDelay = 0.01f; // 줄마다 생성 간격 시간
     [SerializeField] private float chunkSpacing = 1f; // 줄 간격 (Z축 기준)
     [SerializeField] private Transform startChunk; // 시작 초기 스폰 위치

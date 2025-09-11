@@ -8,16 +8,17 @@ public class UnitAgent : MonoBehaviour, IMuzzleProvider, IProvider
     public Player PlayerProvider => _owner; 
     [SerializeField] private Transform muzzle;  // 유닛 모델의 총구 위치
     public Transform Muzzle => muzzle;       
-
+    
+    public GameObject OriginPrefab { get; private set; }
     public bool IsUpgraded { get; private set; } = false;
 
-    public void Bind(Player owner, bool isUpgraded = false)
+    public void Bind(Player owner, GameObject originPrefab, bool isUpgraded = false)
     {
         _owner = owner;
         _stats = owner.playerStat;
         _anim  = GetComponent<Animator>();
         _anim.SetTrigger(PlayerAnimationController.Run);
-
+        OriginPrefab = originPrefab;
         IsUpgraded = isUpgraded; 
         gameObject.SetActive(true);
     }
