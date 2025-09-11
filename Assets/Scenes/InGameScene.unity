@@ -3505,9 +3505,9 @@ MonoBehaviour:
   endChunkOffsetZ: 1
   startChunkOffsetZ: 4
   itemPrefabs:
+  - {fileID: 8179039656167474940, guid: f76b92687a718a348948bfbbfb4761a0, type: 3}
   - {fileID: 8247641960939375756, guid: c1f8408e7c1536c4f8ebff2d2a49825a, type: 3}
   - {fileID: 5447098638533784428, guid: f84a4519d8c317048985c81a0d619cd8, type: 3}
-  - {fileID: 8179039656167474940, guid: f76b92687a718a348948bfbbfb4761a0, type: 3}
   - {fileID: 8862910700603223378, guid: ffdd9a1f6578bb5419bac03aa78b0774, type: 3}
   itemSpacingZ: 12
   itemOffsetX: 1

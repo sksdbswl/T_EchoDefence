@@ -98,28 +98,61 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private float itemSpacingZ = 5f; // Z 간격
     [SerializeField] private float itemOffsetX = 0.5f; // 좌/우 아이템 간격
     [SerializeField] private int maxItemLines = 10;    // 최대 라인 수 (안전장치)
+    [SerializeField, Range(0f,1f)] private float unitItemChance = 0.2f; 
 
     private void SpawnItemLine(Vector3 basePos, int lineIndex)
     {
         if (lineIndex >= maxItemLines) return;
 
-        // 라인의 Z 위치
         float zPos = basePos.z + lineIndex * itemSpacingZ;
-
-        // 좌/우 X 위치
         float[] xOffsets = { -itemOffsetX, +itemOffsetX };
 
         foreach (float x in xOffsets)
         {
             Vector3 pos = new Vector3(x, basePos.y + 0.05f, zPos);
 
-            // 랜덤 아이템 선택
-            int idx = UnityEngine.Random.Range(0, itemPrefabs.Length);
-            GameObject prefab = itemPrefabs[idx];
-
+            GameObject prefab = GetWeightedRandomItem();
             Instantiate(prefab, pos, Quaternion.identity, transform);
         }
     }
+
+    private GameObject GetWeightedRandomItem()
+    {
+        float roll = UnityEngine.Random.value;
+
+        // [0]번 아이템 (유닛 증가) 낮은 확률
+        if (roll < unitItemChance)
+        {
+            return itemPrefabs[0];
+        }
+
+        // 나머지 아이템 중 랜덤
+        int idx = UnityEngine.Random.Range(1, itemPrefabs.Length);
+        return itemPrefabs[idx];
+    }
+
+    // private void SpawnItemLine(Vector3 basePos, int lineIndex)
+    // {
+    //     if (lineIndex >= maxItemLines) return;
+    //
+    //     // 라인의 Z 위치
+    //     float zPos = basePos.z + lineIndex * itemSpacingZ;
+    //
+    //     // 좌/우 X 위치
+    //     float[] xOffsets = { -itemOffsetX, +itemOffsetX };
+    //
+    //     foreach (float x in xOffsets)
+    //     {
+    //         Vector3 pos = new Vector3(x, basePos.y + 0.05f, zPos);
+    //
+    //         // 랜덤 아이템 선택
+    //         int idx = UnityEngine.Random.Range(0, itemPrefabs.Length);
+    //         
+    //         GameObject prefab = itemPrefabs[idx];
+    //
+    //         Instantiate(prefab, pos, Quaternion.identity, transform);
+    //     }
+    // }
     
     private IEnumerator TrySpawnEntry(Vector3 basePos, Transform endChunkTransform)
     {
